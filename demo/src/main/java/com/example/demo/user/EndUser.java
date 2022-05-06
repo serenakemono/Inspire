@@ -1,26 +1,44 @@
 package com.example.demo.user;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
-public class User {
-    private Long userId;
+@Entity
+@Table
+public class EndUser {
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long id;
     private String username;
     private String email;
     private String password;
     private String bio;
     private LocalDate dateOfRegistration;
 
-    public User() {
+    public EndUser() {
     }
 
     // Constructor with all parameters
-    public User(Long userId,
-                String username,
-                String email,
-                String password,
-                String bio,
-                LocalDate dateOfRegistration) {
-        this.userId = userId;
+    public EndUser(Long id,
+                   String username,
+                   String email,
+                   String password,
+                   String bio,
+                   LocalDate dateOfRegistration) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -29,11 +47,11 @@ public class User {
     }
 
     // Constructor without the userId
-    public User(String username,
-                String email,
-                String password,
-                String bio,
-                LocalDate dateOfRegistration) {
+    public EndUser(String username,
+                   String email,
+                   String password,
+                   String bio,
+                   LocalDate dateOfRegistration) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -41,12 +59,12 @@ public class User {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long userId) {
+        this.id = userId;
     }
 
     public String getUsername() {
@@ -92,7 +110,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
