@@ -20,4 +20,8 @@ public class UserService {
     public List<AppUser> getUsers() {
         return userRepository.findAll();
     }
+
+    public void addNewUser(AppUser user) {
+        System.out.println(user);
+    }
 }
