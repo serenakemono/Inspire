@@ -1,6 +1,6 @@
 package com.example.demo.user;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class User {
     private Long userId;
@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String password;
     private String bio;
-    private LocalDateTime dateOfRegistration;
+    private LocalDate dateOfRegistration;
 
     public User() {
     }
@@ -19,7 +19,7 @@ public class User {
                 String email,
                 String password,
                 String bio,
-                LocalDateTime dateOfRegistration) {
+                LocalDate dateOfRegistration) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -33,7 +33,7 @@ public class User {
                 String email,
                 String password,
                 String bio,
-                LocalDateTime dateOfRegistration) {
+                LocalDate dateOfRegistration) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -81,11 +81,11 @@ public class User {
         this.bio = bio;
     }
 
-    public LocalDateTime getDateOfRegistration() {
+    public LocalDate getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(LocalDateTime dateOfRegistration) {
+    public void setDateOfRegistration(LocalDate dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 
