@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -9,16 +10,14 @@ import java.util.List;
 @Service
 public class UserService {
 
-    public List<EndUser> getUsers() {
-        return List.of(
-                new EndUser(
-                        1L,
-                        "serenakemono",
-                        "siriuswusss@gmail.com",
-                        "T0077841e",
-                        "Get Inspired!",
-                        LocalDate.of(2022, Month.MAY, 6)
-                )
-        );
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<AppUser> getUsers() {
+        return userRepository.findAll();
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class EndUser {
+public class AppUser {
     @Id
     @SequenceGenerator(
             name = "user_sequence",
@@ -28,11 +28,11 @@ public class EndUser {
     private String bio;
     private LocalDate dateOfRegistration;
 
-    public EndUser() {
+    public AppUser() {
     }
 
     // Constructor with all parameters
-    public EndUser(Long id,
+    public AppUser(Long id,
                    String username,
                    String email,
                    String password,
@@ -47,7 +47,7 @@ public class EndUser {
     }
 
     // Constructor without the userId
-    public EndUser(String username,
+    public AppUser(String username,
                    String email,
                    String password,
                    String bio,
