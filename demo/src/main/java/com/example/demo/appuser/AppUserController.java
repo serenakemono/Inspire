@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.appuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,33 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/user")
-public class UserController {
+public class AppUserController {
 
-    private final UserService userService;
+    private final AppUserService appUserService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public AppUserController(AppUserService appUserService) {
+        this.appUserService = appUserService;
     }
 
     @GetMapping
     public List<AppUser> getUsers() {
-        return userService.getUsers();
+        return appUserService.getUsers();
     }
 
     @PostMapping
     public void registerNewUser(@RequestBody AppUser user) {
-        userService.addNewUser(user);
+        appUserService.addNewUser(user);
     }
 
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {
-        userService.deleteUser(userId);
+        appUserService.deleteUser(userId);
     }
 
     @PutMapping(path = "{userId}")
@@ -47,6 +46,6 @@ public class UserController {
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String bio) {
-        userService.updateUser(userId, username, email, password, bio);
+        appUserService.updateUser(userId, username, email, password, bio);
     }
 }

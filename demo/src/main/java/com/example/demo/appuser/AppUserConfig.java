@@ -1,15 +1,15 @@
-package com.example.demo.user;
+package com.example.demo.appuser;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class UserConfig {
+public class AppUserConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(
-            UserRepository repo) {
+            AppUserRepository repo) {
         return args -> {
 
             //repo.save(oneuser);

@@ -1,53 +1,51 @@
-package com.example.demo.user;
+package com.example.demo.appuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class AppUserService {
 
-    private final UserRepository userRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AppUserService(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
     }
 
     public List<AppUser> getUsers() {
-        return userRepository.findAll();
+        return appUserRepository.findAll();
     }
 
     public void addNewUser(AppUser user) {
 
         Optional<AppUser> userByEmail =
-                userRepository.findAppUserByEmail(user.getEmail());
+                appUserRepository.findAppUserByEmail(user.getEmail());
         if (userByEmail.isPresent()) {
             throw new IllegalStateException("This email has been taken.");
         }
 
         Optional<AppUser> userByUsername =
-                userRepository.findAppUserByUsername(user.getUsername());
+                appUserRepository.findAppUserByUsername(user.getUsername());
         if (userByUsername.isPresent()) {
             throw new IllegalStateException("This username has been taken.");
         }
 
-        userRepository.save(user);
+        appUserRepository.save(user);
     }
 
     public void deleteUser(Long userId) {
-        boolean exists = userRepository.existsById(userId);
+        boolean exists = appUserRepository.existsById(userId);
         if (!exists) {
             throw new IllegalStateException(
                     "User with id " + userId + " does not exist.");
         }
-        userRepository.deleteById(userId);
+        appUserRepository.deleteById(userId);
     }
 
     // use setter methods instead of db logic
@@ -58,7 +56,7 @@ public class UserService {
                            String password,
                            String bio) {
 
-        AppUser user = userRepository.findById(userId).
+        AppUser user = appUserRepository.findById(userId).
                 orElseThrow(() -> new IllegalStateException(
                         "User with id " + userId + " does not exist."
                 ));
@@ -67,7 +65,7 @@ public class UserService {
                 username.length() > 0 &&
                 !Objects.equals(user.getUsername(), username)) {
             Optional<AppUser> userOptional =
-                    userRepository.findAppUserByUsername(username);
+                    appUserRepository.findAppUserByUsername(username);
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("This username has been taken");
             }
@@ -78,7 +76,7 @@ public class UserService {
                 email.length() > 0 &&
                 !Objects.equals(user.getEmail(), email)) {
             Optional<AppUser> userOptional =
-                    userRepository.findAppUserByEmail(email);
+                    appUserRepository.findAppUserByEmail(email);
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("This email has been taken");
             }

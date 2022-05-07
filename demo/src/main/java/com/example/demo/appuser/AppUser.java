@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.appuser;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -61,10 +61,6 @@ public class AppUser {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long userId) {
-        this.id = userId;
     }
 
     public String getUsername() {
