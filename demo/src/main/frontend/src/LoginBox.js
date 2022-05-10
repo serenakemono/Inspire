@@ -7,7 +7,7 @@ const LoginBox = () => {
               name="account"
               id="account"
               type="text"
-              placeholder="Email / username"
+              placeholder="Email / Username"
           />
           <input
               name="password"
