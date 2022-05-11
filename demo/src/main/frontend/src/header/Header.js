@@ -3,20 +3,36 @@ import { useState } from 'react'
 import NavBar from './NavBar';
 
 const Header = () => {
-    const [headerItems, setHeaderItems] = useState([
+    const [navBarItems, setNavBarItems] = useState([
         {
-            id: "headerItem1",
-            title: "Explore"
+            id: "home",
+            title: "Home"
         },
         {
-            id: "headerItem2",
+            id: "getinspired",
+            title: "Get Inspired"
+        },
+        {
+            id: "community",
+            title: "Community"
+        },
+        {
+            id: "messages",
+            title: "Messages"
+        },
+        {
+            id: "courses",
+            title: "Courses"
+        },
+        {
+            id: "me",
             title: "Me"
         }
     ]);
 
     return (
         <header>
-            <NavBar headerItems = {headerItems} />
+            <NavBar navBarItems = {navBarItems} />
         </header>
     )
 }

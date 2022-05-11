@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NavBar = ({ headerItems }) => {
+const NavBar = ({ navBarItems }) => {
   return (
     <nav>
-        {headerItems.map((item) => (
-          <li>
-              <Link to={ `/${item.title}` }>{ item.title }</Link>
+        {navBarItems.map((item) => (
+          <li key={item.id}>
+              <Link to={ `/${item.id}` }>{ item.title }</Link>
             </li>
         ))}
     </nav>
