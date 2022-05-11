@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const NavBar = ({ headerItems }) => {
   return (
-    <ul>
+    <nav>
         {headerItems.map((item) => (
-            <li className="headerItem" key ={item.id}>
-                <div>{item.title}</div>
+          <li>
+              <Link to={ `/${item.title}` }>{ item.title }</Link>
             </li>
         ))}
-    </ul>
+    </nav>
   )
 }
 
