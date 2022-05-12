@@ -1,5 +1,6 @@
 package com.example.demo.appuser;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,9 @@ public class AppUser {
             generator = "user_sequence"
     )
     private Long id;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String email;
     private String password;
     private String bio;

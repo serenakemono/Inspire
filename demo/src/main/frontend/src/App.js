@@ -1,24 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
-import axios from "axios"
 
 import Header from './header/Header';
 import LoginBox from './LoginBox';
-import RegistrationBox from './header/RegistrationBox';
+import RegistrationBox from './RegistrationBox';
 import Missing from './Missing';
 import Footer from './Footer'
 import Home from './home/Home'
 import PostPage from './home/PostPage';
+import registerApi from './api/register'
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
 
 function App() {
-  const [newUser, setNewUser] = useState('')
 
   const handleRegister = () => {
     console.log("Registered.")
   }
+
+  // refresh at load time only by using []
+  // handles GET request for 'register'
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        // axios automatically takes care of response
+        const response = await registerApi.get('');
+        
+      } catch {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else {
+          console.log(`Error: ${err.message}`)
+        }
+        // Not in the 200 response range
+      }
+    }
+  }, [])
 
   const [posts, setPosts] = useState([
     {
