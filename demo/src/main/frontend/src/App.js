@@ -3,7 +3,7 @@ import './App.css';
 
 import Header from './header/Header';
 import LoginBox from './LoginBox';
-import RegistrationBox from './RegistrationBox';
+import RegistrationBox from './RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'
 import Home from './home/Home'
@@ -12,6 +12,9 @@ import registerApi from './api/register'
 
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
+
+// red: #e51b23
+// pink: #f8c6c8
 
 function App() {
 
