@@ -17,31 +17,26 @@ import { Route, Routes, useHistory } from 'react-router-dom';
 // pink: #f8c6c8
 
 function App() {
-
-  const handleRegister = () => {
-    console.log("Registered.")
-  }
-
   // refresh at load time only by using []
   // handles GET request for 'register'
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        // axios automatically takes care of response
-        const response = await registerApi.get('');
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       // axios automatically takes care of response
+  //       const response = await registerApi.get('');
         
-      } catch {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else {
-          console.log(`Error: ${err.message}`)
-        }
-        // Not in the 200 response range
-      }
-    }
-  }, [])
+  //     } catch {
+  //       if (err.response) {
+  //         console.log(err.response.data);
+  //         console.log(err.response.status);
+  //         console.log(err.response.headers);
+  //       } else {
+  //         console.log(`Error: ${err.message}`)
+  //       }
+  //       // Not in the 200 response range
+  //     }
+  //   }
+  // }, [])
 
   const [posts, setPosts] = useState([
     {

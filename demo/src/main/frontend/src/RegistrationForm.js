@@ -4,16 +4,17 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
-
-const defaultValues = {
-  email: "",
-  username: "",
-  password: "",
-  confirm_password: "",
-};
+import axios from 'axios';
 
 const RegistrationBox = () => {
-  const [formValues, setFormValues] = useState(defaultValues);
+  const defaultFormValues = {
+    email: "",
+    username: "",
+    password: "",
+    confirm_password: "",
+  };
+  
+  const [formValues, setFormValues] = useState(defaultFormValues);
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,29 @@ const RegistrationBox = () => {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+
     console.log(formValues);
+
+    if (formValues.password != formValues.confirm_password) {
+      alert("passwords do not match");
+      return;
+    }
+
+    const appUser = {
+      email: formValues.email,
+      username: formValues.username,
+      password: formValues.password,
+      bio: null,
+      dateOfRegistration: Date()
+    };
+
+    console.log({appUser})
+
+    axios.post(`http://localhost:8080/api/v1/user`, appUser).
+      then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   };
   
   return (
