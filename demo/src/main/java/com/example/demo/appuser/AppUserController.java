@@ -32,14 +32,9 @@ public class AppUserController {
     }
 
     @PostMapping
-    public void registerNewUser(@RequestBody Object user) {
-
-        String email = user.get('email');
-
+    public void registerNewUser(@RequestBody AppUser user) {
+        appUserService.addNewUser(user);
         System.out.println(user);
-        AppUser oneUser = new AppUser();
-        System.out.println(oneUser);
-        //appUserService.addNewUser(user);
     }
 
     @DeleteMapping(path = "{userId}")

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.time.LocalDate;
 
 @Entity
 @Table
@@ -29,7 +28,7 @@ public class AppUser {
     private String email;
     private String password;
     private String bio;
-    private LocalDate dateOfRegistration;
+    private Long timestampForRegistration;
 
     public AppUser() {
     }
@@ -40,13 +39,13 @@ public class AppUser {
                    String email,
                    String password,
                    String bio,
-                   LocalDate dateOfRegistration) {
+                   Long timestampForRegistration) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.bio = bio;
-        this.dateOfRegistration = dateOfRegistration;
+        this.timestampForRegistration = timestampForRegistration;
     }
 
     // Constructor without the userId
@@ -54,12 +53,12 @@ public class AppUser {
                    String email,
                    String password,
                    String bio,
-                   LocalDate dateOfRegistration) {
+                   Long timestampForRegistration) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.bio = bio;
-        this.dateOfRegistration = dateOfRegistration;
+        this.timestampForRegistration = timestampForRegistration;
     }
 
     public Long getId() {
@@ -98,12 +97,12 @@ public class AppUser {
         this.bio = bio;
     }
 
-    public LocalDate getDateOfRegistration() {
-        return dateOfRegistration;
+    public Long getTimestampForRegistration() {
+        return timestampForRegistration;
     }
 
-    public void setDateOfRegistration(LocalDate dateOfRegistration) {
-        this.dateOfRegistration = dateOfRegistration;
+    public void setDateOfRegistration(Long timestampForRegistration) {
+        this.timestampForRegistration = timestampForRegistration;
     }
 
     @Override
@@ -114,7 +113,7 @@ public class AppUser {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", bio='" + bio + '\'' +
-                ", dateOfRegistration=" + dateOfRegistration +
+                ", timestampForRegistration=" + timestampForRegistration +
                 '}';
     }
 }

@@ -34,12 +34,16 @@ const RegistrationBox = () => {
       return;
     }
 
+    const dateTime = Date.now();
+    const timestamp = Math.floor(dateTime / 1000);
+
     const appUser = {
+      id: null,
       email: formValues.email,
       username: formValues.username,
       password: formValues.password,
       bio: null,
-      dateOfRegistration: Date()
+      timestampForRegistration: timestamp
     };
 
     console.log({appUser})
