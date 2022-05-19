@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link as RouterLink } from "react-router-dom"
+import { Link, Link as RouterLink } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import {
     AppBar,
@@ -7,7 +7,9 @@ import {
     makeStyles,
     Typography,
     Button,
-    IconButton
+    IconButton,
+    Drawer,
+    MenuItem
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
 
@@ -42,10 +44,11 @@ const headersData = [
 const Header = () => {
 
     const [state, setState] = useState({
-        mobileView: false
+        mobileView: false,
+        drawerOpen: false
     });
 
-    const { mobileView } = state;
+    const { mobileView, drawerOpen } = state;
 
     useEffect(() => {
         const setResponsiveness = () => {
@@ -86,10 +89,13 @@ const Header = () => {
         toolbar: {
             display: "flex",
             justifyContent: "space-between",
+        },
+        drawerContainer: {
+            padding: "20px 30px",
         }
     }));
 
-    const { header, logo, menuButton, toolbar } = useStyles();
+    const { header, logo, menuButton, toolbar, drawerContainer } = useStyles();
 
     /**
      * variant="h6" will ensure that the size of our logo is 
@@ -135,8 +141,32 @@ const Header = () => {
             </Toolbar>
         );
     };
+
+    const getDrawerChoices = () => {
+        return headersData.map(({ label, href }) => {
+            return (
+                <Link
+                    {...{
+                        component: RouterLink,
+                        to: href,
+                        color: "#000000",
+                        style: { textDecoration: "none" },
+                        key: label,
+                    }}
+                >
+                    <MenuItem>{label}</MenuItem>
+                </Link>
+            );
+        });
+    };
         
     const displayMobile = () => {
+        const handleDrawerOpen = () => setState((prevState) =>
+            ({ ...prevState, drawerOpen: true }));
+        const handleDrawerClose = () =>
+            setState((prevState) =>
+                ({ ...prevState, drawerOpen: false }));
+      
         return (
             <Toolbar>
                 <IconButton
@@ -148,11 +178,25 @@ const Header = () => {
                         // screen readers to notify users who have visual impairments that 
                         // this element is a menu and has a pop-up, respectively.
                         "aria-label": "menu",
-                        "aria-haspopup": "true"
+                        "aria-haspopup": "true",
+                        onclick: handleDrawerOpen,
                     }}
                 >
                     <MenuIcon />
                 </IconButton>
+                <Drawer
+                    {...{
+                        anchor: "left",
+                        open: drawerOpen,
+                        // When we click on anything outside of the drawer, 
+                        // the handleDrawerClose function will be called
+                        onClose: handleDrawerClose,
+                    }}
+                >
+                    <div className={drawerContainer}>
+                        {getDrawerChoices()}
+                    </div>
+                </Drawer>
                 <div>{inspireLogo}</div>
             </Toolbar>
         );
