@@ -15,6 +15,14 @@ const RegistrationBox = () => {
   };
   
   const [formValues, setFormValues] = useState(defaultFormValues);
+
+  const confirmPasswordStateDefaultValues = {
+    error: false,
+    helperText: null
+  };
+  
+  const [confirmPasswordStateValues, setConfirmPasswordStateValues] =
+    useState(confirmPasswordStateDefaultValues)
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +30,7 @@ const RegistrationBox = () => {
       ...formValues,
       [name]: value,
     });
+    setConfirmPasswordStateValues(confirmPasswordStateDefaultValues);
   };
   
   const handleSubmit = (event) => {
@@ -30,7 +39,10 @@ const RegistrationBox = () => {
     console.log(formValues);
 
     if (formValues.password != formValues.confirm_password) {
-      alert("passwords do not match");
+      setConfirmPasswordStateValues({
+        error: true,
+        helperText: 'Passwords do not match.'
+      })
       return;
     }
 
@@ -107,6 +119,8 @@ const RegistrationBox = () => {
           <Grid item>
             <TextField
               required
+              error={confirmPasswordStateValues.error}
+              helperText={confirmPasswordStateValues.helperText}
               id="confirm_password-input"
               name="confirm_password"
               label="Confirm Password"
