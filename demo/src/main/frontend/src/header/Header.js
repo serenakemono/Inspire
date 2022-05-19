@@ -1,14 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
-import NavBar from './NavBar';
+import { Link as RouterLink } from "react-router-dom"
+import { useState, useEffect } from 'react'
 import {
     AppBar,
     Toolbar,
     makeStyles,
     Typography,
-    Button
+    Button,
+    IconButton
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom"
+import MenuIcon from "@material-ui/icons/Menu"
+
 
 const headersData = [
     {
@@ -39,11 +41,35 @@ const headersData = [
 
 const Header = () => {
 
+    const [state, setState] = useState({
+        mobileView: false
+    });
+
+    const { mobileView } = state;
+
+    useEffect(() => {
+        const setResponsiveness = () => {
+            return window.innerWidth < 900
+                ? setState((prevState) => ({ ...prevState, mobileView: true }))
+                : setState((prevState) => ({ ...prevState, mobileView: false }));
+        };
+
+        setResponsiveness();
+        window.addEventListener("resize", () => setResponsiveness());
+
+        return () => {
+            window.removeEventListener("resize", () => setResponsiveness());
+        }
+    }, []);
+
     const useStyles = makeStyles(() => ({
         header: {
             backgroundColor: "#FFFFFF",
             paddingRight: "79px",
-            paddingLeft: "118px"
+            paddingLeft: "118px",
+            "@media (max-width: 900px)": {
+                paddingLeft: 0,
+            },
         },
         logo: {
             fontFamily: "Work Sans, sans-serif",
@@ -109,18 +135,36 @@ const Header = () => {
             </Toolbar>
         );
     };
+        
+    const displayMobile = () => {
+        return (
+            <Toolbar>
+                <IconButton
+                    {...{
+                        // allows the button to be positioned at the start of the toolbar
+                        edge: "start",
+                        color: "#000000",
+                        // “aria-label": “menu" and “aria-haspopup": “true" are meant for 
+                        // screen readers to notify users who have visual impairments that 
+                        // this element is a menu and has a pop-up, respectively.
+                        "aria-label": "menu",
+                        "aria-haspopup": "true"
+                    }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <div>{inspireLogo}</div>
+            </Toolbar>
+        );
+    };
     
     return (
         <header>
-            <AppBar className={header}>{displayDesktop()}</AppBar>
+            <AppBar className={header}>
+                {mobileView ? displayMobile() : displayDesktop()}
+            </AppBar>
         </header>
     );
-
-    // return (
-    //     <header>
-    //         <NavBar navBarItems = {navBarItems} />
-    //     </header>
-    // )
 }
 
 export default Header
