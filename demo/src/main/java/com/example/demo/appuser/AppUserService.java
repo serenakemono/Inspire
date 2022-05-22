@@ -39,37 +39,39 @@ public class AppUserService {
         appUserRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
-        boolean exists = appUserRepository.existsById(userId);
+    public void deleteUser(String username) {
+        Optional<AppUser> userByUsername =
+                appUserRepository.findAppUserByUsername(username);
+        boolean exists = userByUsername.isPresent();
         if (!exists) {
             throw new IllegalStateException(
-                    "User with id " + userId + " does not exist.");
+                    "User with username " + username + " does not exist.");
         }
-        appUserRepository.deleteById(userId);
+        appUserRepository.deleteById(username);
     }
 
     // use setter methods instead of db logic
     @Transactional
-    public void updateUser(Long userId,
-                           String username,
+    public void updateUser(String username,
+                           String newUsername,
                            String email,
                            String password,
                            String bio) {
 
-        AppUser user = appUserRepository.findById(userId).
+        AppUser user = appUserRepository.findAppUserByUsername(username).
                 orElseThrow(() -> new IllegalStateException(
-                        "User with id " + userId + " does not exist."
+                        "User with username " + username + " does not exist."
                 ));
 
-        if (username != null &&
-                username.length() > 0 &&
-                !Objects.equals(user.getUsername(), username)) {
+        if (newUsername != null &&
+                newUsername.length() > 0 &&
+                !Objects.equals(user.getUsername(), newUsername)) {
             Optional<AppUser> userOptional =
-                    appUserRepository.findAppUserByUsername(username);
+                    appUserRepository.findAppUserByUsername(newUsername);
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("This username has been taken");
             }
-            user.setUsername(username);
+            user.setUsername(newUsername);
         }
 
         if (email != null &&

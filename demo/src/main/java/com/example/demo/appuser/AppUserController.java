@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "api/v1/")
 @CrossOrigin(origins = "http://localhost:3000")
 public class AppUserController {
 
@@ -26,29 +26,29 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    @GetMapping
+    @GetMapping(path="users")
     public List<AppUser> getUsers() {
         return appUserService.getUsers();
     }
 
-    @PostMapping
+    @PostMapping(path="register")
     public void registerNewUser(@RequestBody AppUser user) {
         appUserService.addNewUser(user);
         System.out.println(user);
     }
 
-    @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId) {
-        appUserService.deleteUser(userId);
+    @DeleteMapping(path = "{username}")
+    public void deleteUser(@PathVariable("username") String username) {
+        appUserService.deleteUser(username);
     }
 
-    @PutMapping(path = "{userId}")
+    @PutMapping(path = "{username}")
     public void updateUser(
-            @PathVariable("userId") Long userId,
-            @RequestParam(required = false) String username,
+            @PathVariable("username") String username,
+            @RequestParam(required = false) String newUsername,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String bio) {
-        appUserService.updateUser(userId, username, email, password, bio);
+        appUserService.updateUser(username, newUsername, email, password, bio);
     }
 }

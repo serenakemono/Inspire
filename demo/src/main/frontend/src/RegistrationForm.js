@@ -50,7 +50,6 @@ const RegistrationForm = () => {
     const timestamp = Math.floor(dateTime / 1000);
 
     const appUser = {
-      id: null,
       email: formValues.email,
       username: formValues.username,
       password: formValues.password,
@@ -60,7 +59,7 @@ const RegistrationForm = () => {
 
     console.log({appUser})
 
-    axios.post(`http://localhost:8080/api/v1/user/register`, appUser).
+    axios.post(`http://localhost:8080/api/v1/register`, appUser).
       then(res => {
         console.log(res);
         console.log(res.data);
