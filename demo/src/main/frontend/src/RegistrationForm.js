@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from 'axios';
 
-const RegistrationBox = () => {
+const RegistrationForm = () => {
   const defaultFormValues = {
     email: "",
     username: "",
@@ -68,12 +68,19 @@ const RegistrationBox = () => {
   };
   
   return (
+    <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "100px"
+      }}
+    >
     <Box
-      alignItems="center"
       sx={{
         boxShadow: 1,
         borderRadius: 2,
         width: "25ch",
+        
       }}>
       <form onSubmit={handleSubmit}>
         <Grid
@@ -81,7 +88,9 @@ const RegistrationBox = () => {
           alignItems="center"
           justify="center"
           direction="column"
-          spacing={2}
+            spacing={2}
+            marginTop="3px"
+            marginBottom="8px"
         >
           <Grid item>
             <TextField
@@ -138,7 +147,8 @@ const RegistrationBox = () => {
         </Grid>
         </form>
       </Box>
+    </div>
   );
 };
 
-export default RegistrationBox
+export default RegistrationForm

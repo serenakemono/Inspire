@@ -2,13 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 
 import Header from './header/Header';
-import LoginBox from './LoginBox';
-import RegistrationBox from './RegistrationForm';
+import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'
 import PostsDisplay from './home/PostsDisplay'
 import PostPage from './home/PostPage';
-import registerApi from './api/register'
 
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
@@ -58,6 +57,12 @@ function App() {
     <div>
       <Header />
       <Routes>
+        <Route path="login" element={<LoginForm />} />
+        <Route
+          path="register"
+          element={<RegistrationForm />}
+        />
+      
         <Route path="home" element={<PostsDisplay posts={posts} />} />
         <Route path="post/:id" element={<PostPage posts={posts} />} />
         <Route path="me" element={<Profile posts={posts} />} />

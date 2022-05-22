@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from 'axios';
 
-const LoginBox = () => {
+const LoginForm = () => {
   const defaultFormValues = {
     username: "",
     password: ""
@@ -63,10 +63,13 @@ const LoginBox = () => {
   };
   
   return (
+    <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "100px"
+      }}>
     <Box
-      position="absolute"
-      top="5ch"
-      left="5ch"
       alignItems="center"
       sx={{
         boxShadow: 1,
@@ -82,8 +85,8 @@ const LoginBox = () => {
           justify="center"
           direction="column"
           spacing={2}
-          position="relative"
-          top="3ch"
+            marginTop="3px"
+          marginBottom="8px"
         >
           <Grid item>
             <TextField
@@ -117,8 +120,9 @@ const LoginBox = () => {
           </Grid>
         </Grid>
       </form>
-    </Box>
+      </Box>
+      </div>
   );
 };
 
-export default LoginBox
+export default LoginForm
