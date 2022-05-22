@@ -60,7 +60,7 @@ const RegistrationForm = () => {
 
     console.log({appUser})
 
-    axios.post(`http://localhost:8080/api/v1/user`, appUser).
+    axios.post(`http://localhost:8080/api/v1/user/register`, appUser).
       then(res => {
         console.log(res);
         console.log(res.data);
