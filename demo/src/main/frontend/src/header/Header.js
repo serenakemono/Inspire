@@ -183,7 +183,7 @@ const Header = () => {
                         "aria-label": "menu",
                         "aria-haspopup": "true",
                         // solves the problem of too many re-renders
-                        onclick: ()=>handleDrawerOpen(),
+                        onClick: ()=>handleDrawerOpen(),
                     }}
                 >
                     <MenuIcon />
