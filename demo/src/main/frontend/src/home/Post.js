@@ -5,8 +5,8 @@ const Post = ({ post }) => {
   return (
       <article>
           <Link to={`/post/${post.id}`}>
-              <h2>{post.title}</h2>
-              <p>{post.datetime}</p>
+              <h3>{post.title}</h3>
+              <h6>{post.datetime}</h6>
           </Link>
           <p>{
               (post.body).length <= 25
