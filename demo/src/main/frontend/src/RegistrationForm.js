@@ -16,13 +16,22 @@ const RegistrationForm = () => {
   
   const [formValues, setFormValues] = useState(defaultFormValues);
 
-  const confirmPasswordStateDefaultValues = {
+  const defaultInputValidity = {
     error: false,
     helperText: null
   };
   
-  const [confirmPasswordStateValues, setConfirmPasswordStateValues] =
-    useState(confirmPasswordStateDefaultValues)
+  const [
+    confirmPasswordStateValues,
+    setConfirmPasswordStateValues
+  ] =
+    useState(defaultInputValidity)
+  
+  const [usernameValidity, setUsernameValidity] =
+    useState(defaultInputValidity)
+  
+  const [emailValidity, setEmailValidity] =
+    useState(defaultInputValidity)
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +39,13 @@ const RegistrationForm = () => {
       ...formValues,
       [name]: value,
     });
-    setConfirmPasswordStateValues(confirmPasswordStateDefaultValues);
+
+    setConfirmPasswordStateValues(
+      defaultInputValidity);
+    
+    setUsernameValidity(defaultInputValidity);
+
+    setEmailValidity(defaultInputValidity);
   };
   
   const handleSubmit = (event) => {
@@ -60,10 +75,19 @@ const RegistrationForm = () => {
     console.log({appUser})
 
     axios.post(`http://localhost:8080/api/v1/register`, appUser).
-      then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+      catch(function (error) {
+        if (error.response) {
+          const errorMsg = error.response.data.message;
+          if (errorMsg.includes("username")) {
+            setUsernameValidity({ error: true, helperText: errorMsg });
+          } else if (errorMsg.includes("email")) {
+            setEmailValidity({ error: true, helperText: errorMsg });
+          } else {
+            alert(errorMsg);
+          }
+        }
+      }
+    )
   };
   
   return (
@@ -94,6 +118,8 @@ const RegistrationForm = () => {
           <Grid item>
             <TextField
               required
+              error={usernameValidity.error}
+              helperText={usernameValidity.helperText}
               id="username-input"
               name="username"
               label="Username"
@@ -105,6 +131,8 @@ const RegistrationForm = () => {
           <Grid item>
             <TextField
               required
+              error={emailValidity.error}
+              helperText={emailValidity.helperText}
               id="email-input"
               name="email"
               label="Email"
@@ -116,6 +144,7 @@ const RegistrationForm = () => {
           <Grid item>
             <TextField
               required
+              error={confirmPasswordStateValues.error}
               id="password-input"
               name="password"
               label="Password"
