@@ -1,9 +1,9 @@
 import React from 'react'
 import Feed from './Feed'
 
-const Home = ({ posts }) => {
+const PostsDisplay = ({ posts }) => {
   return (
-    <main>
+    <main className="content">
       {posts.length ? (
         <Feed posts={ posts } />
       ) : (
@@ -13,4 +13,4 @@ const Home = ({ posts }) => {
   )
 }
 
-export default Home
+export default PostsDisplay

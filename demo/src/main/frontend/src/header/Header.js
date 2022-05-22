@@ -67,6 +67,7 @@ const Header = () => {
 
     const useStyles = makeStyles(() => ({
         header: {
+            position: "fixed",
             backgroundColor: "#FFFFFF",
             paddingRight: "79px",
             paddingLeft: "118px",
@@ -161,12 +162,14 @@ const Header = () => {
     };
         
     const displayMobile = () => {
-        const handleDrawerOpen = () => setState((prevState) =>
-            ({ ...prevState, drawerOpen: true }));
-        const handleDrawerClose = () =>
+        const handleDrawerOpen = () => {
+            setState((prevState) =>
+                ({ ...prevState, drawerOpen: true }));
+        }
+        const handleDrawerClose = () => {
             setState((prevState) =>
                 ({ ...prevState, drawerOpen: false }));
-      
+        }
         return (
             <Toolbar>
                 <IconButton
@@ -179,7 +182,8 @@ const Header = () => {
                         // this element is a menu and has a pop-up, respectively.
                         "aria-label": "menu",
                         "aria-haspopup": "true",
-                        onclick: handleDrawerOpen,
+                        // solves the problem of too many re-renders
+                        onclick: ()=>handleDrawerOpen(),
                     }}
                 >
                     <MenuIcon />

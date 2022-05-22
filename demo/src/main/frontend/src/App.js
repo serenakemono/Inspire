@@ -6,12 +6,13 @@ import LoginBox from './LoginBox';
 import RegistrationBox from './RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'
-import Home from './home/Home'
+import PostsDisplay from './home/PostsDisplay'
 import PostPage from './home/PostPage';
 import registerApi from './api/register'
 
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
+import Profile from './profile/Profile';
 
 // red: #e51b23
 // pink: #f8c6c8
@@ -57,8 +58,9 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="home" element={<Home posts={posts} />} />
+        <Route path="home" element={<PostsDisplay posts={posts} />} />
         <Route path="post/:id" element={<PostPage posts={posts} />} />
+        <Route path="me" element={<Profile posts={posts} />} />
         {/* <Route path="getinspired" element={<GetInspired />} />
         <Route path="community" element={<Community />} />
         <Route path="courses" element={<Courses />} />
