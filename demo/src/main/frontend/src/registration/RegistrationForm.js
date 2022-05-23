@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from 'axios';
+import RedirectAftRegistration from './RedirectAftRegistration';
 
 const RegistrationForm = () => {
   const defaultFormValues = {
@@ -72,9 +73,10 @@ const RegistrationForm = () => {
       timestampForRegistration: timestamp
     };
 
-    console.log({appUser})
+    console.log({ appUser })
 
     axios.post(`http://localhost:8080/api/v1/register`, appUser).
+      then(() => { window.location.href = '/redirect'; }).
       catch(function (error) {
         if (error.response) {
           const errorMsg = error.response.data.message;
@@ -88,6 +90,9 @@ const RegistrationForm = () => {
         }
       }
     )
+
+    
+
   };
   
   return (

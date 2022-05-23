@@ -3,7 +3,7 @@ import './App.css';
 
 import Header from './header/Header';
 import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
+import RegistrationForm from './registration/RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'
 import PostsDisplay from './home/PostsDisplay'
