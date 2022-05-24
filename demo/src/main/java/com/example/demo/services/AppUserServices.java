@@ -1,14 +1,17 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.AppUser;
+import com.example.demo.entities.Authority;
 import com.example.demo.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,7 +54,18 @@ public class AppUserServices implements UserDetailsService {
             throw new IllegalStateException("This username has been taken.");
         }
 
+        List<Authority> authorityList = new ArrayList<>();
+        authorityList.add(createAuthority("USER", "User role"));
+        user.setAuthorities(authorityList);
+
         userRepo.save(user);
+    }
+
+    private Authority createAuthority(String roleCode, String roleDescription) {
+        Authority authority = new Authority();
+        authority.setRoleCode(roleCode);
+        authority.setRoleDescription(roleDescription);
+        return authority;
     }
 
     public void deleteUser(String username) {

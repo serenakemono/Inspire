@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Authority;
 import com.example.demo.services.AppUserServices;
 import com.example.demo.entities.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,9 @@ import java.util.List;
 public class AppUserController {
 
     private final AppUserServices appUserServices;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public AppUserController(AppUserServices appUserServices) {
@@ -35,6 +41,7 @@ public class AppUserController {
 
     @PostMapping(path="register")
     public void registerNewUser(@RequestBody AppUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         appUserServices.addNewUser(user);
         System.out.println(user);
     }

@@ -38,7 +38,8 @@ public class AuthController {
     private AppUserServices userServices;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) throws NoSuchAlgorithmException, InvalidKeyException {
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest)
+            throws NoSuchAlgorithmException, InvalidKeyException {
 
         final Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
