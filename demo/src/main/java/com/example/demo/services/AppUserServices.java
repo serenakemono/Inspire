@@ -1,6 +1,11 @@
-package com.example.demo.appuser;
+package com.example.demo.services;
 
+import com.example.demo.entities.AppUser;
+import com.example.demo.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -9,45 +14,55 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class AppUserService {
-
-    private final AppUserRepository appUserRepository;
+public class AppUserServices implements UserDetailsService {
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
+    private final AppUserRepository userRepo;
+
+    @Autowired
+    public AppUserServices(AppUserRepository appUserRepository) {
+        this.userRepo = appUserRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<AppUser> user = userRepo.findAppUserByUsername(username);
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user.get();
     }
 
     public List<AppUser> getUsers() {
-        return appUserRepository.findAll();
+        return userRepo.findAll();
     }
 
     public void addNewUser(AppUser user) {
 
         Optional<AppUser> userByEmail =
-                appUserRepository.findAppUserByEmail(user.getEmail());
+                userRepo.findAppUserByEmail(user.getEmail());
         if (userByEmail.isPresent()) {
             throw new IllegalStateException("This email has been taken.");
         }
 
         Optional<AppUser> userByUsername =
-                appUserRepository.findAppUserByUsername(user.getUsername());
+                userRepo.findAppUserByUsername(user.getUsername());
         if (userByUsername.isPresent()) {
             throw new IllegalStateException("This username has been taken.");
         }
 
-        appUserRepository.save(user);
+        userRepo.save(user);
     }
 
     public void deleteUser(String username) {
         Optional<AppUser> userByUsername =
-                appUserRepository.findAppUserByUsername(username);
+                userRepo.findAppUserByUsername(username);
         boolean exists = userByUsername.isPresent();
         if (!exists) {
             throw new IllegalStateException(
                     "User with username " + username + " does not exist.");
         }
-        appUserRepository.deleteById(username);
+        userRepo.deleteById(username);
     }
 
     // use setter methods instead of db logic
@@ -58,7 +73,7 @@ public class AppUserService {
                            String password,
                            String bio) {
 
-        AppUser user = appUserRepository.findAppUserByUsername(username).
+        AppUser user = userRepo.findAppUserByUsername(username).
                 orElseThrow(() -> new IllegalStateException(
                         "User with username " + username + " does not exist."
                 ));
@@ -67,7 +82,7 @@ public class AppUserService {
                 newUsername.length() > 0 &&
                 !Objects.equals(user.getUsername(), newUsername)) {
             Optional<AppUser> userOptional =
-                    appUserRepository.findAppUserByUsername(newUsername);
+                    userRepo.findAppUserByUsername(newUsername);
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("This username has been taken");
             }
@@ -78,7 +93,7 @@ public class AppUserService {
                 email.length() > 0 &&
                 !Objects.equals(user.getEmail(), email)) {
             Optional<AppUser> userOptional =
-                    appUserRepository.findAppUserByEmail(email);
+                    userRepo.findAppUserByEmail(email);
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("This email has been taken");
             }

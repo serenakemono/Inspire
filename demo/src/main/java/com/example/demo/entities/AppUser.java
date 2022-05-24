@@ -1,23 +1,44 @@
-package com.example.demo.appuser;
+package com.example.demo.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table
-public class AppUser {
+public class AppUser implements UserDetails {
     @Id
     private String username;
+
     @Column(unique = true)
     private String email;
     private String password;
     private String bio;
     private Long timestampForRegistration;
+    private boolean enabled = true;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "auth_user_authority",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private List<Authority> authorities;
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
     public AppUser() {
     }
@@ -36,7 +57,27 @@ public class AppUser {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.enabled;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.enabled;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.enabled;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
     public void setUsername(String username) {
@@ -44,15 +85,20 @@ public class AppUser {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -60,7 +106,7 @@ public class AppUser {
     }
 
     public String getBio() {
-        return bio;
+        return this.bio;
     }
 
     public void setBio(String bio) {
@@ -73,6 +119,11 @@ public class AppUser {
 
     public void setDateOfRegistration(Long timestampForRegistration) {
         this.timestampForRegistration = timestampForRegistration;
+    }
+
+
+    public void setEnabled(boolean b) {
+        this.enabled = b;
     }
 
     @Override

@@ -1,5 +1,7 @@
-package com.example.demo.appuser;
+package com.example.demo.controllers;
 
+import com.example.demo.services.AppUserServices;
+import com.example.demo.entities.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,27 +21,27 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class AppUserController {
 
-    private final AppUserService appUserService;
+    private final AppUserServices appUserServices;
 
     @Autowired
-    public AppUserController(AppUserService appUserService) {
-        this.appUserService = appUserService;
+    public AppUserController(AppUserServices appUserServices) {
+        this.appUserServices = appUserServices;
     }
 
     @GetMapping(path="users")
     public List<AppUser> getUsers() {
-        return appUserService.getUsers();
+        return appUserServices.getUsers();
     }
 
     @PostMapping(path="register")
     public void registerNewUser(@RequestBody AppUser user) {
-        appUserService.addNewUser(user);
+        appUserServices.addNewUser(user);
         System.out.println(user);
     }
 
     @DeleteMapping(path = "{username}")
     public void deleteUser(@PathVariable("username") String username) {
-        appUserService.deleteUser(username);
+        appUserServices.deleteUser(username);
     }
 
     @PutMapping(path = "{username}")
@@ -49,6 +51,6 @@ public class AppUserController {
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String bio) {
-        appUserService.updateUser(username, newUsername, email, password, bio);
+        appUserServices.updateUser(username, newUsername, email, password, bio);
     }
 }
