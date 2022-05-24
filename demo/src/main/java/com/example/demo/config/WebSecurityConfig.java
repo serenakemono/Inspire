@@ -66,7 +66,7 @@ public class WebSecurityConfig
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/home")
+                .antMatchers("/api/v1/homne")
                 .authenticated()
                 .anyRequest()
                 .permitAll()

@@ -37,14 +37,15 @@ public class AuthController {
     @Autowired
     private AppUserServices userServices;
 
-    @PostMapping("/auth/login")
+    @PostMapping("auth/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest)
             throws NoSuchAlgorithmException, InvalidKeyException {
 
         final Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getUsername(), authRequest.getPassword()
-                ));
+                )
+        );
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
@@ -57,7 +58,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/auth/userinfo")
+    @GetMapping("auth/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user) {
         AppUser userObj = (AppUser) userServices.loadUserByUsername(user.getName());
 
