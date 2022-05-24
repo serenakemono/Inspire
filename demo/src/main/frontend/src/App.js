@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Header from './header/Header';
-import LoginForm from './LoginForm';
+import LoginForm from './login/LoginForm';
 import RegistrationForm from './registration/RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'

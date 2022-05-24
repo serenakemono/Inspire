@@ -4,8 +4,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
-import axios from 'axios';
+import axios from '../api/axios';
 import RedirectAftRegistration from './RedirectAftRegistration';
+
+const REGISTER_URL = '/register'
 
 const RegistrationForm = () => {
   const defaultFormValues = {
@@ -75,9 +77,10 @@ const RegistrationForm = () => {
 
     console.log({ appUser })
 
-    axios.post(`http://localhost:8080/api/v1/register`, appUser).
+    axios.post(REGISTER_URL, appUser).
       then(() => { window.location.href = '/redirect'; }).
       catch(function (error) {
+        console.log(error);
         if (error.response) {
           const errorMsg = error.response.data.message;
           if (errorMsg.includes("username")) {

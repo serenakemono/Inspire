@@ -1,12 +1,22 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
-import axios from 'axios';
+import axios from '../api/axios';
+import AuthContext from './AuthProvider';
+
+const LOGIN_URL = '/login'
 
 const LoginForm = () => {
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef(null);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
+
   const defaultFormValues = {
     username: "",
     password: ""
@@ -14,13 +24,13 @@ const LoginForm = () => {
   
   const [formValues, setFormValues] = useState(defaultFormValues);
 
-  const defaultLoginStatusValues = {
+  const defaultLoginStatus = {
     error: false,
     helperText: null
   };
   
-  const [loginStatusValues, setLoginStatusValues] =
-    useState(defaultLoginStatusValues)
+  const [loginStatus, setLoginStatus] =
+    useState(defaultLoginStatus)
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,20 +38,49 @@ const LoginForm = () => {
       ...formValues,
       [name]: value,
     });
-    setLoginStatusValues(defaultLoginStatusValues);
+    setLoginStatus(defaultLoginStatus);
   };
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     console.log(formValues);
 
-    if (true) {
-      setLoginStatusValues({
-        error: true,
-        helperText: 'Username / password error.'
-      })
-      return;
+    try {
+      const response = await axios.post(LOGIN_URL,
+        JSON.stringify({ user, pwd }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles; // an array of roles
+      setAuth({ user, pwd, roles, accessToken })
+      setFormValues(defaultFormValues);
+    } catch (err) {
+      if (!err?.response) {
+        setLoginStatus({
+          error: true,
+          helperText: "No server response."
+        })
+      } else if (err.response?.status === 400) {
+        setLoginStatus({
+          error: true,
+          helperText: "Missing username or password."
+        })
+      } else if (err.response?.status === 401) {
+        setLoginStatus({
+          error: true,
+          helperText: "Unauthroized."
+        })
+      } else {
+        setLoginStatus({
+          error: true,
+          helperText: 'Wrong username or password.'
+        })
+      }
     }
 
     const dateTime = Date.now();
@@ -85,14 +124,15 @@ const LoginForm = () => {
           justify="center"
           direction="column"
           spacing={2}
-            marginTop="3px"
+          marginTop="3px"
           marginBottom="8px"
         >
           <Grid item>
             <TextField
               required
-              error={loginStatusValues.error}
-              id="username-input"
+              error={loginStatus.error}
+                id="username-input"
+                ref={userRef}
               name="username"
               label="Username"
               type="text"
@@ -103,8 +143,8 @@ const LoginForm = () => {
           <Grid item>
             <TextField
               required
-              error={loginStatusValues.error}
-              helperText={loginStatusValues.helperText}
+              error={loginStatus.error}
+              helperText={loginStatus.helperText}
               id="password-input"
               name="password"
               label="Password"
@@ -117,7 +157,13 @@ const LoginForm = () => {
             <Button variant="contained" type="submit">
               Login
             </Button>
-          </Grid>
+            </Grid>
+            <Grid>
+              <p>
+                Don't have an account?<br />
+                <a href="/register">Join us</a>
+              </p>
+            </Grid>
         </Grid>
       </form>
       </Box>
