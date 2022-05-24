@@ -61,9 +61,9 @@ const LoginForm = () => {
         console.log(error);
         if (error.response) {
           setLoginStatus({
-          error: true,
-          helperText: 'Wrong username or password.'
-        })
+            error: true,
+            helperText: 'Wrong username or password.'
+          })
         }
       }
     )
@@ -125,13 +125,13 @@ const LoginForm = () => {
             <Button variant="contained" type="submit">
               Login
             </Button>
-            </Grid>
-            <Grid>
-              <p>
-                Don't have an account?<br />
-                <a href="/register">Join us</a>
-              </p>
-            </Grid>
+          </Grid>
+          <Grid item>
+            <p>
+              Don't have an account?&nbsp;&nbsp;&nbsp;
+              <a href="/register">Join us</a>
+            </p>
+          </Grid>
         </Grid>
       </form>
       </Box>

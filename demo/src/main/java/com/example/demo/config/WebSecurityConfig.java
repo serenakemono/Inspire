@@ -36,13 +36,6 @@ public class WebSecurityConfig
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // In-memory
-//        auth.inMemoryAuthentication().
-//                withUser("Serena").
-//                password(passwordEncoder().encode("asd")).
-//                authorities("USER", "ADMIN");
-
-        // Database Auth
         auth.userDetailsService(userServices).passwordEncoder(passwordEncoder());
     }
 
@@ -66,8 +59,8 @@ public class WebSecurityConfig
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/homne")
-                .authenticated()
+//                .antMatchers("/api/v1/homne")
+//                .authenticated()
                 .anyRequest()
                 .permitAll()
                 .and()
