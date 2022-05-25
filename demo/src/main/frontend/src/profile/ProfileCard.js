@@ -39,6 +39,9 @@ const ProfileCard = ({ bio, email }) => {
                             </IconButton>
                             <Menu
                                 anchorEl={anchorEl}
+                                getContentAnchorEl={null}
+                                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                                transformOrigin={{ vertical: "top", horizontal: "center" }}
                                 open={open}
                                 onClose={handleClose}
                                 MenuListProps={{

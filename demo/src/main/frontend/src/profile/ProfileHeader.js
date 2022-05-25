@@ -12,7 +12,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg, bio }) => {
+const ProfileHeader = ({ userImg, username, bio }) => {
     
   const context = useContext(AuthContext);
   //console.log(context);
@@ -33,7 +33,7 @@ const ProfileHeader = ({ userImg, bio }) => {
                         <img className="profile-pic" src={userImg} alt="profile" />
                     </Grid>
                     <Grid item>
-                        <Item className="profile-name">username</Item>
+                          <Item className="profile-name">{ username }</Item>
                         <Item className="bio">{ bio }</Item>
                         <Item className="follower-stats">111 Followers 111 Following</Item>
                     </Grid>
@@ -56,31 +56,26 @@ const ProfileHeader = ({ userImg, bio }) => {
         </div>
     
         <div className="header-links">
-            <Tabs value={0} centered sx={{width: "50%"}}>
+            <Tabs value={1} centered sx={{width: "50%"}}>
                   <Tab
                     style={{textTransform: 'none'}}
                     icon={<AccountCircleRoundedIcon />}
-                    iconPosition='start'
                     label="About Me" />
                 <Tab
                     style={{textTransform: 'none'}}
                     icon={<PhotoLibraryRoundedIcon />}
-                    iconPosition="start"
                     label="Posts" />
                   <Tab
                       style={{textTransform: 'none'}}
                     icon={<ForumRoundedIcon />}
-                    iconPosition="start"
                     label="Discussions" />
                   <Tab
                       style={{textTransform: 'none'}}
                     icon={<StyleRoundedIcon />}
-                    iconPosition="start"
                     label="Tags" />
                   <Tab
                       style={{textTransform: 'none'}}
                     icon={<StarRoundedIcon />}
-                    iconPosition="start"
                     label="Collections" />
             </Tabs>
         </div>
