@@ -133,6 +133,10 @@ body{
   margin-left: 17px;
 }
 
+.btn-edit-profile {
+  text-transform: none;
+}
+
 .profile-page .profile-header .header-links {
   padding: 15px;
   display: -webkit-flex;
