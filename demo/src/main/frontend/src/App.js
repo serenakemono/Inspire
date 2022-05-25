@@ -55,7 +55,7 @@ function App() {
         <Route path="me" element={<Me />} /> */}
         <Route path="*" element={<Missing />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
