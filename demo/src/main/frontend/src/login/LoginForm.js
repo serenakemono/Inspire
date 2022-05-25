@@ -45,13 +45,14 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setFormValues(defaultFormValues);
+    
 
     axios.post(LOGIN_URL, formValues).
         then((response) => {
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
+            setFormValues(defaultFormValues);
             window.location.href = '/me';
         }).
         catch(function (error) {

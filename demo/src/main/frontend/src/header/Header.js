@@ -14,35 +14,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
 
-
-const headersData = [
-    {
-        label: "home",
-        href: "/home"
-    },
-    {
-        label: "getinspired",
-        href: "/getinspired"
-    },
-    {
-        label: "community",
-        href: "/community"
-    },
-    {
-        label: "messages",
-        href: "/messages"
-    },
-    {
-        label: "courses",
-        href: "/courses"
-    },
-    {
-        label: "me",
-        href: "/me"
-    }
-];
-
-const Header = () => {
+const Header = ({ headerItems }) => {
 
     const [state, setState] = useState({
         mobileView: false,
@@ -117,16 +89,29 @@ const Header = () => {
         </Typography>
     );
 
+    const handleLogoutClick = () => {
+
+        localStorage.removeItem("user");
+        window.location.href = '/login';
+    }
+
+    const handleOtherClicks = (href) => {
+        window.location.href = href;
+    }
+
     const getMenuButtons = () => {
-        return headersData.map(({ label, href }) => {
+        return headerItems.map(({ label, href }) => {
             return (
                 <Button
                     {...{
                         key: label,
                         color: "#000000",
-                        to: href,
+                        // onClick: () => {
+                        //     label === 'log out' ? handleLogoutClick : handleOtherClicks(href);
+                        // },
+                        className: menuButton,
                         component: RouterLink,
-                        className: menuButton
+                        to: href
                     }}
                 >
                     {label}
@@ -145,7 +130,7 @@ const Header = () => {
     };
 
     const getDrawerChoices = () => {
-        return headersData.map(({ label, href }) => {
+        return headerItems.map(({ label, href }) => {
             return (
                 <Link
                     {...{
