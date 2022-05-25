@@ -12,31 +12,12 @@ import PostPage from './home/PostPage';
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
 import Profile from './profile/Profile';
+import ProfilePage from './profile/ProfilePage';
 
 // red: #e51b23
 // pink: #f8c6c8
 
 function App() {
-  // refresh at load time only by using []
-  // handles GET request for 'register'
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       // axios automatically takes care of response
-  //       const response = await registerApi.get('');
-        
-  //     } catch {
-  //       if (err.response) {
-  //         console.log(err.response.data);
-  //         console.log(err.response.status);
-  //         console.log(err.response.headers);
-  //       } else {
-  //         console.log(`Error: ${err.message}`)
-  //       }
-  //       // Not in the 200 response range
-  //     }
-  //   }
-  // }, [])
 
   const [posts, setPosts] = useState([
     {
@@ -66,6 +47,7 @@ function App() {
         <Route path="home" element={<PostsDisplay posts={posts} />} />
         <Route path="post/:id" element={<PostPage posts={posts} />} />
         <Route path="me" element={<Profile posts={posts} />} />
+        <Route path="profile" element={<ProfilePage />} />
         {/* <Route path="getinspired" element={<GetInspired />} />
         <Route path="community" element={<Community />} />
         <Route path="courses" element={<Courses />} />
