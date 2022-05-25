@@ -12,10 +12,10 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg }) => {
+const ProfileHeader = ({ userImg, bio }) => {
     
-    const context = useContext(AuthContext);
-    //console.log(context);
+  const context = useContext(AuthContext);
+  //console.log(context);
 
   return (
     <div className="profile-header">
@@ -31,17 +31,17 @@ const ProfileHeader = ({ userImg }) => {
                 <Grid container spacing={2}>
                     <Grid item>
                         <img className="profile-pic" src={userImg} alt="profile" />
-                      </Grid>
-                      <Grid item>
-                          <Item className="profile-name">username</Item>
-                          <Item>111 Followers 111 Following</Item>
-                      </Grid>
+                    </Grid>
+                    <Grid item>
+                        <Item className="profile-name">username</Item>
+                        <Item className="bio">{ bio }</Item>
+                        <Item className="follower-stats">111 Followers 111 Following</Item>
+                    </Grid>
                 </Grid>
                   
                 <div>
                       <Button
                           variant="contained"
-                          sentenceCase // no change?
                           style={{
                               backgroundColor: "#e51b23",
                               color: "#FFFFFF",
@@ -56,12 +56,12 @@ const ProfileHeader = ({ userImg }) => {
         </div>
     
         <div className="header-links">
-            <Tabs value={0} variant="fullWidth" centered>
+            <Tabs value={0} centered sx={{width: "50%"}}>
                   <Tab
                     style={{textTransform: 'none'}}
                     icon={<AccountCircleRoundedIcon />}
-                    iconPosition="start"
-                    label="About" />
+                    iconPosition='start'
+                    label="About Me" />
                 <Tab
                     style={{textTransform: 'none'}}
                     icon={<PhotoLibraryRoundedIcon />}

@@ -9,7 +9,8 @@ import {
     Button,
     IconButton,
     Drawer,
-    MenuItem
+    MenuItem,
+    SwipeableDrawer
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
 
@@ -188,7 +189,7 @@ const Header = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Drawer
+                <SwipeableDrawer
                     {...{
                         anchor: "left",
                         open: drawerOpen,
@@ -200,7 +201,7 @@ const Header = () => {
                     <div className={drawerContainer}>
                         {getDrawerChoices()}
                     </div>
-                </Drawer>
+                </SwipeableDrawer>
                 <div>{inspireLogo}</div>
             </Toolbar>
         );

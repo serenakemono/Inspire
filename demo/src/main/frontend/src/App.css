@@ -130,7 +130,16 @@ body{
 .profile-page .profile-header .cover .cover-body .profile-name {
   font-size: 20px;
   font-weight: 600;
+}
+
+.profile-page .profile-header .profile-name
+.cover .cover-body .bio .follower-stats {
   margin-left: 17px;
+}
+
+.bio .follower-stats {
+  font-size: 10px;
+  font-weight: 400;
 }
 
 .btn-edit-profile {
@@ -199,7 +208,9 @@ body{
   border-radius: .25rem;
 }
 
-.rtl .profile-page .profile-header .cover .cover-body .profile-name {
+.rtl .profile-page 
+.profile-header .cover 
+.cover-body {
   margin-left: 0;
   margin-right: 17px;
 }
