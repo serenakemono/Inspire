@@ -10,47 +10,47 @@ const ProfileLatestPics = () => {
                     <div className="row">
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar1.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar3.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar4.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar5.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure>
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar6.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure className="mb-0">
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar7.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure className="mb-0">
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar8.png" alt="" />
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt="" />
                             </figure>
                         </div>
                         <div className="col-md-4">
                             <figure className="mb-0">
-                                <img className="img-fluid" src="https://therichpost.com/wp-content/uploads/2021/03/avatar9.png" alt=""/>
+                                <img className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfTFqdguTh5hMKPCMshObe9ee72O5Dei3-w&usqp=CAU" alt=""/>
                             </figure>
                         </div>
                     </div>

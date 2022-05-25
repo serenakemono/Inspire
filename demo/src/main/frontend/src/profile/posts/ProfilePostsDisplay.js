@@ -16,11 +16,18 @@ const ProfilePostsDisplay = () => {
     const post2 = {
         id: 2,
         op: op,
-        text: "a good day",
+        text: "a post without an image",
+        img: ""
+    }
+
+    const post3 = {
+        id: 3,
+        op: op,
+        text: "this is the third post",
         img: "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
     }
 
-    const posts = [post1, post2]
+    const posts = [post1, post2, post3]
 
 
     return (

@@ -89,16 +89,6 @@ const Header = ({ headerItems }) => {
         </Typography>
     );
 
-    const handleLogoutClick = () => {
-
-        localStorage.removeItem("user");
-        window.location.href = '/login';
-    }
-
-    const handleOtherClicks = (href) => {
-        window.location.href = href;
-    }
-
     const getMenuButtons = () => {
         return headerItems.map(({ label, href }) => {
             return (
@@ -106,9 +96,6 @@ const Header = ({ headerItems }) => {
                     {...{
                         key: label,
                         color: "#000000",
-                        // onClick: () => {
-                        //     label === 'log out' ? handleLogoutClick : handleOtherClicks(href);
-                        // },
                         className: menuButton,
                         component: RouterLink,
                         to: href

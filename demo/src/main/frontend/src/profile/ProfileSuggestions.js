@@ -12,7 +12,7 @@ const ProfileSuggestions = () => {
                     <div className="d-flex align-items-center hover-pointer">
                         <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                       </div>
@@ -22,9 +22,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar3.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -34,9 +34,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar4.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -46,9 +46,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar5.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -58,9 +58,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar6.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -70,9 +70,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar7.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
-                            <p>jassa</p>
+                            <p>Johnny</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
