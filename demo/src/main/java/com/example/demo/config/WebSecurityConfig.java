@@ -58,11 +58,13 @@ public class WebSecurityConfig
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
+                // permit register and login pages
                 .authorizeRequests()
-//                .antMatchers("/api/v1/homne")
-//                .authenticated()
-                .anyRequest()
+                .antMatchers("/api/v1/register", "/api/v1/auth/login", "/api/v1/users")
                 .permitAll()
+                // all the rest need authentication
+                .anyRequest()
+                .authenticated()
                 .and()
                 .addFilterBefore(
                         new JWTAuthFilter(userServices, jwtTokenHelper),
