@@ -6,7 +6,7 @@ import App from './App';
 
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import RedirectAftRegistration from './registration/RedirectAftRegistration';
-import { AuthProvider } from './login/AuthProvider';
+import { AuthProvider } from './authentication/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

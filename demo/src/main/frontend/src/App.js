@@ -9,55 +9,68 @@ import Footer from './Footer'
 import PostsDisplay from './home/PostsDisplay'
 import PostPage from './home/PostPage';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
-import Profile from './profile/Profile';
 import ProfilePage from './profile/ProfilePage';
+import AuthService from './authentication/AuthService';
 
 // red: #e51b23
 // pink: #f8c6c8
 
-function App() {
+class App extends Component {
 
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "my first post",
-      datetime: "May 11, 2022 08:04:36 PM",
-      body: "dfjadsogo lkdhflaer  djhoasd fdslkfjoasp fdlufpoa   fladsfsdlnosdue lfdsufopasdbn ioenfdjkwe fldshfhnf lsadhfop s."
-    },
-    {
-      id: 2,
-      title: "my second post",
-      datetime: "May 22, 2022 05:23:11 PM",
-      body: "today ld ldfjne9r ldjpe flksdaf pwejn,v asdoifsuaoplk eopiru pwe."
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      currUser: undefined
+    };
+  }
+
+  componentDidMount() {
+    const user = AuthService.getCurrUser();
+
+    if (user) {
+      this.setState({
+        currUser: AuthService.getCurrUser(),
+      })
     }
-  ])
+  }
 
-  return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="login" element={<LoginForm />} />
-        <Route
-          path="register"
-          element={<RegistrationForm />}
-        />
-      
-        <Route path="home" element={<PostsDisplay posts={posts} />} />
-        <Route path="post/:id" element={<PostPage posts={posts} />} />
-        <Route path="me" element={<Profile posts={posts} />} />
-        <Route path="profile" element={<ProfilePage />} />
-        {/* <Route path="getinspired" element={<GetInspired />} />
-        <Route path="community" element={<Community />} />
-        <Route path="courses" element={<Courses />} />
-        <Route path="messaging" element={<Messaging />} />
-        <Route path="me" element={<Me />} /> */}
-        <Route path="*" element={<Missing />} />
-      </Routes>
-      {/* <Footer /> */}
-    </div>
-  );
+  logOut() {
+    AuthService.logout();
+  }
+
+  render() {
+
+    const { currUser } = this.state;
+
+    return (
+      <div>
+        <Header />
+        <Routes>
+          <Route path="login" element={<LoginForm />} />
+          <Route
+            path="register"
+            element={<RegistrationForm />}
+          />
+        
+          {/* <Route path="home" element={<PostsDisplay posts={posts} />} />
+          <Route path="post/:id" element={<PostPage posts={posts} />} /> */}
+          {/* <Route path="me" element={<Profile posts={posts} />} /> */}
+          <Route path="me" element={<ProfilePage />} />
+          {/* <Route path="getinspired" element={<GetInspired />} />
+          <Route path="community" element={<Community />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="messaging" element={<Messaging />} />
+          <Route path="me" element={<Me />} /> */}
+          <Route path="*" element={<Missing />} />
+        </Routes>
+        {/* <Footer /> */}
+      </div>
+    );
+  }
 }
 
 export default App;

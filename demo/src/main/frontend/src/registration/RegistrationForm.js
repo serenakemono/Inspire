@@ -93,9 +93,6 @@ const RegistrationForm = () => {
         }
       }
     )
-
-    
-
   };
   
   return (
@@ -111,7 +108,6 @@ const RegistrationForm = () => {
         boxShadow: 1,
         borderRadius: 2,
         width: "25ch",
-        
       }}>
       <form onSubmit={handleSubmit}>
         <Grid
@@ -119,9 +115,9 @@ const RegistrationForm = () => {
           alignItems="center"
           justify="center"
           direction="column"
-            spacing={2}
-            marginTop="3px"
-            marginBottom="8px"
+          spacing={2}
+          marginTop="3px"
+          marginBottom="8px"
         >
           <Grid item>
             <TextField
@@ -178,9 +174,14 @@ const RegistrationForm = () => {
             <Button variant="contained" type="submit">
               Join
             </Button>
+            </Grid>
+            <Grid item>
+            <p>Have an account?&nbsp;&nbsp;&nbsp;
+              <a href="/login">Sign in</a>
+            </p>
+          </Grid>
           </Grid>
           
-        </Grid>
         </form>
       </Box>
     </div>

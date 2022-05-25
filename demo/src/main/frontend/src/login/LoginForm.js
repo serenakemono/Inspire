@@ -5,18 +5,19 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from '../api/axios';
-import AuthContext from './AuthProvider';
-
-const LOGIN_URL = '/auth/login'
+import AuthContext from '../authentication/AuthProvider';
+import AuthService from '../authentication/AuthService';
 
 const LoginForm = () => {
-  const { setAuth } = useContext(AuthContext);
-  const userRef = useRef(null);
+  // const { setAuth } = useContext(AuthContext);
+  // const userRef = useRef(null);
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, [])
-
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, [])
+  
+  const LOGIN_URL = '/auth/login'
+  
   const defaultFormValues = {
     username: "",
     password: ""
@@ -44,28 +45,25 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setFormValues(defaultFormValues);
+
     axios.post(LOGIN_URL, formValues).
-      
-      then((response) => {
-        const newAuth = {
-          username: formValues.username,
-          password: formValues.password,
-          token: response?.data?.token
-        };
-        console.log(newAuth);
-        setAuth(newAuth);
-        setFormValues(defaultFormValues);
-      }).
-      
-      catch(function (error) {
-        console.log(error);
-        if (error.response) {
+        then((response) => {
+            if (response.data.token) {
+                localStorage.setItem("user", JSON.stringify(response.data));
+            }
+            window.location.href = '/me';
+        }).
+        catch(function (error) {
+          console.log(error)
+          if (error.response) {
+            console.log(error.response)
+          }
           setLoginStatus({
             error: true,
             helperText: 'Wrong username or password.'
           })
         }
-      }
     )
   };
   
@@ -99,8 +97,7 @@ const LoginForm = () => {
             <TextField
               required
               error={loginStatus.error}
-                id="username-input"
-                ref={userRef}
+              id="username-input"
               name="username"
               label="Username"
               type="text"

@@ -7,13 +7,22 @@ import ProfileCard from './ProfileCard';
 import ProfilePostsDisplay from './posts/ProfilePostsDisplay';
 import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
+import AuthService from '../authentication/AuthService';
 
 
 
 class ProfilePage extends React.Component {
-  
- 
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentUser: AuthService.getCurrUser()
+        };
+    }
+
     render() {
+
+        const { currentUser } = this.state;
+        
         const username = "Serena"
         const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
         const bio = "bio"
@@ -47,12 +56,8 @@ class ProfilePage extends React.Component {
                  
                 </div>
             </div>
-            </div>
-          </div> 
-             
-       
-     
-      
+        </div>
+    </div> 
 )
 };
 }

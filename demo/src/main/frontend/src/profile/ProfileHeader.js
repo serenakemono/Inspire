@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Button from "@material-ui/core/Button"
 import Tab from "@material-ui/core/Tab"
 import Tabs from "@material-ui/core/Tabs"
-import AuthContext from '../login/AuthProvider'
+import AuthContext from '../authentication/AuthProvider'
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid'
 
 const ProfileHeader = ({ userImg, username, bio }) => {
     
-  const context = useContext(AuthContext);
+  //const context = useContext(AuthContext);
   //console.log(context);
 
   return (
