@@ -26,7 +26,7 @@ const ProfilePage = () => {
                 <div className="profile-page tx-13">
                     <div className="row">
                         <div className="col-12 grid-margin">
-                        <ProfileHeader userImg ={userImg} username={username} bio={bio} />
+                            <ProfileHeader userImg ={userImg} username={username} bio={bio} />
                         </div>
                     </div>
                     <div className="profile-body row">

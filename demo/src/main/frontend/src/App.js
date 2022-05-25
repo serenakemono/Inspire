@@ -6,8 +6,7 @@ import LoginForm from './login/LoginForm';
 import RegistrationForm from './registration/RegistrationForm';
 import Missing from './Missing';
 import Footer from './Footer'
-import PostsDisplay from './home/PostsDisplay'
-import PostPage from './home/PostPage';
+import HomePage from './home/HomePage';
 
 import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
@@ -88,8 +87,8 @@ class App extends Component {
             element={<RegistrationForm />}
           />
         
-          {/* <Route path="home" element={<PostsDisplay posts={posts} />} />
-          <Route path="post/:id" element={<PostPage posts={posts} />} /> */}
+          <Route path="home" element={<HomePage />} />
+          {/* <Route path="post/:id" element={<PostPage posts={posts} />} /> */}
           {/* <Route path="me" element={<Profile posts={posts} />} /> */}
           <Route path="me" element={<ProfilePage />} />
           <Route path='logout' element={<LogoutPage />} />
