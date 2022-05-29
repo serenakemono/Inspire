@@ -103,12 +103,25 @@ const RegistrationForm = () => {
         marginTop: "100px"
       }}
     >
-    <Box
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
       sx={{
         boxShadow: 1,
         borderRadius: 2,
         width: "25ch",
-      }}>
+        }}>
+        <Grid
+          item
+          style={{
+            paddingTop: "10px",
+            fontSize: "25px"
+          }}
+        >
+        Join Inspire
+      </Grid>
       <form onSubmit={handleSubmit}>
         <Grid
           container

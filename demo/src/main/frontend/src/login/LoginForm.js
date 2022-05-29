@@ -75,13 +75,25 @@ const LoginForm = () => {
         alignItems: "center",
         marginTop: "100px"
       }}>
-    <Box
-      alignItems="center"
-      sx={{
-        boxShadow: 1,
-        borderRadius: 2,
-        width: "25ch",
-      }}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        flexDirection="column"
+        alignItems="center"
+        sx={{
+          boxShadow: 1,
+          borderRadius: 2,
+          width: "25ch",
+        }}>
+        <Grid
+          item
+          style={{
+            paddingTop: "10px",
+            fontSize: "25px"
+          }}
+        >
+        Sign in
+      </Grid>
       <form
         onSubmit={handleSubmit}
       >
