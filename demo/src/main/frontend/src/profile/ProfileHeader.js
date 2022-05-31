@@ -12,7 +12,9 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg, user, handleEditProfile }) => {
+const ProfileHeader = ({ userImg, user, handleEditProfile, editMode }) => {
+
+  if (user === null) return;
   
   const username = user.username;
   const bio = user.bio;
@@ -40,47 +42,48 @@ const ProfileHeader = ({ userImg, user, handleEditProfile }) => {
             </Grid>
           </Grid>
                   
-            <div>
-              <Button
-                variant="contained"
-                style={{
-                    backgroundColor: "#e51b23",
-                    color: "#FFFFFF",
-                    textTransform: 'none',
-                    width: "130px"
-                }}
-                startIcon={<EditRoundedIcon />}
-                onClick={() => handleEditProfile()}
-              >Edit profile
-              </Button>
-            </div>
+          <div>
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "#e51b23",
+                color: "#FFFFFF",
+                textTransform: 'none',
+                width: "130px"
+              }}
+              startIcon={<EditRoundedIcon />}
+              onClick={() => handleEditProfile()}
+            >Edit profile
+            </Button>
           </div>
         </div>
+      </div>
     
-        <div className="header-links">
-            <Tabs value={1} centered sx={{width: "50%"}}>
-                  <Tab
-                    style={{textTransform: 'none'}}
-                    icon={<AccountCircleRoundedIcon />}
-                    label="About Me" />
-                <Tab
-                    style={{textTransform: 'none'}}
-                    icon={<PhotoLibraryRoundedIcon />}
-                    label="Posts" />
-                  <Tab
-                      style={{textTransform: 'none'}}
-                    icon={<ForumRoundedIcon />}
-                    label="Discussions" />
-                  <Tab
-                      style={{textTransform: 'none'}}
-                    icon={<StyleRoundedIcon />}
-                    label="Tags" />
-                  <Tab
-                      style={{textTransform: 'none'}}
-                    icon={<StarRoundedIcon />}
-                    label="Collections" />
-            </Tabs>
-        </div>
+      <div className="header-links">
+        <Tabs
+          value={editMode?0:1} centered sx={{ width: "50%" }}>
+          <Tab
+            style={{textTransform: 'none'}}
+            icon={<AccountCircleRoundedIcon />}
+            label="About Me" />
+          <Tab
+            style={{textTransform: 'none'}}
+            icon={<PhotoLibraryRoundedIcon />}
+            label="Posts" />
+          <Tab
+            style={{textTransform: 'none'}}
+            icon={<ForumRoundedIcon />}
+            label="Discussions" />
+          <Tab
+            style={{textTransform: 'none'}}
+            icon={<StyleRoundedIcon />}
+            label="Tags" />
+          <Tab
+            style={{textTransform: 'none'}}
+            icon={<StarRoundedIcon />}
+            label="Collections" />
+        </Tabs>
+      </div>
     </div>
   )
 }

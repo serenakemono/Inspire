@@ -17,14 +17,9 @@ const ProfilePage = () => {
 
     const GET_USER_INFO_URL
         = 'http://localhost:8080/api/v1/auth/userinfo'
-    
-    const defaultUser = {
-        username: "unknown",
-        bio: "unknown",
-        email: "unknown",
-    }
 
-    const [user, setUser] = useState(defaultUser);
+    const [editMode, setEditMode] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         axios.get(GET_USER_INFO_URL,
@@ -37,7 +32,7 @@ const ProfilePage = () => {
                 }
                 setUser(newUser);
             }).catch((error) => {
-                console.log(error);
+                console.log(error)
             }
         )
     }, []);
@@ -48,7 +43,7 @@ const ProfilePage = () => {
 
     const handleEditProfile = () => {
         console.log('editing');
-        console.log(currentUser.token);
+        setEditMode(true);
     }
 
     return (
@@ -61,12 +56,18 @@ const ProfilePage = () => {
                                 userImg={userImg}
                                 user={user}
                                 handleEditProfile={handleEditProfile}
+                                editMode={editMode}
                             />
                         </div>
                     </div>
                     <div className="profile-body row">
                         <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                            <ProfileCard user={user} />
+                            <ProfileCard
+                                user={user}
+                                editMode={editMode}
+                                setEditMode={setEditMode}
+                                handleEditProfile={handleEditProfile}
+                            />
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
@@ -88,27 +89,3 @@ const ProfilePage = () => {
 }
 
 export default ProfilePage
-
-// class ProfilePage extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-            
-//         };
-//     }
-
-//     render() {
-
-//         const { currentUser } = this.state;
-        
-        
-        
-        
-//     return (
-     
-        
-// )
-// };
-// }
-
-// export default ProfilePage;

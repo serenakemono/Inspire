@@ -81,11 +81,12 @@ public class AppUserServices implements UserDetailsService {
 
     // use setter methods instead of db logic
     @Transactional
-    public void updateUser(String username,
-                           String newUsername,
-                           String email,
-                           String password,
-                           String bio) {
+    public void updateUser(String username, AppUser updatedUser) {
+
+        String newUsername = updatedUser.getUsername();
+        String email = updatedUser.getEmail();
+        String password = updatedUser.getPassword();
+        String bio = updatedUser.getBio();
 
         AppUser user = userRepo.findAppUserByUsername(username).
                 orElseThrow(() -> new IllegalStateException(

@@ -268,4 +268,5 @@ img {
   background-clip: border-box;
   border: 1px solid #f2f4f9;
   border-radius: 0.25rem;
+  min-height: 1px;
 }

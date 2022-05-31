@@ -43,7 +43,6 @@ public class AppUserController {
     public void registerNewUser(@RequestBody AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         appUserServices.addNewUser(user);
-        System.out.println(user);
     }
 
     @DeleteMapping(path = "{username}")
@@ -54,10 +53,8 @@ public class AppUserController {
     @PutMapping(path = "{username}")
     public void updateUser(
             @PathVariable("username") String username,
-            @RequestParam(required = false) String newUsername,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String password,
-            @RequestParam(required = false) String bio) {
-        appUserServices.updateUser(username, newUsername, email, password, bio);
+            @RequestBody AppUser user) {
+        System.out.println(user);
+        appUserServices.updateUser(username, user);
     }
 }
