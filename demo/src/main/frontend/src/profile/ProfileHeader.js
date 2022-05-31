@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import Button from "@material-ui/core/Button"
 import Tab from "@material-ui/core/Tab"
 import Tabs from "@material-ui/core/Tabs"
@@ -12,13 +12,17 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg, user, handleEditProfile, editMode }) => {
+const ProfileHeader = ({ userImg, user, handleEditProfile, tab, setTab }) => {
 
   if (user === null) return;
   
   const username = user.username;
   const bio = user.bio;
   const email = user.email;
+
+  const handleTabs = (e, val) => {
+      setTab(val);
+  }
 
   return (
     <div className="profile-header">
@@ -61,7 +65,10 @@ const ProfileHeader = ({ userImg, user, handleEditProfile, editMode }) => {
     
       <div className="header-links">
         <Tabs
-          value={editMode?0:1} centered sx={{ width: "50%" }}>
+          value={tab}
+          onChange={handleTabs}
+          centered
+          sx={{ width: "50%" }}>
           <Tab
             style={{textTransform: 'none'}}
             icon={<AccountCircleRoundedIcon />}

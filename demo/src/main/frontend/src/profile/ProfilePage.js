@@ -20,6 +20,7 @@ const ProfilePage = () => {
 
     const [editMode, setEditMode] = useState(false);
     const [user, setUser] = useState(null);
+    const [tab, setTab] = useState(0)
 
     useEffect(() => {
         axios.get(GET_USER_INFO_URL,
@@ -42,8 +43,8 @@ const ProfilePage = () => {
     if (!currentUser) return window.location.href = '/login';
 
     const handleEditProfile = () => {
-        console.log('editing');
         setEditMode(true);
+        setTab(0)
     }
 
     return (
@@ -57,6 +58,8 @@ const ProfilePage = () => {
                                 user={user}
                                 handleEditProfile={handleEditProfile}
                                 editMode={editMode}
+                                tab={tab}
+                                setTab={setTab}
                             />
                         </div>
                     </div>
