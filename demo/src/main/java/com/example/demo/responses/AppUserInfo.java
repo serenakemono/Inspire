@@ -6,6 +6,16 @@ public class AppUserInfo {
     private String email;
     private Object roles;
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    private String bio;
+
     public String getUsername() {
         return username;
     }

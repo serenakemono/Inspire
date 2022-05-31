@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "@material-ui/core/Button"
@@ -8,17 +8,48 @@ import ProfilePostsDisplay from './posts/ProfilePostsDisplay';
 import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
+import axios from 'axios'
 
 const ProfilePage = () => {
 
     const currentUser = AuthService.getCurrUser();
+    const token = currentUser.token;
 
-    const username = "Serena"
+    const GET_USER_INFO_URL
+        = 'http://localhost:8080/api/v1/auth/userinfo'
+    
+    const defaultUser = {
+        username: "unknown",
+        bio: "unknown",
+        email: "unknown",
+    }
+
+    const [user, setUser] = useState(defaultUser);
+
+    useEffect(() => {
+        axios.get(GET_USER_INFO_URL,
+            { headers: { "Authorization": `Bearer ${token}` } })
+            .then(res => {
+                const newUser = {
+                    username: res.data.username,
+                    bio: res.data.bio,
+                    email: res.data.email,
+                }
+                setUser(newUser);
+            }).catch((error) => {
+                console.log(error);
+            }
+        )
+    }, []);
+
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
-    const bio = "bio"
-    const email = "abc@gmail.com"
     
     if (!currentUser) return window.location.href = '/login';
+
+    const handleEditProfile = () => {
+        console.log('editing');
+        console.log(currentUser.token);
+    }
 
     return (
         <div className="maincontainer">
@@ -26,12 +57,16 @@ const ProfilePage = () => {
                 <div className="profile-page tx-13">
                     <div className="row">
                         <div className="col-12 grid-margin">
-                            <ProfileHeader userImg ={userImg} username={username} bio={bio} />
+                            <ProfileHeader
+                                userImg={userImg}
+                                user={user}
+                                handleEditProfile={handleEditProfile}
+                            />
                         </div>
                     </div>
                     <div className="profile-body row">
                         <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                            <ProfileCard bio={bio} email={email} />
+                            <ProfileCard user={user} />
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">

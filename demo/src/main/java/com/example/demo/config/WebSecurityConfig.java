@@ -60,7 +60,7 @@ public class WebSecurityConfig
                 .and()
                 // permit register and login pages
                 .authorizeRequests()
-                .antMatchers("/api/v1/register", "/api/v1/auth/login", "/api/v1/users")
+                .antMatchers("/**")
                 .permitAll()
                 // all the rest need authentication
                 .anyRequest()

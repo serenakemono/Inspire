@@ -66,6 +66,7 @@ public class AuthController {
         userInfo.setUsername(userObj.getUsername());
         userInfo.setEmail(userObj.getEmail());
         userInfo.setRoles(userObj.getAuthorities().toArray());
+        userInfo.setBio(userObj.getBio());
 
         return ResponseEntity.ok(userInfo);
     }

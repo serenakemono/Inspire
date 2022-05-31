@@ -12,47 +12,49 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg, username, bio }) => {
-    
-  //const context = useContext(AuthContext);
-  //console.log(context);
+const ProfileHeader = ({ userImg, user, handleEditProfile }) => {
+  
+  const username = user.username;
+  const bio = user.bio;
+  const email = user.email;
 
   return (
     <div className="profile-header">
-        <div className="cover">
-            <div className="gray-shade"></div>
-            <div 
-                className="cover-body"
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                }}>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <img className="profile-pic" src={userImg} alt="profile" />
-                    </Grid>
-                    <Grid item>
-                          <Item className="profile-name">{ username }</Item>
-                        <Item className="bio">{ bio }</Item>
-                        <Item className="follower-stats">111 Followers 111 Following</Item>
-                    </Grid>
-                </Grid>
+      <div className="cover">
+        <div className="gray-shade"></div>
+        <div 
+          className="cover-body"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <img className="profile-pic" src={userImg} alt="profile" />
+            </Grid>
+            <Grid item>
+              <Item className="profile-name">{ username }</Item>
+              <Item className="bio">{ bio }</Item>
+              <Item className="follower-stats">111 Followers 111 Following</Item>
+            </Grid>
+          </Grid>
                   
-                <div>
-                      <Button
-                          variant="contained"
-                          style={{
-                              backgroundColor: "#e51b23",
-                              color: "#FFFFFF",
-                              textTransform: 'none',
-                              width: "130px"
-                          }}
-                          startIcon={<EditRoundedIcon />}
-                      >Edit profile
-                    </Button>
-                </div>
+            <div>
+              <Button
+                variant="contained"
+                style={{
+                    backgroundColor: "#e51b23",
+                    color: "#FFFFFF",
+                    textTransform: 'none',
+                    width: "130px"
+                }}
+                startIcon={<EditRoundedIcon />}
+                onClick={() => handleEditProfile()}
+              >Edit profile
+              </Button>
             </div>
+          </div>
         </div>
     
         <div className="header-links">

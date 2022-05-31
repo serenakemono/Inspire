@@ -4,7 +4,10 @@ import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-const ProfileCard = ({ bio, email }) => {
+const ProfileCard = ({ user }) => {
+
+    const bio = user.bio;
+    const email = user.email;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
