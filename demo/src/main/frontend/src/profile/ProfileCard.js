@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Box from '@material-ui/core/Box'
@@ -62,16 +63,6 @@ const ProfileCard = ({ user, editMode, setEditMode, handleEditProfile }) => {
                 }
             })
     }
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    
     
     return (
         <div className="card rounded">
@@ -151,28 +142,9 @@ const ProfileCard = ({ user, editMode, setEditMode, handleEditProfile }) => {
                     <h6 className="card-title mb-0">Bio</h6>
                     <div className="dropdown">
                         <div>
-                            <IconButton
-                                aria-controls={open ? 'basic-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                                onClick={handleClick}
-                            >
-                                <MoreHorizRoundedIcon />
+                            <IconButton>
+                                <EditRoundedIcon onClick={handleEditProfile} />
                             </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
-                                getContentAnchorEl={null}
-                                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                                transformOrigin={{ vertical: "top", horizontal: "center" }}
-                                open={open}
-                                onClose={handleClose}
-                                MenuListProps={{
-                                    'aria-labelledby': 'basic-button',
-                                }}
-                            >
-                                <MenuItem onClick={handleEditProfile}>Edit</MenuItem>
-                                <MenuItem onClick={handleClose}>Show more</MenuItem>
-                            </Menu>
                         </div>
                     </div>
                 </div>
