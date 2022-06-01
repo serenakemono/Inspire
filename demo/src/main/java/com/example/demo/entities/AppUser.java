@@ -40,14 +40,6 @@ public class AppUser implements UserDetails {
         this.authorities = authorities;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_post",
-            joinColumns = @JoinColumn(referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
-    )
-    private List<Post> posts;
-
     public AppUser() {
     }
 

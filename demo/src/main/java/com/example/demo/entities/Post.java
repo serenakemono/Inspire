@@ -18,6 +18,18 @@ public class Post {
     @Column
     private String text;
 
+    public Post() {}
+
+    public Post(
+            String username,
+            Long timestamp,
+            String text) {
+        this.username = username;
+        this.timestamp = timestamp;
+        this.text = text;
+    }
+
+
     public String getUsername() {
         return username;
     }
