@@ -40,6 +40,14 @@ public class AppUser implements UserDetails {
         this.authorities = authorities;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_post",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
+    )
+    private List<Post> posts;
+
     public AppUser() {
     }
 
@@ -128,7 +136,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User {" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
