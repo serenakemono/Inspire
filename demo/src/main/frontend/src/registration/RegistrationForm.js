@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from '../api/axios';
-import RedirectAftRegistration from './RedirectAftRegistration';
 
 const REGISTER_URL = '/register'
 

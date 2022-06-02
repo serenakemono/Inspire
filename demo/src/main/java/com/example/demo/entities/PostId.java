@@ -7,6 +7,8 @@ public class PostId implements Serializable {
     private String username;
     private Long timestamp;
 
+    public PostId() {}
+
     public PostId(String username, Long timestamp) {
         this.username = username;
         this.timestamp = timestamp;

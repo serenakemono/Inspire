@@ -45,8 +45,6 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    
-
     axios.post(LOGIN_URL, formValues).
         then((response) => {
             if (response.data.token) {
