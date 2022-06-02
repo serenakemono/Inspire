@@ -9,7 +9,7 @@ import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
 import axios from 'axios'
 import PostCreationCard from './postcreation/PostCreationCard';
-import PostCreationPopup from './posts/PostCreationPopup';
+import PostCreationPopup from './postcreation/PostCreationPopup';
 
 const ProfilePage = () => {
 
@@ -97,7 +97,11 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
-            { popup && <PostCreationPopup setPopup={setPopup} /> }
+            {popup && <PostCreationPopup
+                setPopup={setPopup}
+                userImg={userImg}
+                user={user}
+            />}
         </div>
     )
 }
