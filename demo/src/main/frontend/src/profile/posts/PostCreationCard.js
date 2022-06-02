@@ -6,7 +6,8 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import ForumIcon from '@mui/icons-material/Forum';
 import FeedIcon from '@mui/icons-material/Feed';
 
-const PostCreationCard = ({userImg}) => {
+const PostCreationCard = ({ userImg, setPopup }) => {
+
     return (
         <div className="col-md-12 grid-margin">
         <div className="card rounded">
@@ -17,7 +18,9 @@ const PostCreationCard = ({userImg}) => {
                     paddingBottom: "15px"
                 }}>
                     <img className="img-xs rounded-circle" src={userImg} alt="" />
-                    <button className="btn-create-post">Feeling inspired today?</button>
+                    <button className="btn-create-post" onClick={()=>setPopup(true)}>
+                        Feeling inspired today?
+                    </button>
                 </div>
                 <div style={{
                     display: "flex",

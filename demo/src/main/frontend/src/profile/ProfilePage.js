@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from "@material-ui/core/Button"
 import ProfileHeader from './ProfileHeader';
 import ProfileCard from './ProfileCard';
 import ProfilePostsDisplay from './posts/ProfilePostsDisplay';
@@ -10,6 +9,7 @@ import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
 import axios from 'axios'
 import PostCreationCard from './posts/PostCreationCard';
+import PostCreationPopup from './posts/PostCreationPopup';
 
 const ProfilePage = () => {
 
@@ -48,48 +48,57 @@ const ProfilePage = () => {
         setTab(0)
     }
 
+    const [popup, setPopup] = useState(false);
+    const duringPopup = popup ? "during-popup" : ""
+
     return (
-        <div className="maincontainer">
-            <div className="container">
-                <div className="profile-page tx-13">
-                    <div className="row">
-                        <div className="col-12 grid-margin">
-                            <ProfileHeader
-                                userImg={userImg}
-                                user={user}
-                                handleEditProfile={handleEditProfile}
-                                editMode={editMode}
-                                tab={tab}
-                                setTab={setTab}
-                            />
-                        </div>
-                    </div>
-                    <div className="profile-body row">
-                        <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                            <ProfileCard
-                                user={user}
-                                editMode={editMode}
-                                setEditMode={setEditMode}
-                                handleEditProfile={handleEditProfile}
-                            />
-                        </div>
-                    
-                        <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <PostCreationCard user={user} userImg={userImg} />
-                            <ProfilePostsDisplay />
-                        </div>
-                    
-                        <div className="d-none d-xl-block col-xl-3 right-wrapper">
-                            <div className="row">
-                                <ProfileLatestPics />
-                                <ProfileSuggestions />
+        <div>
+            <div className={duringPopup}></div>
+            <div className="maincontainer">
+                <div className="container">
+                    <div className="profile-page tx-13">
+                        <div className="row">
+                            <div className="col-12 grid-margin">
+                                <ProfileHeader
+                                    userImg={userImg}
+                                    user={user}
+                                    handleEditProfile={handleEditProfile}
+                                    editMode={editMode}
+                                    tab={tab}
+                                    setTab={setTab}
+                                />
                             </div>
                         </div>
-                    
+                        <div className="profile-body row">
+                            <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
+                                <ProfileCard
+                                    user={user}
+                                    editMode={editMode}
+                                    setEditMode={setEditMode}
+                                    handleEditProfile={handleEditProfile}
+                                />
+                            </div>
+                        
+                            <div className="col-md-8 col-xl-6 middle-wrapper">
+                                <PostCreationCard
+                                    user={user}
+                                    userImg={userImg}
+                                    setPopup={setPopup} />
+                                <ProfilePostsDisplay />
+                            </div>
+                        
+                            <div className="d-none d-xl-block col-xl-3 right-wrapper">
+                                <div className="row">
+                                    <ProfileLatestPics />
+                                    <ProfileSuggestions />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div> 
+            { popup && <PostCreationPopup setPopup={setPopup} /> }
+        </div>
     )
 }
 
