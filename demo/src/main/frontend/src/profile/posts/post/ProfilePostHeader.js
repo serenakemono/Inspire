@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Menu, MenuItem, IconButton } from '@material-ui/core'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
-const ProfilePostHeader = ({post}) => {
+const ProfilePostHeader = ({post, userImg}) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -24,8 +24,8 @@ const ProfilePostHeader = ({post}) => {
                     display: "flex",
                     alignItems: "center"
                 }}>
-                <img className="img-xs rounded-circle" src={post.op.userImg} alt="" />
-                <div style={{marginLeft:"10px"}}>{ post.op.username }</div>
+                <img className="img-xs rounded-circle" src={userImg} alt="" />
+                <div style={{marginLeft:"10px"}}>{ post.username }</div>
             </div>
             <div>
                 <IconButton

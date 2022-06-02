@@ -84,7 +84,7 @@ const ProfilePage = () => {
                                     user={user}
                                     userImg={userImg}
                                     setPopup={setPopup} />
-                                <ProfilePostsDisplay />
+                                <ProfilePostsDisplay user={user} />
                             </div>
                         
                             <div className="d-none d-xl-block col-xl-3 right-wrapper">

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./PostCreationCard"
 import "../../App.css"
 import Button from '@material-ui/core/Button'
@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios"
 
 const PostCreationPopup = ({ setPopup, userImg, user }) => {
-    
+
     const POST_URL = "http://localhost:8080/api/v1/post"
 
     const [text, setText] = useState("");
