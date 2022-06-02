@@ -7,15 +7,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios"
 
 const PostCreationPopup = ({ setPopup, userImg, user }) => {
+    
     const POST_URL = "http://localhost:8080/api/v1/post"
 
     const [text, setText] = useState("");
+    const [postError, setPostError] = useState(false);
 
     const handleInputChange = (e) => {
         setText(e.target.value);
-        console.log(e.target.value);
+        setPostError(false)
     }
-    const handlePost = () => {
+
+    const handlePost = (e) => {
+        e.preventDefault();
+
         const dateTime = Date.now();
         const timestamp = Math.floor(dateTime / 1000);
 
@@ -29,12 +34,18 @@ const PostCreationPopup = ({ setPopup, userImg, user }) => {
         axios.post(POST_URL, post).
             then((response) => {
                 console.log(response);
+                setPopup(false);
+                window.location.reload(false);
             }).
             catch(function (error) {
                 console.log(error);
+                setPostError(true);
             })
-        
+    }
+
+    const handleClose = () => {
         setPopup(false);
+        setPostError(false);
     }
 
     return (
@@ -50,8 +61,7 @@ const PostCreationPopup = ({ setPopup, userImg, user }) => {
             >
                 <h5>Create a post</h5>
                 <IconButton
-                    className="popup-x"
-                    onClick={() => setPopup(false)}
+                    onClick={handleClose}
                 >
                     <CloseIcon />
                 </IconButton>
@@ -65,14 +75,16 @@ const PostCreationPopup = ({ setPopup, userImg, user }) => {
                     <img className="img-xs rounded-circle" src={userImg} alt="" />
                     <div style={{marginLeft:"10px"}}>{ user.username }</div>
                 </div>
-                <InputBase
-                    placeholder="What inspired you today?"
-                    value={text}
-                    fullWidth
-                    multiline
-                    rows={5}
-                    onChange={handleInputChange}
-                />
+                <form>
+                    <InputBase
+                        placeholder="What inspired you today?"
+                        value={text}
+                        fullWidth
+                        multiline
+                        rows={5}
+                        onChange={handleInputChange}
+                    />
+                </form>
             </div>
             <div
                 className="card-footer"
@@ -84,12 +96,25 @@ const PostCreationPopup = ({ setPopup, userImg, user }) => {
                 }}
             >
                 <p>add hashtags</p>
-                <Button
-                    style={{textTransform: "none", backgroundColor: "#f8c6c8"}}
-                    onClick={handlePost}
-                >
-                    Post
-                </Button>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-between"
+                }}>
+                    {postError &&
+                        (<div style={{ color: "#e51b23", paddingBottom: "5px" }}>
+                            Error
+                        </div>)
+                    }
+                    <Button
+                        disabled={text===""}
+                        style={{textTransform: "none", backgroundColor: "#f8c6c8"}}
+                        onClick={handlePost}
+                    >
+                        Post
+                    </Button>
+                </div>
             </div>
         </div>
     )
