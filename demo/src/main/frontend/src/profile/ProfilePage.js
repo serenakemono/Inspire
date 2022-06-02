@@ -9,6 +9,7 @@ import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
 import axios from 'axios'
+import PostCreationCard from './posts/PostCreationCard';
 
 const ProfilePage = () => {
 
@@ -74,6 +75,7 @@ const ProfilePage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
+                            <PostCreationCard user={user} userImg={userImg} />
                             <ProfilePostsDisplay />
                         </div>
                     

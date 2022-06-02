@@ -7,12 +7,12 @@ const ProfilePost = ({post}) => {
 
   return (
     <div className="col-md-12 grid-margin">
-            <div className="card rounded">
-                <ProfilePostHeader post={post} />
-                <ProfilePostBody post={post} />
-                <ProfilePostFooter post={post} />
-            </div>
-        </div>
+      <div className="card rounded">
+        <ProfilePostHeader post={post} />
+        <ProfilePostBody post={post} />
+        <ProfilePostFooter post={post} />
+      </div>
+    </div>
   )
 }
 
