@@ -1,9 +1,10 @@
 import React from 'react';
 import "./Popup.css"
+import "../../App.css"
 
 const PostCreationPopup = ({setPopup}) => {
     return (
-        <div className="PopUp">
+        <div className="PopUp card">
             {/* x close window */}
             <button className="popup-x" onClick={()=> setPopup(false)} >X</button>
             <div className="pu-content-container">

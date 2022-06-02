@@ -8,7 +8,7 @@ import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
 import axios from 'axios'
-import PostCreationCard from './posts/PostCreationCard';
+import PostCreationCard from './postcreation/PostCreationCard';
 import PostCreationPopup from './posts/PostCreationPopup';
 
 const ProfilePage = () => {
