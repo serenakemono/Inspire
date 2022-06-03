@@ -13,6 +13,16 @@ const ProfilePostHeader = ({post, userImg}) => {
         setAnchorEl(null);
     };
 
+    const unixTime = post.timestamp*1000;
+    let timestamp = new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    }).format(unixTime);
+
   return (
     <div className="card-header">
             <div style={{
@@ -25,7 +35,11 @@ const ProfilePostHeader = ({post, userImg}) => {
                     alignItems: "center"
                 }}>
                 <img className="img-xs rounded-circle" src={userImg} alt="" />
-                <div style={{marginLeft:"10px"}}>{ post.username }</div>
+                <div style={{ marginLeft: "10px" }}>
+                      <div style={{fontSize: "17px"}}>{post.username}</div>
+                      <div className="text-muted" style={{fontSize: "14px"}}>{timestamp}</div>
+                </div>
+                
             </div>
             <div>
                 <IconButton
