@@ -21,7 +21,8 @@ const ProfilePage = () => {
 
     const [editMode, setEditMode] = useState(false);
     const [user, setUser] = useState(null);
-    const [tab, setTab] = useState(0)
+    const [tab, setTab] = useState(0);
+    const [sessionExpired, setSessionExpired] = useState(false);
 
     useEffect(() => {
         axios.get(GET_USER_INFO_URL,
@@ -34,7 +35,8 @@ const ProfilePage = () => {
                 }
                 setUser(newUser);
             }).catch((error) => {
-                console.log(error)
+                setSessionExpired(true);
+                console.log(error);
             }
         )
     }, []);
@@ -53,6 +55,7 @@ const ProfilePage = () => {
 
     return (
         <div>
+            {sessionExpired && (window.location.href = '/login')}
             <div className={duringPopup}></div>
             <div className="maincontainer">
                 <div className="container">

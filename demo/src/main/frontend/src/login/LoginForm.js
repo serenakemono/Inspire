@@ -5,16 +5,8 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from '../api/axios';
-import AuthContext from '../authentication/AuthProvider';
-import AuthService from '../authentication/AuthService';
 
 const LoginForm = () => {
-  // const { setAuth } = useContext(AuthContext);
-  // const userRef = useRef(null);
-
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, [])
   
   const LOGIN_URL = '/auth/login'
   

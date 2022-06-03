@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 @IdClass(PostId.class)
-public class Post {
+public class Post implements Comparable<Post> {
 
     @Id
     private String username;
@@ -52,6 +52,11 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int compareTo(Post p) {
+        return getTimestamp().compareTo(p.getTimestamp());
     }
 
     @Override
