@@ -3,7 +3,7 @@ import React from 'react'
 import '../../App.css'
 import './PostCreation.css'
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import ForumIcon from '@mui/icons-material/Forum';
 import FeedIcon from '@mui/icons-material/Feed';
 
@@ -35,7 +35,7 @@ const PostCreationCard = ({ userImg, setPopup }) => {
                     Photo
                     </Button>
                     <Button
-                        startIcon={<VideoLibraryIcon style={{color:"#F6BD60"}} />}
+                        startIcon={<OndemandVideoIcon style={{color:"#F6BD60"}} />}
                         style={{textTransform: "none", fontSize: "16px", color: "#727272"}}
                     >
                         Video
