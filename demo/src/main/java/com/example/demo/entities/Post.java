@@ -1,15 +1,24 @@
 package com.example.demo.entities;
 
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table
 @IdClass(PostId.class)
-public class Post implements Comparable<Post> {
+@TypeDef(name = "list-array", typeClass = ListArrayType.class)
+    public class Post implements Comparable<Post> {
 
     @Id
     private String username;
@@ -18,15 +27,22 @@ public class Post implements Comparable<Post> {
     @Column
     private String text;
 
+    @Column
+    @Convert(converter = ImageListConverter.class)
+    private List<Image> images;
+
     public Post() {}
 
     public Post(
             String username,
             Long timestamp,
-            String text) {
+            String text,
+            List<Image> images
+    ) {
         this.username = username;
         this.timestamp = timestamp;
         this.text = text;
+        this.images = images;
     }
 
 
@@ -54,6 +70,14 @@ public class Post implements Comparable<Post> {
         this.text = text;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
     @Override
     public int compareTo(Post p) {
         return getTimestamp().compareTo(p.getTimestamp());
@@ -64,7 +88,8 @@ public class Post implements Comparable<Post> {
         return "Post {" +
                 "username='" + username + '\'' +
                 ", timestamp='" + timestamp + '\'' +
-                ", text='" + text +
+                ", text='" + text + '\'' +
+                ", images='" + images +
                 '}';
     }
 

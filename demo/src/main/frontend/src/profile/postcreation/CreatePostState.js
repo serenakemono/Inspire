@@ -7,7 +7,6 @@ import ForumIcon from '@mui/icons-material/Forum';
 import FeedIcon from '@mui/icons-material/Feed';
 import axios from "axios"
 
-
 const CreatePostState = ({
     user,
     userImg,
@@ -35,14 +34,31 @@ const CreatePostState = ({
         const dateTime = Date.now();
         const timestamp = Math.floor(dateTime / 1000);
 
-        const post = {
-            username: user.username,
-            timestamp: timestamp,
-            text: text
+        const formData = new FormData();
+        formData.append('username', user.username);
+        formData.append('timestamp', timestamp);
+        formData.append('text', text);
+        for (let i = 0; i < selectedImgs.length; i++) {
+            formData.append('files', selectedImgs[i]);
         }
-        console.log(post)
+        // formData.append('files', selectedImgs);
+        // const post = {
+        //     username: user.username,
+        //     timestamp: timestamp,
+        //     text: text,
+        //     selectedImgs: selectedImgs
+        // }
+        for (var pair of formData.entries()) {
+            console.log(pair); 
+        }
 
-        axios.post(POST_URL, post).
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        axios.post(POST_URL, formData, config).
             then((response) => {
                 console.log(response);
                 setPopup(false);

@@ -13,11 +13,11 @@ const AddPhotoState = ({
     setSelectedImgs
 }) => {
 
-    const imgSelectedHandler = (event) => {
-        console.log(event.target.files[0]);
-        setSelectedImgs(prev => (
-            [...prev, event.target.files[0]]
-        ));
+    const imgSelectedHandler = (e) => {
+        for (let i = 0; i < e.target.files.length; i++) {
+            console.log(e.target.files[i]);
+            setSelectedImgs(prev => ([...prev, e.target.files[i]]));
+        }
     }
 
     const removeImgHandler = () => {
@@ -76,31 +76,32 @@ const AddPhotoState = ({
                     />
                 </Button>
             )}
-            {(selectedImgs.length!==0) && (
-                <div style={{
-                    display: "flex",
-                    flexDirection: "row"
-                }}>
-                    {selectedImgs.map((image) =>
-                        <img
-                            src={URL.createObjectURL(image)}
-                            style={{maxWidth: "100px", maxHeight: "100px"}}
-                            alt="Thumb"
+            <div>
+                {selectedImgs.map((image) =>
+                    <img
+                        src={URL.createObjectURL(image)}
+                        style={{
+                            maxWidth: "100px",
+                            maxHeight: "100px",
+                            marginRight: "10px"
+                        }}
+                        alt="Thumb"
+                    />
+                )}
+                {(selectedImgs.length >= 1 && selectedImgs.length <= 9) && (
+                    <IconButton component="label">
+                        <AddIcon />
+                        <input
+                            accept="image/*"
+                            type="file"
+                            hidden
+                            multiple
+                            onChange={imgSelectedHandler}
                         />
-                    )}
-                    {selectedImgs.length <= 9 && (
-                        <IconButton component="label">
-                            <AddIcon />
-                            <input
-                                accept="image/*"
-                                type="file"
-                                hidden
-                                onChange={imgSelectedHandler}
-                            />
-                        </IconButton>
-                    )}
-                </div>
-            )}
+                    </IconButton>
+                )}
+            </div>
+            
         </div>
 
         <div
