@@ -44,21 +44,16 @@ public class PostController {
             @RequestParam String username,
             @RequestParam Long timestamp,
             @RequestParam String text,
-            @RequestParam MultipartFile[] files
+            @RequestParam(required = false) MultipartFile file
     ) throws IOException {
         Post post = new Post();
         List<Image> images = new java.util.ArrayList<>(Collections.emptyList());
         post.setUsername(username);
         post.setTimestamp(timestamp);
         post.setText(text);
-        for (MultipartFile file : files) {
-            Image image = new Image();
-            image.setName(file.getName());
-            image.setContent(file.getBytes());
-            images.add(image);
+        if (file!=null) {
+            post.setImage(file.getBytes());
         }
-        post.setImages(images);
-        System.out.println(post);
         postServices.addNewPost(post);
     }
 

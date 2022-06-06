@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
 import { IconButton, Button } from '@material-ui/core'
 import CloseIcon from '@mui/icons-material/Close';
-import { textTransform } from '@mui/system';
-import AddIcon from '@mui/icons-material/Add';
-import axios from 'axios';
 
 const AddPhotoState = ({
     handleClose,
@@ -14,18 +11,15 @@ const AddPhotoState = ({
 }) => {
 
     const imgSelectedHandler = (e) => {
-        for (let i = 0; i < e.target.files.length; i++) {
-            console.log(e.target.files[i]);
-            setSelectedImgs(prev => ([...prev, e.target.files[i]]));
-        }
+        setSelectedImgs(e.target.files[0]);
     }
 
     const removeImgHandler = () => {
-        setSelectedImgs([]);
+        setSelectedImgs(null);
     }
 
     const cancelSelectingHandler = () => {
-        setSelectedImgs([]);
+        setSelectedImgs(null);
         setWindowState(windowStates[0]);
     }
     
@@ -59,7 +53,7 @@ const AddPhotoState = ({
                 alignItems: "center",
                 height: "12rem"
             }}>
-            {(selectedImgs.length===0) && (
+            {(selectedImgs === null) && (
                 <Button
                     style={{
                         textTransform: "none",
@@ -77,9 +71,9 @@ const AddPhotoState = ({
                 </Button>
             )}
             <div>
-                {selectedImgs.map((image) =>
+                {(selectedImgs !== null) && (
                     <img
-                        src={URL.createObjectURL(image)}
+                        src={URL.createObjectURL(selectedImgs)}
                         style={{
                             maxWidth: "100px",
                             maxHeight: "100px",
@@ -88,7 +82,7 @@ const AddPhotoState = ({
                         alt="Thumb"
                     />
                 )}
-                {(selectedImgs.length >= 1 && selectedImgs.length <= 9) && (
+                {/* {(selectedImgs.length >= 1 && selectedImgs.length <= 9) && (
                     <IconButton component="label">
                         <AddIcon />
                         <input
@@ -99,7 +93,7 @@ const AddPhotoState = ({
                             onChange={imgSelectedHandler}
                         />
                     </IconButton>
-                )}
+                )} */}
             </div>
             
         </div>

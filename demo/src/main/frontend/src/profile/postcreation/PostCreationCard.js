@@ -7,7 +7,23 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import ForumIcon from '@mui/icons-material/Forum';
 import FeedIcon from '@mui/icons-material/Feed';
 
-const PostCreationCard = ({ userImg, setPopup }) => {
+const PostCreationCard = ({
+    userImg,
+    setPopup,
+    windowStates,
+    setWindowState
+}) => {
+
+    const handleCreate = () => {
+        setPopup(true);
+        setWindowState(windowStates[0]);
+        console.log('window state is set to: ' + windowStates[0])
+    }
+
+    const handleAddPhoto = () => {
+        setPopup(true);
+        setWindowState(windowStates[1])
+    }
 
     return (
         <div className="col-md-12 grid-margin">
@@ -19,7 +35,7 @@ const PostCreationCard = ({ userImg, setPopup }) => {
                     paddingBottom: "15px"
                 }}>
                     <img className="img-xs rounded-circle" src={userImg} alt="" />
-                    <button className="btn-create-post" onClick={()=>setPopup(true)}>
+                    <button className="btn-create-post" onClick={handleCreate}>
                         Feeling inspired today?
                     </button>
                 </div>
@@ -30,7 +46,8 @@ const PostCreationCard = ({ userImg, setPopup }) => {
                 }}>
                     <Button
                         startIcon={<InsertPhotoIcon style={{color:"#EB474D"}}/>}
-                        style={{textTransform: "none", fontSize: "16px", color: "#727272"}}
+                            style={{ textTransform: "none", fontSize: "16px", color: "#727272" }}
+                            onClick={handleAddPhoto}
                     >
                     Photo
                     </Button>

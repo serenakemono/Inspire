@@ -16,12 +16,12 @@ const CreatePostState = ({
     setWindowState,
     postError,
     setPostError,
+    text,
+    setText,
     selectedImgs
 }) => {
 
     const POST_URL = "http://localhost:8080/api/v1/post"
-    
-    const [text, setText] = useState("");
 
     const handleInputChange = (e) => {
         setText(e.target.value);
@@ -38,9 +38,7 @@ const CreatePostState = ({
         formData.append('username', user.username);
         formData.append('timestamp', timestamp);
         formData.append('text', text);
-        for (let i = 0; i < selectedImgs.length; i++) {
-            formData.append('files', selectedImgs[i]);
-        }
+        formData.append('file', selectedImgs);
         // formData.append('files', selectedImgs);
         // const post = {
         //     username: user.username,
@@ -108,9 +106,9 @@ const CreatePostState = ({
                 <Button># Add hashtag</Button>
             </form>
             <div>
-                {selectedImgs.map((image) =>
+                {(selectedImgs !== null) && (
                     <img
-                        src={URL.createObjectURL(image)}
+                        src={URL.createObjectURL(selectedImgs)}
                         style={{maxWidth: "100px", maxHeight: "100px"}}
                         alt="Thumb"
                     />

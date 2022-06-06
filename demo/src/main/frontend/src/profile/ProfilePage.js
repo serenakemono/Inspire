@@ -53,6 +53,12 @@ const ProfilePage = () => {
     const [popup, setPopup] = useState(false);
     const duringPopup = popup ? "during-popup" : ""
 
+    const CREATE_POST = "create a post";
+    const ADD_PHOTO = "add a photo";
+    const ADD_VIDEO = "add a video";
+    const windowStates = [CREATE_POST, ADD_PHOTO, ADD_VIDEO];
+    const [windowState, setWindowState] = useState(windowStates[0])
+
     return (
         <div>
             {sessionExpired && (window.location.href = '/login')}
@@ -84,9 +90,11 @@ const ProfilePage = () => {
                         
                             <div className="col-md-8 col-xl-6 middle-wrapper">
                                 <PostCreationCard
-                                    user={user}
                                     userImg={userImg}
-                                    setPopup={setPopup} />
+                                    setPopup={setPopup}
+                                    windowStates={windowStates}
+                                    setWindowState={setWindowState}
+                                />
                                 <ProfilePostsDisplay user={user} />
                             </div>
                         
@@ -102,6 +110,9 @@ const ProfilePage = () => {
             </div>
             {popup && <PostCreationPopup
                 setPopup={setPopup}
+                windowState={windowState}
+                windowStates={windowStates}
+                setWindowState={setWindowState}
                 userImg={userImg}
                 user={user}
             />}

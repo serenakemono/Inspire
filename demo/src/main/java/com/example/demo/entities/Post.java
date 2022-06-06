@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -28,8 +29,7 @@ import java.util.List;
     private String text;
 
     @Column
-    @Convert(converter = ImageListConverter.class)
-    private List<Image> images;
+    private byte[] image;
 
     public Post() {}
 
@@ -37,12 +37,22 @@ import java.util.List;
             String username,
             Long timestamp,
             String text,
-            List<Image> images
+            byte[] image
     ) {
         this.username = username;
         this.timestamp = timestamp;
         this.text = text;
-        this.images = images;
+        this.image = image;
+    }
+
+    public Post(
+            String username,
+            Long timestamp,
+            String text
+    ) {
+        this.username = username;
+        this.timestamp = timestamp;
+        this.text = text;
     }
 
 
@@ -70,12 +80,12 @@ import java.util.List;
         this.text = text;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override
@@ -85,11 +95,12 @@ import java.util.List;
 
     @Override
     public String toString() {
+        String imageToString = image != null ? Arrays.toString(image) : "";
         return "Post {" +
                 "username='" + username + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", text='" + text + '\'' +
-                ", images='" + images +
+                ", image='" + imageToString +
                 '}';
     }
 

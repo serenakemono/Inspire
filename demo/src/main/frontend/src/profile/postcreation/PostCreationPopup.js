@@ -4,25 +4,30 @@ import "../../App.css"
 import CreatePostState from './CreatePostState';
 import AddPhotoState from './AddPhotoState';
 
-const PostCreationPopup = ({ setPopup, userImg, user }) => {
+const PostCreationPopup = ({
+    setPopup,
+    windowState,
+    windowStates,
+    setWindowState,
+    userImg,
+    user
+}) => {
 
-    const CREATE_POST = "create a post";
-    const ADD_PHOTO = "add a photo";
-    const ADD_VIDEO = "add a video";
-    const windowStates = [CREATE_POST, ADD_PHOTO, ADD_VIDEO]
-    const [windowState, setWindowState] = useState(windowStates[0])
+    console.log('current window state is: ' + windowState)
+
     const [postError, setPostError] = useState(false);
-    const [selectedImgs, setSelectedImgs] = useState([]);
+    const [selectedImgs, setSelectedImgs] = useState(null);
+    const [text, setText] = useState("");
 
     const handleClose = () => {
         setPopup(false);
         setPostError(false);
         setWindowState(windowStates[0]);
     }
-
+    
     return (
         <div className="PopUp card rounded">
-            {(windowState === CREATE_POST) && (<CreatePostState
+            {(windowState === windowStates[0]) && (<CreatePostState
                 user={user}
                 userImg={userImg}
                 setPopup={setPopup}
@@ -32,8 +37,10 @@ const PostCreationPopup = ({ setPopup, userImg, user }) => {
                 postError={postError}
                 setPostError={setPostError}
                 selectedImgs={selectedImgs}
+                text={text}
+                setText={setText}
             />)}
-            {(windowState === ADD_PHOTO) && (<AddPhotoState
+            {(windowState === windowStates[1]) && (<AddPhotoState
                 handleClose={handleClose}
                 windowStates={windowStates}
                 setWindowState={setWindowState}
