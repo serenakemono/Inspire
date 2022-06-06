@@ -2,8 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Header from './header/Header';
-import LoginForm from './login/LoginForm';
-import RegistrationForm from './registration/RegistrationForm';
+import SignInUpPage from './sign_in_sign_up/SignInUpPage';
 import Missing from './Missing';
 import Footer from './Footer'
 import HomePage from './home/HomePage';
@@ -73,19 +72,14 @@ class App extends Component {
       headerItems.push({ label: "Me", href: "/me" });
       headerItems.push({ label: "log out", href: "/logout" });
     } else {
-      headerItems.push({ label: "sign in", href: "/login" });
-      headerItems.push({ label: "sign up", href: "/register" })
+      headerItems.push({ label: "login/register", href: "/login" });
     }
 
     return (
       <div>
         <Header headerItems={headerItems} />
         <Routes>
-          <Route path="login" element={<LoginForm />} />
-          <Route
-            path="register"
-            element={<RegistrationForm />}
-          />
+          
         
           <Route path="home" element={<HomePage />} />
           {/* <Route path="post/:id" element={<PostPage posts={posts} />} /> */}

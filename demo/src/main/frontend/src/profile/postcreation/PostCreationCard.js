@@ -17,7 +17,6 @@ const PostCreationCard = ({
     const handleCreate = () => {
         setPopup(true);
         setWindowState(windowStates[0]);
-        console.log('window state is set to: ' + windowStates[0])
     }
 
     const handleAddPhoto = () => {

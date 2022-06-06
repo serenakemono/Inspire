@@ -5,7 +5,13 @@ const LogoutPage = () => {
     AuthService.logout();
     window.location.href = '/Login';
   return (
-    <div style={{marginTop: "80px"}}>You have been logged out. Going back to the login page now...</div>
+    <div style={{
+      display: "flex",
+      marginTop: "80px",
+      marginLeft: "15px"
+    }}>
+      You have been logged out. Going back to the login page now...
+    </div>
   )
 }
 

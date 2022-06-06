@@ -13,8 +13,6 @@ const PostCreationPopup = ({
     user
 }) => {
 
-    console.log('current window state is: ' + windowState)
-
     const [postError, setPostError] = useState(false);
     const [selectedImgs, setSelectedImgs] = useState(null);
     const [text, setText] = useState("");

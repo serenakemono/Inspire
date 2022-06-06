@@ -1,10 +1,12 @@
 import React from 'react'
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box"
 import axios from '../api/axios';
+import Peep from "react-peeps";
+import { ReactComponent as LoginAvatar } from './LoginAvatar.svg'
 
 const LoginForm = () => {
   
@@ -57,85 +59,123 @@ const LoginForm = () => {
         }
     )
   };
+
+  const styles = {
+    peepStyle: {
+      width: 300,
+      height: 300,
+      justifyContent: "center",
+      alignSelf: "center"
+    },
+    showcaseWrapper: {
+      display: "flex",
+      justifyContent: "center",
+      height: "-webkit-fill-available"
+    }
+  };
   
   return (
     <div style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "100px"
-      }}>
-      <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-        sx={{
-          boxShadow: 1,
-          borderRadius: 2,
-          width: "25ch",
-        }}>
-        <Grid
-          item
-          style={{
-            paddingTop: "10px",
-            fontSize: "25px"
-          }}
-        >
-        Sign in
-      </Grid>
-      <form
-        onSubmit={handleSubmit}
-      >
-        <Grid
-          container
-          alignItems="center"
-          justify="center"
-          direction="column"
-          spacing={2}
-          marginTop="3px"
-          marginBottom="8px"
-        >
-          <Grid item>
-            <TextField
-              required
-              error={loginStatus.error}
-              id="username-input"
-              name="username"
-              label="Username"
-              type="text"
-              value={formValues.username}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              required
-              error={loginStatus.error}
-              helperText={loginStatus.helperText}
-              id="password-input"
-              name="password"
-              label="Password"
-              type="password"
-              value={formValues.password}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <Button variant="contained" type="submit">
-              Login
-            </Button>
-          </Grid>
-          <Grid item>
-            <p>
-              Don't have an account?&nbsp;&nbsp;&nbsp;
-              <a href="/register">Join us</a>
-            </p>
-          </Grid>
-        </Grid>
-      </form>
-      </Box>
+        marginTop: "160px",
+    }}>
+
+      <div style={styles.showcaseWrapper}>
+        <LoginAvatar style={ styles.peepStyle }/>
+        {/* <Peep
+          style={{ ...styles.peepStyle }}
+          body="WalkingWB"
+          face="Cute"
+          hair="MediumBangs"
+          viewBox={{ x: "-20", y: "-330", width: "1050", height: "3000" }}
+        /> */}
       </div>
+
+      <div>
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+          sx={{
+            boxShadow: 1,
+            borderRadius: 2,
+            width: "25ch",
+          }}>
+          <Grid
+            item
+            style={{
+              paddingTop: "10px",
+              fontSize: "25px"
+            }}
+          >
+            Sign in
+          </Grid>
+          <form
+            onSubmit={handleSubmit}
+          >
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            direction="column"
+            spacing={2}
+            marginTop="3px"
+            marginBottom="8px"
+          >
+            <Grid item>
+              <TextField
+                required
+                error={loginStatus.error}
+                id="username-input"
+                name="username"
+                label="Username"
+                type="text"
+                value={formValues.username}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                error={loginStatus.error}
+                helperText={loginStatus.helperText}
+                id="password-input"
+                name="password"
+                label="Password"
+                type="password"
+                value={formValues.password}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{
+                    backgroundColor: "#e51b23",
+                    textTransform: "none"
+                  }}
+                >
+                Login
+              </Button>
+            </Grid>
+            <Grid item>
+              <p>
+                Don't have an account?&nbsp;&nbsp;
+                  <a
+                    href="/register"
+                    style={{color: "#e51b23"}}
+                  >Join us</a>
+              </p>
+            </Grid>
+          </Grid>
+          </form>
+        </Box>
+      </div>
+    </div>
   );
 };
 

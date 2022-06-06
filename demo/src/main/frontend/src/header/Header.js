@@ -13,6 +13,7 @@ import {
     SwipeableDrawer
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
+import { ReactComponent as InspireLogo } from '../logo.svg'
 
 const Header = ({ headerItems }) => {
 
@@ -80,13 +81,12 @@ const Header = ({ headerItems }) => {
      * will ensure that this happens.
      */
     const inspireLogo = (
-        <Typography
-            variant="h6"
-            component="h1"
-            className={logo}
-        >
-            Inspire
-        </Typography>
+        <InspireLogo
+            style={{
+                width: "80px",
+                height: "auto"
+            }}
+        />
     );
 
     const getMenuButtons = () => {
@@ -124,7 +124,6 @@ const Header = ({ headerItems }) => {
                         component: RouterLink,
                         to: href,
                         color: "#000000",
-                        style: { textDecoration: "none" },
                         key: label,
                     }}
                 >
