@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Post;
 import com.example.demo.entities.Image;
+import com.example.demo.entities.Tag;
 import com.example.demo.services.PostServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,15 +45,20 @@ public class PostController {
             @RequestParam String username,
             @RequestParam Long timestamp,
             @RequestParam String text,
+            @RequestParam (required=false) String tag,
             @RequestParam(required = false) MultipartFile file
     ) throws IOException {
         Post post = new Post();
-        List<Image> images = new java.util.ArrayList<>(Collections.emptyList());
         post.setUsername(username);
         post.setTimestamp(timestamp);
         post.setText(text);
         if (file!=null) {
             post.setImage(file.getBytes());
+        }
+        if (tag!=null) {
+            List<Tag> tags = new java.util.ArrayList<>(Collections.emptyList());
+            tags.add(new Tag(tag));
+            post.setTags(tags);
         }
         postServices.addNewPost(post);
     }

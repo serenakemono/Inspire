@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 
 import Header from './header/Header';
-import SignInUpPage from './sign_in_sign_up/SignInUpPage';
 import Missing from './Missing';
 import Footer from './Footer'
 import HomePage from './home/HomePage';
@@ -11,7 +10,7 @@ import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
 import ProfilePage from './profile/ProfilePage';
 import AuthService from './authentication/AuthService';
-import LogoutPage from './login/LogoutPage';
+import LogoutPage from './sign_in_sign_up/LogoutPage';
 
 // red: #e51b23
 // pink: #f8c6c8

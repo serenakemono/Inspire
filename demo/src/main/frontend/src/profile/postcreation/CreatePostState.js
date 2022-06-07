@@ -18,18 +18,35 @@ const CreatePostState = ({
     setPostError,
     text,
     setText,
-    selectedImgs
+    selectedImgs,
+    tag,
+    setTag
 }) => {
 
     const POST_URL = "http://localhost:8080/api/v1/post"
+    const TAG_URL = "http://localhost:8080/api/v1/tag"
 
     const handleInputChange = (e) => {
         setText(e.target.value);
-        setPostError(false)
+        setPostError(false);
+    }
+
+    const handleTagChange = (e) => {
+        setTag(e.target.value);
+        setPostError(false);
     }
 
     const handlePost = (e) => {
         e.preventDefault();
+
+        const tagFormData = new FormData();
+        tagFormData.append('tagname', tag);
+        axios.post(TAG_URL, tagFormData).
+            then((response) => {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+        })
 
         const dateTime = Date.now();
         const timestamp = Math.floor(dateTime / 1000);
@@ -38,6 +55,7 @@ const CreatePostState = ({
         formData.append('username', user.username);
         formData.append('timestamp', timestamp);
         formData.append('text', text);
+        formData.append('tag', tag);
         formData.append('file', selectedImgs);
         // formData.append('files', selectedImgs);
         // const post = {
@@ -102,6 +120,12 @@ const CreatePostState = ({
                     multiline
                     rows={5}
                     onChange={handleInputChange}
+                />
+                <InputBase
+                    placeholder="Add a tag?"
+                    value={tag}
+                    fullWidth
+                    onChange={handleTagChange}
                 />
                 <Button># Add hashtag</Button>
             </form>

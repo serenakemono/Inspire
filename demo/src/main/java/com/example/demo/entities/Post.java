@@ -5,12 +5,17 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +35,11 @@ import java.util.List;
 
     @Column
     private byte[] image;
+
+    @Column
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "post_tags")
+    private List<Tag> tags;
 
     public Post() {}
 
@@ -88,6 +98,14 @@ import java.util.List;
         this.image = image;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public int compareTo(Post p) {
         return getTimestamp().compareTo(p.getTimestamp());
@@ -100,7 +118,8 @@ import java.util.List;
                 "username='" + username + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", text='" + text + '\'' +
-                ", image='" + imageToString +
+                ", image='" + imageToString + '\'' +
+                ", tags='" + tags + '\'' +
                 '}';
     }
 

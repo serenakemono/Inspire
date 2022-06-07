@@ -16,6 +16,7 @@ const PostCreationPopup = ({
     const [postError, setPostError] = useState(false);
     const [selectedImgs, setSelectedImgs] = useState(null);
     const [text, setText] = useState("");
+    const [tag, setTag] = useState("");
 
     const handleClose = () => {
         setPopup(false);
@@ -37,6 +38,8 @@ const PostCreationPopup = ({
                 selectedImgs={selectedImgs}
                 text={text}
                 setText={setText}
+                tag={tag}
+                setTag={setTag}
             />)}
             {(windowState === windowStates[1]) && (<AddPhotoState
                 handleClose={handleClose}
