@@ -16,12 +16,12 @@ const PostCreationCard = ({
 
     const handleCreate = () => {
         setPopup(true);
-        setWindowState(windowStates[0]);
+        setWindowState(windowStates.create_post);
     }
 
     const handleAddPhoto = () => {
         setPopup(true);
-        setWindowState(windowStates[1])
+        setWindowState(windowStates.add_photo)
     }
 
     return (

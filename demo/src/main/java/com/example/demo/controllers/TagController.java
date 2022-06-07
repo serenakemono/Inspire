@@ -43,10 +43,12 @@ public class TagController {
     }
 
     @PostMapping(path="/tag")
-    public void addTag(@RequestParam String tagname) {
-        Optional<Tag> tag = tagServices.getTagByTagname(tagname);
-        if (tag.isEmpty()) {
-            tagServices.addNewTag(new Tag(tagname));
+    public void addTag(@RequestParam List<String> tags) {
+        for (int i = 0; i < tags.size(); i++) {
+            Optional<Tag> tag = tagServices.getTagByTagname(tags.get(i));
+            if (tag.isEmpty()) {
+                tagServices.addNewTag(new Tag(tags.get(i)));
+            }
         }
     }
 }

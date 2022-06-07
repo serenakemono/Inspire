@@ -3,6 +3,7 @@ import "./PostCreationCard"
 import "../../App.css"
 import CreatePostState from './CreatePostState';
 import AddPhotoState from './AddPhotoState';
+import AddTagState from './AddTagState';
 
 const PostCreationPopup = ({
     setPopup,
@@ -16,17 +17,17 @@ const PostCreationPopup = ({
     const [postError, setPostError] = useState(false);
     const [selectedImgs, setSelectedImgs] = useState(null);
     const [text, setText] = useState("");
-    const [tag, setTag] = useState("");
+    const [tags, setTags] = useState([]);
 
     const handleClose = () => {
         setPopup(false);
         setPostError(false);
-        setWindowState(windowStates[0]);
+        setWindowState(windowStates.create_post);
     }
     
     return (
         <div className="PopUp card rounded">
-            {(windowState === windowStates[0]) && (<CreatePostState
+            {(windowState === windowStates.create_post) && (<CreatePostState
                 user={user}
                 userImg={userImg}
                 setPopup={setPopup}
@@ -38,10 +39,19 @@ const PostCreationPopup = ({
                 selectedImgs={selectedImgs}
                 text={text}
                 setText={setText}
-                tag={tag}
-                setTag={setTag}
+                tags={tags}
+                setTags={setTags}
             />)}
-            {(windowState === windowStates[1]) && (<AddPhotoState
+
+            {(windowState === windowStates.add_tag) && (<AddTagState
+                handleClose={handleClose}
+                tags={tags}
+                setTags={setTags}
+                windowStates={windowStates}
+                setWindowState={setWindowState}
+            />)}
+
+            {(windowState === windowStates.add_photo) && (<AddPhotoState
                 handleClose={handleClose}
                 windowStates={windowStates}
                 setWindowState={setWindowState}

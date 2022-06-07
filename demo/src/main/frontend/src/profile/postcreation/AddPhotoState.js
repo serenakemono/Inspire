@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { IconButton, Button } from '@material-ui/core'
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -20,11 +20,11 @@ const AddPhotoState = ({
 
     const cancelSelectingHandler = () => {
         setSelectedImgs(null);
-        setWindowState(windowStates[0]);
+        setWindowState(windowStates.create_post);
     }
     
     const doneSelectingHandler = () => {
-        setWindowState(windowStates[0])
+        setWindowState(windowStates.create_post);
     }
 
     return (<>

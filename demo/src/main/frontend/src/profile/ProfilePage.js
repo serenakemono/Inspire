@@ -53,11 +53,18 @@ const ProfilePage = () => {
     const [popup, setPopup] = useState(false);
     const duringPopup = popup ? "during-popup" : ""
 
-    const CREATE_POST = "create a post";
-    const ADD_PHOTO = "add a photo";
-    const ADD_VIDEO = "add a video";
-    const windowStates = [CREATE_POST, ADD_PHOTO, ADD_VIDEO];
-    const [windowState, setWindowState] = useState(windowStates[0])
+    // const CREATE_POST = "create a post";
+    // const ADD_TAG = "add a tag";
+    // const ADD_PHOTO = "add a photo";
+    // const ADD_VIDEO = "add a video";
+    // const windowStates = [CREATE_POST, ADD_TAG, ADD_PHOTO, ADD_VIDEO];
+    const windowStates = {
+        create_post: "create a post",
+        add_tag: "add a tag",
+        add_photo: "add a photo",
+        add_video: "add a video",
+    }
+    const [windowState, setWindowState] = useState(windowStates.create_post)
 
     return (
         <div>

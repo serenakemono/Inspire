@@ -4,6 +4,7 @@ import com.example.demo.entities.Post;
 import com.example.demo.entities.Image;
 import com.example.demo.entities.Tag;
 import com.example.demo.services.PostServices;
+import com.example.demo.services.TagServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,10 +26,12 @@ import java.util.List;
 public class PostController {
 
     private final PostServices postServices;
+    private final TagServices tagServices;
 
     @Autowired
-    public PostController(PostServices postServices) {
+    public PostController(PostServices postServices, TagServices tagServices) {
         this.postServices = postServices;
+        this.tagServices = tagServices;
     }
 
     @GetMapping(path="/posts")
@@ -45,7 +49,7 @@ public class PostController {
             @RequestParam String username,
             @RequestParam Long timestamp,
             @RequestParam String text,
-            @RequestParam (required=false) String tag,
+            @RequestParam (required=false) List<String> tags,
             @RequestParam(required = false) MultipartFile file
     ) throws IOException {
         Post post = new Post();
@@ -55,11 +59,13 @@ public class PostController {
         if (file!=null) {
             post.setImage(file.getBytes());
         }
-        if (tag!=null) {
-            List<Tag> tags = new java.util.ArrayList<>(Collections.emptyList());
-            tags.add(new Tag(tag));
-            post.setTags(tags);
+        List<Tag> postTags = new ArrayList<>(Collections.emptyList());
+        if (tags.size()!=0) {
+            for (int i = 0; i < tags.size(); i++) {
+                postTags.add(tagServices.getTagByTagname(tags.get(i)).get());
+            }
         }
+        post.setTags(postTags);
         postServices.addNewPost(post);
     }
 
