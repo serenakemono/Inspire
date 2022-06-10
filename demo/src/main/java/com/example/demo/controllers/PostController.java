@@ -61,8 +61,8 @@ public class PostController {
         }
         List<Tag> postTags = new ArrayList<>(Collections.emptyList());
         if (tags.size()!=0) {
-            for (int i = 0; i < tags.size(); i++) {
-                postTags.add(tagServices.getTagByTagname(tags.get(i)).get());
+            for (String tag : tags) {
+                postTags.add(tagServices.getTagByTagname(tag).get());
             }
         }
         post.setTags(postTags);

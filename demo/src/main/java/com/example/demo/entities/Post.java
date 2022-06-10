@@ -10,25 +10,37 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Table
-@IdClass(PostId.class)
-@TypeDef(name = "list-array", typeClass = ListArrayType.class)
-    public class Post implements Comparable<Post> {
+public class Post implements Comparable<Post> {
 
     @Id
+    @SequenceGenerator(
+            name = "post_sequence",
+            sequenceName = "post_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "post_sequence"
+    )
+    private Long id;
+    @Column
     private String username;
-    @Id
+    @Column
     private Long timestamp;
     @Column
     private String text;
@@ -42,6 +54,20 @@ import java.util.List;
     private List<Tag> tags;
 
     public Post() {}
+
+    public Post(
+            Long id,
+            String username,
+            Long timestamp,
+            String text,
+            byte[] image
+    ) {
+        this.id = id;
+        this.username = username;
+        this.timestamp = timestamp;
+        this.text = text;
+        this.image = image;
+    }
 
     public Post(
             String username,
@@ -65,6 +91,13 @@ import java.util.List;
         this.text = text;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -115,6 +148,7 @@ import java.util.List;
     public String toString() {
         String imageToString = image != null ? Arrays.toString(image) : "";
         return "Post {" +
+                "id='" + id + '\'' +
                 "username='" + username + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", text='" + text + '\'' +
@@ -122,6 +156,4 @@ import java.util.List;
                 ", tags='" + tags + '\'' +
                 '}';
     }
-
-
 }
