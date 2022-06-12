@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -56,7 +57,7 @@ public class Post implements Comparable<Post> {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "tagname")
     )
-    @JsonBackReference
+    @JsonSerialize(using = CustomTagListSerializer.class)
     private List<Tag> tags;
 
     public Post() {}

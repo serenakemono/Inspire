@@ -1,13 +1,10 @@
 package com.example.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
@@ -20,7 +17,7 @@ public class Tag {
 
     @Column
     @ManyToMany(mappedBy = "tags")
-    @JsonManagedReference
+    @JsonSerialize(using = CustomPostListSerializer.class)
     private List<Post> posts;
 
     public Tag() {}
