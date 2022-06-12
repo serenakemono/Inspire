@@ -17,7 +17,6 @@ public class Tag {
 
     @Column
     @ManyToMany(mappedBy = "tags")
-    @JsonSerialize(using = CustomPostListSerializer.class)
     private List<Post> posts;
 
     public Tag() {}

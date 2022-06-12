@@ -18,7 +18,7 @@ const PostBody = ({ post }) => {
       {(tags.length !== 0) && <div>
         {tags.map((tag, index) => (
             <div className="tag-item-in-post" style={{marginRight: "5px"}} key={index}>
-                <span className="text">{tag.tagname}</span>
+                <span className="text">{tag}</span>
             </div>
         ))}
       </div>}

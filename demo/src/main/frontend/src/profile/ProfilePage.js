@@ -41,9 +41,6 @@ const ProfilePage = () => {
             setSessionExpired(true);
             console.log(error);
         });
-
-        
-        
     }, []);
 
     function get_posts_url(username) {
@@ -61,7 +58,7 @@ const ProfilePage = () => {
                 })
                 .catch((error) => { console.log(error) })
         }
-    }, [])
+    }, [user])
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
     

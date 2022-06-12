@@ -6,8 +6,6 @@ const PostsDisplay = ({ posts }) => {
 
     if (posts === null) return;
 
-    
-
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
 
     return (

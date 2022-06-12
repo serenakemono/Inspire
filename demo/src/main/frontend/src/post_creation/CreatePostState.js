@@ -56,24 +56,12 @@ const CreatePostState = ({
             then((response) => {
                 console.log(response);
                 postId = response.data;
-                // window.location.reload(false);
+                window.location.reload(false);
             }).
             catch(function (error) {
                 console.log(error);
                 setPostError(true);
             })
-        
-        // // send request to add tags
-        // const tagFormData = new FormData();
-        // tagFormData.append('tags', tags);
-        // tagFormData.append('postId', postId)
-        // await axios.post(TAG_URL, tagFormData).
-        //     then((response) => {
-        //         console.log(response);
-        //     }).catch(function (error) {
-        //         console.log(error);
-        //     })
-        
     }
 
     return (<>

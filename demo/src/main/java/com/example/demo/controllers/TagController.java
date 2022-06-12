@@ -36,7 +36,7 @@ public class TagController {
 
     @GetMapping(path="/tag/{tag}")
     public Tag getTag(@PathVariable("tag") String tagname) {
-        Optional<Tag> tag = tagServices.getTagByTagname(tagname);
+        Optional<Tag> tag = tagServices.getTagByTagname("#" + tagname);
         if (tag.isEmpty()) {
             return new Tag("", new ArrayList<>());
         }

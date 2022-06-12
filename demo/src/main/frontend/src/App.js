@@ -11,6 +11,7 @@ import { Route, Routes, useHistory } from 'react-router-dom';
 import ProfilePage from './profile/ProfilePage';
 import AuthService from './authentication/AuthService';
 import LogoutPage from './sign_in_sign_up/LogoutPage';
+import TagPage from './tag_display/TagPage';
 
 // red: #e51b23
 // pink: #f8c6c8
@@ -47,7 +48,7 @@ class App extends Component {
     const headerItems = [
       {
           label: "home",
-          href: "/home"
+          href: "/feed"
       },
       {
           label: "getinspired",
@@ -80,16 +81,15 @@ class App extends Component {
         <Routes>
           
         
-          <Route path="home" element={<HomePage />} />
-          {/* <Route path="post/:id" element={<PostPage posts={posts} />} /> */}
-          {/* <Route path="me" element={<Profile posts={posts} />} /> */}
+          <Route exact path="feed" element={<HomePage />} />
+          <Route path={"feed/hashtag/:tagname"} element={<TagPage />} />
+          
           <Route path="me" element={<ProfilePage />} />
-          <Route path='logout' element={<LogoutPage />} />
+          <Route path="logout" element={<LogoutPage />} />
           {/* <Route path="getinspired" element={<GetInspired />} />
           <Route path="community" element={<Community />} />
           <Route path="courses" element={<Courses />} />
-          <Route path="messaging" element={<Messaging />} />
-          <Route path="me" element={<Me />} /> */}
+          <Route path="messaging" element={<Messaging />} /> */}
           <Route path="*" element={<Missing />} />
         </Routes>
         {/* <Footer /> */}
