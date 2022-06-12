@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PostCreation.css'
 import { IconButton, Button, InputBase } from '@material-ui/core'
 import CloseIcon from '@mui/icons-material/Close';
@@ -25,6 +25,7 @@ const CreatePostState = ({
 
     const POST_URL = "http://localhost:8080/api/v1/post"
     const TAG_URL = "http://localhost:8080/api/v1/tag"
+    // const ADD_POSTS_TO_TAGS = (tag, postId) => `http://localhost:8080/api/v1/tag/${tag}/${postId}`
 
     const handleInputChange = (e) => {
         setText(e.target.value);
@@ -33,35 +34,16 @@ const CreatePostState = ({
 
     async function handlePost(e) {
         e.preventDefault();
-
-        const tagFormData = new FormData();
-        tagFormData.append('tags', tags);
-        await axios.post(TAG_URL, tagFormData).
-            then((response) => {
-                console.log(response);
-            }).catch(function (error) {
-                console.log(error);
-        })
-
+        
+        // send request to create a post
         const dateTime = Date.now();
         const timestamp = Math.floor(dateTime / 1000);
-
-        const formData = new FormData();
-        formData.append('username', user.username);
-        formData.append('timestamp', timestamp);
-        formData.append('text', text);
-        formData.append('tags', tags);
-        formData.append('file', selectedImgs);
-        // formData.append('files', selectedImgs);
-        // const post = {
-        //     username: user.username,
-        //     timestamp: timestamp,
-        //     text: text,
-        //     selectedImgs: selectedImgs
-        // }
-        for (var pair of formData.entries()) {
-            console.log(pair); 
-        }
+        const postFormData = new FormData();
+        postFormData.append('username', user.username);
+        postFormData.append('timestamp', timestamp);
+        postFormData.append('text', text);
+        postFormData.append('tagnames', tags);
+        postFormData.append('file', selectedImgs);
 
         const config = {
             headers: {
@@ -69,16 +51,29 @@ const CreatePostState = ({
             }
         };
 
-        axios.post(POST_URL, formData, config).
+        var postId;
+        await axios.post(POST_URL, postFormData, config).
             then((response) => {
                 console.log(response);
-                setPopup(false);
-                window.location.reload(false);
+                postId = response.data;
+                // window.location.reload(false);
             }).
             catch(function (error) {
                 console.log(error);
                 setPostError(true);
             })
+        
+        // // send request to add tags
+        // const tagFormData = new FormData();
+        // tagFormData.append('tags', tags);
+        // tagFormData.append('postId', postId)
+        // await axios.post(TAG_URL, tagFormData).
+        //     then((response) => {
+        //         console.log(response);
+        //     }).catch(function (error) {
+        //         console.log(error);
+        //     })
+        
     }
 
     return (<>

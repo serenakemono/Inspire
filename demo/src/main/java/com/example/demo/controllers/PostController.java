@@ -49,7 +49,7 @@ public class PostController {
             @RequestParam String username,
             @RequestParam Long timestamp,
             @RequestParam String text,
-            @RequestParam (required=false) List<String> tags,
+            @RequestParam (required=false) List<String> tagnames,
             @RequestParam(required = false) MultipartFile file
     ) throws IOException {
         Post post = new Post();
@@ -59,14 +59,10 @@ public class PostController {
         if (file!=null) {
             post.setImage(file.getBytes());
         }
-        List<Tag> postTags = new ArrayList<>(Collections.emptyList());
-        if (tags.size()!=0) {
-            for (String tag : tags) {
-                postTags.add(tagServices.getTagByTagname(tag).get());
-            }
+        Long postId = postServices.addNewPost(post);
+        if (tagnames.size() != 0) {
+            List<Tag> tags = tagServices.addPostToTags(tagnames, postId);
+            postServices.setTags(tags, postId);
         }
-        post.setTags(postTags);
-        postServices.addNewPost(post);
     }
-
 }

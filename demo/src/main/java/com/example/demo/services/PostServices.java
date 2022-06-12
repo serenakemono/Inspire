@@ -2,11 +2,13 @@ package com.example.demo.services;
 
 import com.example.demo.entities.AppUser;
 import com.example.demo.entities.Post;
+import com.example.demo.entities.Tag;
 import com.example.demo.repositories.AppUserRepository;
 import com.example.demo.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,11 +30,22 @@ public class PostServices {
         return posts;
     }
 
-    public void addNewPost(Post post) {
-        postRepository.save(post);
+    public Long addNewPost(Post post) {
+        Post newPost = postRepository.save(post);
+        return newPost.getId();
+    }
+
+    @Transactional
+    public void setTags(List<Tag> tags, Long postId) {
+        Post currPost = postRepository.getById(postId);
+        currPost.setTags(tags);
     }
 
     public List<Post> getPosts() {
         return postRepository.findAll();
+    }
+
+    public Post getPostById(Long id) {
+        return postRepository.getById(id);
     }
 }

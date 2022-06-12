@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,18 +38,16 @@ public class TagController {
     public Tag getTag(@PathVariable("tag") String tagname) {
         Optional<Tag> tag = tagServices.getTagByTagname(tagname);
         if (tag.isEmpty()) {
-            return new Tag("");
+            return new Tag("", new ArrayList<>());
         }
         return tag.get();
     }
 
     @PostMapping(path="/tag")
-    public void addTag(@RequestParam List<String> tags) {
-        for (int i = 0; i < tags.size(); i++) {
-            Optional<Tag> tag = tagServices.getTagByTagname(tags.get(i));
-            if (tag.isEmpty()) {
-                tagServices.addNewTag(new Tag(tags.get(i)));
-            }
-        }
+    public void addTag(
+            @RequestParam List<String> tags,
+            @RequestParam Long postId
+    ) {
+        tagServices.addPostToTags(tags, postId);
     }
 }

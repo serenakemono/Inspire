@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -49,8 +50,13 @@ public class Post implements Comparable<Post> {
     private byte[] image;
 
     @Column
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "post_tags")
+    @ManyToMany
+    @JoinTable(
+            name = "post_tags",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tagname")
+    )
+    @JsonBackReference
     private List<Tag> tags;
 
     public Post() {}
@@ -147,13 +153,17 @@ public class Post implements Comparable<Post> {
     @Override
     public String toString() {
         String imageToString = image != null ? Arrays.toString(image) : "";
+        StringBuilder tagnames = new StringBuilder();
+        for (Tag tag : tags) {
+            tagnames.append(" '").append(tag.getTagname()).append("'");
+        }
         return "Post {" +
                 "id='" + id + '\'' +
                 "username='" + username + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", text='" + text + '\'' +
-                ", image='" + imageToString + '\'' +
-                ", tags='" + tags + '\'' +
+                ", image='" + "image string" + '\'' +
+                ", tags='" + tagnames + '\'' +
                 '}';
     }
 }
