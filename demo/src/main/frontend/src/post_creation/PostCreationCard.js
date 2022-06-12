@@ -1,6 +1,6 @@
 import { Button, IconButton } from '@material-ui/core'
 import React from 'react'
-import '../../App.css'
+import '../App.css'
 import './PostCreation.css'
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';

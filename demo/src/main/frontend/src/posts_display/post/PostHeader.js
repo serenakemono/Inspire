@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Menu, MenuItem, IconButton } from '@material-ui/core'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
-const PostHeader = ({post}) => {
+const PostHeader = ({post, userImg}) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -12,6 +12,16 @@ const PostHeader = ({post}) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const unixTime = post.timestamp*1000;
+    let timestamp = new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    }).format(unixTime);
 
   return (
     <div className="card-header">
@@ -24,8 +34,12 @@ const PostHeader = ({post}) => {
                     display: "flex",
                     alignItems: "center"
                 }}>
-                <img className="img-xs rounded-circle" src={post.op.userImg} alt="" />
-                <div style={{marginLeft:"10px"}}>{ post.op.username }</div>
+                <img className="img-xs rounded-circle" src={userImg} alt="" />
+                <div style={{ marginLeft: "10px" }}>
+                      <div style={{fontSize: "17px"}}>{post.username}</div>
+                      <div className="text-muted" style={{fontSize: "14px"}}>{timestamp}</div>
+                </div>
+                
             </div>
             <div>
                 <IconButton

@@ -3,13 +3,13 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileHeader from './ProfileHeader';
 import ProfileCard from './ProfileCard';
-import ProfilePostsDisplay from './posts/ProfilePostsDisplay';
+import PostsDisplay from '../posts_display/PostsDisplay';
 import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
 import AuthService from '../authentication/AuthService';
 import axios from 'axios'
-import PostCreationCard from './postcreation/PostCreationCard';
-import PostCreationPopup from './postcreation/PostCreationPopup';
+import PostCreationCard from '../post_creation/PostCreationCard';
+import PostCreationPopup from '../post_creation/PostCreationPopup';
 
 const ProfilePage = () => {
 
@@ -23,23 +23,45 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [tab, setTab] = useState(0);
     const [sessionExpired, setSessionExpired] = useState(false);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get(GET_USER_INFO_URL,
-            { headers: { "Authorization": `Bearer ${token}` } })
-            .then(res => {
-                const newUser = {
-                    username: res.data.username,
-                    bio: res.data.bio,
-                    email: res.data.email,
-                }
-                setUser(newUser);
-            }).catch((error) => {
-                setSessionExpired(true);
-                console.log(error);
-            }
-        )
+        const fetchUser = async () => {
+            const res = await axios.get(GET_USER_INFO_URL,
+                { headers: { "Authorization": `Bearer ${token}` } });
+            const newUser = {
+                username: res.data.username,
+                bio: res.data.bio,
+                email: res.data.email,
+            };
+            setUser(newUser);
+        }
+
+        fetchUser().catch((error) => {
+            setSessionExpired(true);
+            console.log(error);
+        });
+
+        
+        
     }, []);
+
+    function get_posts_url(username) {
+        return `http://localhost:8080/api/v1/${username}/posts`
+    }
+
+    useEffect(() => {
+        if (user !== null) {
+            const GET_POSTS_URL = get_posts_url(user.username);
+            axios.get(GET_POSTS_URL)
+                .then((response) => {
+                    if (response.data) {
+                        setPosts(response.data);
+                    }
+                })
+                .catch((error) => { console.log(error) })
+        }
+    }, [])
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
     
@@ -53,11 +75,6 @@ const ProfilePage = () => {
     const [popup, setPopup] = useState(false);
     const duringPopup = popup ? "during-popup" : ""
 
-    // const CREATE_POST = "create a post";
-    // const ADD_TAG = "add a tag";
-    // const ADD_PHOTO = "add a photo";
-    // const ADD_VIDEO = "add a video";
-    // const windowStates = [CREATE_POST, ADD_TAG, ADD_PHOTO, ADD_VIDEO];
     const windowStates = {
         create_post: "create a post",
         add_tag: "add a tag",
@@ -102,7 +119,7 @@ const ProfilePage = () => {
                                     windowStates={windowStates}
                                     setWindowState={setWindowState}
                                 />
-                                <ProfilePostsDisplay user={user} />
+                                <PostsDisplay posts={posts} />
                             </div>
                         
                             <div className="d-none d-xl-block col-xl-3 right-wrapper">

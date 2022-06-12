@@ -1,12 +1,27 @@
-import React from 'react'
-import PostsDisplay from './posts/PostsDisplay'
+import React, { useState, useEffect } from 'react'
 import AuthService from '../authentication/AuthService'
+import PostsDisplay from '../posts_display/PostsDisplay';
+import PostCreationCard from '../post_creation/PostCreationCard';
+import axios from 'axios';
 
 const HomePage = () => {
 
     const currentUser = AuthService.getCurrUser();
 
     if (!currentUser) return window.location.href = '/login';
+
+    const GET_POSTS_URL = 'http://localhost:8080/api/v1/posts';
+
+    const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        axios.get(GET_POSTS_URL)
+            .then((response) => {
+                if (response.data) {
+                    setPosts(response.data);
+                }
+            })
+            .catch((error) => { console.log(error) })
+    }, [])
 
     return (
         <div className="maincontainer">
@@ -19,7 +34,8 @@ const HomePage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <PostsDisplay />
+                            <PostCreationCard />
+                            <PostsDisplay posts={posts} />
                         </div>
                     
                         <div className="d-none d-xl-block col-xl-3 right-wrapper">

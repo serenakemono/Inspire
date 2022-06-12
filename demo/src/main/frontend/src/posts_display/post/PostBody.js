@@ -1,7 +1,7 @@
 import React from 'react'
-import '../../postcreation/PostCreation.css'
+import '../../post_creation/PostCreation.css'
 
-const ProfilePostBody = ({ post }) => {
+const PostBody = ({ post }) => {
 
   const tags = post.tags;
 
@@ -27,4 +27,4 @@ const ProfilePostBody = ({ post }) => {
   )
 }
 
-export default ProfilePostBody
+export default PostBody

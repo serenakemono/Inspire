@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import "./PostCreationCard"
-import "../../App.css"
+import "../App.css"
 import CreatePostState from './CreatePostState';
 import AddPhotoState from './AddPhotoState';
 import AddTagState from './AddTagState';
