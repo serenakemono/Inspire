@@ -160,7 +160,7 @@ const CreatePostState = ({
                 }
                 <Button
                     disabled={text===""}
-                    style={{textTransform: "none", backgroundColor: "#f8c6c8"}}
+                    style={{textTransform: "none", backgroundColor: "#f8c6c8", borderRadius: "35rem"}}
                     onClick={handlePost}
                 >
                     Post
