@@ -5,15 +5,16 @@ import {
     AppBar,
     Toolbar,
     makeStyles,
-    Typography,
     Button,
     IconButton,
-    Drawer,
     MenuItem,
-    SwipeableDrawer
+    SwipeableDrawer,
+    Input
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
+import SearchIcon from '@mui/icons-material/Search';
 import { ReactComponent as InspireLogo } from '../logo.svg'
+import SearchBar from './SearchBar';
 
 const Header = ({ headerItems }) => {
 
@@ -49,12 +50,6 @@ const Header = ({ headerItems }) => {
                 paddingLeft: 0,
             },
         },
-        logo: {
-            fontFamily: "Work Sans, sans-serif",
-            fontWeight: 600,
-            color: "#E51B23",
-            textAlign: "left",
-        },
         menuButton: {
             fontFamily: "Open Sans, sans-serif",
             fontWeight: 700,
@@ -70,7 +65,7 @@ const Header = ({ headerItems }) => {
         }
     }));
 
-    const { header, logo, menuButton, toolbar, drawerContainer } = useStyles();
+    const { header, menuButton, toolbar, drawerContainer } = useStyles();
 
     /**
      * variant="h6" will ensure that the size of our logo is 
@@ -109,10 +104,13 @@ const Header = ({ headerItems }) => {
     
     const displayDesktop = () => {
         return (
-            <Toolbar className={toolbar}>
-                {inspireLogo}
-                <div>{getMenuButtons()}</div>
-            </Toolbar>
+            <>
+                <Toolbar className={toolbar}>
+                    {inspireLogo}
+                    <SearchBar />
+                    <div>{getMenuButtons()}</div>
+                </Toolbar>
+            </>
         );
     };
 
