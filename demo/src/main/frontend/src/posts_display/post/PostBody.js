@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import '../../post_creation/PostCreation.css'
+import Button from '@material-ui/core/Button'
 
 const PostBody = ({ post }) => {
 
   const tags = post.tags;
+
+  // let navigate = useNavigate();
+  // const routeChange = (tag) => { 
+  //   let path = `/feed/hashtag/${tag}`; 
+  //   navigate(path);
+  // }
 
   return (
     <div className="card-body">
@@ -17,9 +25,14 @@ const PostBody = ({ post }) => {
       </div>
       {(tags.length !== 0) && <div>
         {tags.map((tag, index) => (
-            <div className="tag-item-in-post" style={{marginRight: "5px"}} key={index}>
-                <span className="text">{tag}</span>
+          <div className="tag-item-in-post" style={{marginRight: "5px"}} key={index}>
+            <div
+              className="text"
+              onClick={()=>{window.location.href = `/feed/hashtag/${tag.substring(1)}`}}
+            >
+              {tag}
             </div>
+          </div>
         ))}
       </div>}
       

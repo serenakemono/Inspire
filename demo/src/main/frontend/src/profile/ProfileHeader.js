@@ -53,7 +53,8 @@ const ProfileHeader = ({ userImg, user, handleEditProfile, tab, setTab }) => {
                 backgroundColor: "#e51b23",
                 color: "#FFFFFF",
                 textTransform: 'none',
-                width: "130px"
+                width: "130px",
+                borderRadius: '35rem',
               }}
               startIcon={<EditRoundedIcon />}
               onClick={() => handleEditProfile()}

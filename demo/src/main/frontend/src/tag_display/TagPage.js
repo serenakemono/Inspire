@@ -40,9 +40,9 @@ const TagPage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <TagCard />
+                            <TagCard tagname={tagname} />
                             <PostCreationCard />
-                            <PostsDisplay posts={posts} />
+                            <PostsDisplay posts={posts.reverse()} />
                         </div>
                     
                         <div className="d-none d-xl-block col-xl-3 right-wrapper">
