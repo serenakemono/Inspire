@@ -6,8 +6,10 @@ import axios from 'axios'
 const SearchBar = () => {
 
     const [selected, setSelected] = useState(false);
-    const [text, setText] = useState("");
+    const [text, setText] = useState('');
     const [dataResult, setDataResult] = useState([]);
+    const [isHidden, setIsHidden] = useState(false);
+    const [url, setUrl] = useState('');
     
     const ref = useRef(null);
 
@@ -75,10 +77,18 @@ const SearchBar = () => {
     }))
     const { container, placeholder, icon, input, data, dataItem } = useStyles();
 
-    const handleLoseFocus = () => {
-        setText('');
-        // setDataResult([]);
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+
+    const handleLoseFocus = async () => {
         setSelected(false);
+        await delay(100);
+        setDataResult([]);
+    }
+
+    const handleOnFocus = () => {
+        setSelected(true);
     }
 
     const handleChange = async (e) => {
@@ -101,12 +111,12 @@ const SearchBar = () => {
                     ref={ref}
                     placeholder='Search...'
                     className={input}
-                    onFocus={() => setSelected(true)}
+                    onFocus={handleOnFocus}
                     onBlur={handleLoseFocus}
                     onChange={handleChange}
                 />
             </div>
-            {dataResult.length > 0 && document.activeElement === ref.current && 
+            {dataResult.length > 0 &&
                 <div className={data}>
                 {dataResult.map((value, key) => {
                     return (
@@ -114,7 +124,6 @@ const SearchBar = () => {
                             className={dataItem}
                             href={`http://localhost:3000/feed/hashtag/${value.tagname.substring(1)}`}
                             target='_self'
-                            
                         >
                             <p> {value.tagname} </p>
                         </a>

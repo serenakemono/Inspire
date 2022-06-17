@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Tag {
+public class Tag implements Comparable<Tag> {
     @Id
     private String tagname;
 
@@ -44,6 +44,11 @@ public class Tag {
 
     public void addPost(Post post) {
         this.posts.add(post);
+    }
+
+    @Override
+    public int compareTo(Tag t) {
+        return getTagname().compareTo(t.getTagname());
     }
 
     @Override

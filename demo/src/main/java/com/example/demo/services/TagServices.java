@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,9 @@ public class TagServices {
 
     public List<Tag> listAll(String keyword) {
         if (keyword != null) {
-            return tagRepository.search(keyword);
+            List<Tag> tags = tagRepository.search(keyword);
+            Collections.sort(tags);
+            return tags;
         }
         return new ArrayList<>();
     }
