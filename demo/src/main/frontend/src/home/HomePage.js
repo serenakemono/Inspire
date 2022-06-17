@@ -6,14 +6,14 @@ import axios from 'axios';
 
 const HomePage = () => {
 
-    const currentUser = AuthService.getCurrUser();
-
-    if (!currentUser) return window.location.href = '/login';
-
     const GET_POSTS_URL = 'http://localhost:8080/api/v1/posts';
-
     const [posts, setPosts] = useState([]);
+
     useEffect(() => {
+
+        const currentUser = AuthService.getCurrUser();
+        if (!currentUser) return window.location.href = '/login';
+
         axios.get(GET_POSTS_URL)
             .then((response) => {
                 if (response.data) {
@@ -30,7 +30,6 @@ const HomePage = () => {
                     <div style={{height: "80px"}}></div>
                     <div className="profile-page-body row">
                         <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                            
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
@@ -40,10 +39,8 @@ const HomePage = () => {
                     
                         <div className="d-none d-xl-block col-xl-3 right-wrapper">
                             <div className="row">
-                                
                             </div>
                         </div>
-                    
                     </div>
                 </div>
             </div>

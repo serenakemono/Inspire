@@ -19,7 +19,7 @@ const SearchBar = () => {
             height: '2.35rem',
             width: '20rem',
             backgroundColor: '#eeeeee',
-            border: selected ? '2px solid #f8c6c8' : ''
+            border: selected ? '2px solid #e51b23' : ''
         }, icon: {
             height: '100%',
             pointerEvents: 'none',
@@ -39,6 +39,12 @@ const SearchBar = () => {
         setText(value);
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key !== 'Enter') return;
+        // logic to search for a tag
+        setText('');
+    }
+
     return (
         <div className={container}>
             <SearchIcon className={ icon } sx={{ color: "#545454" }} />
@@ -49,6 +55,7 @@ const SearchBar = () => {
                 onFocus={() => setSelected(true)}
                 onBlur={() => setSelected(false)}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
             />
         </div>
     )
