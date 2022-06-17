@@ -1,9 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import './common/assets/App.css';
 
 import Header from './header/Header';
-import Missing from './Missing';
-import Footer from './Footer'
+import Missing from './common/Missing';
 import HomePage from './home/HomePage';
 
 import React, { useState, useEffect, Component } from 'react';

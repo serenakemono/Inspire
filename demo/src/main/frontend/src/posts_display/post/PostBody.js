@@ -1,17 +1,11 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import '../../post_creation/PostCreation.css'
+import '../../post_creation/assets/PostCreation.css'
 import Button from '@material-ui/core/Button'
 
 const PostBody = ({ post }) => {
 
   const tags = post.tags;
-
-  // let navigate = useNavigate();
-  // const routeChange = (tag) => { 
-  //   let path = `/feed/hashtag/${tag}`; 
-  //   navigate(path);
-  // }
 
   return (
     <div className="card-body">

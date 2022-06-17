@@ -1,6 +1,6 @@
 import React from 'react';
-import '../App.css';
-import './PostCreation.css';
+import '../common/assets/App.css';
+import './assets/PostCreation.css';
 import { IconButton, Button } from '@material-ui/core';
 import CloseIcon from '@mui/icons-material/Close';
 

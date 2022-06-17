@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import Peep from "react-peeps";
-import { ReactComponent as LoginAvatar } from './LoginAvatar.svg'
-import { ReactComponent as RegisterAvatar } from './RegisterAvatar.svg'
+import { ReactComponent as LoginAvatar } from './assets/LoginAvatar.svg'
+import { ReactComponent as RegisterAvatar } from './assets/RegisterAvatar.svg'
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import { ReactComponent as InspireLogo } from '../logo.svg'
+import { ReactComponent as InspireLogo } from '../common/assets/logo.svg'
 
 const SignInUpPage = () => {
 

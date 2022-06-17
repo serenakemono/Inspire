@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './PostCreation.css'
+import './assets/PostCreation.css'
 import { IconButton, Button, InputBase } from '@material-ui/core'
 import CloseIcon from '@mui/icons-material/Close';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';

@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from '@mui/icons-material/Search';
-import { ReactComponent as InspireLogo } from '../logo.svg'
+import { ReactComponent as InspireLogo } from '../common/assets/logo.svg'
 import SearchBar from './SearchBar';
 
 const Header = ({ headerItems }) => {
