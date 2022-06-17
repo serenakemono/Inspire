@@ -9,7 +9,6 @@ const SearchBar = () => {
     const [text, setText] = useState('');
     const [dataResult, setDataResult] = useState([]);
     const [isHidden, setIsHidden] = useState(false);
-    const [url, setUrl] = useState('');
     
     const ref = useRef(null);
 
@@ -84,11 +83,12 @@ const SearchBar = () => {
     const handleLoseFocus = async () => {
         setSelected(false);
         await delay(100);
-        setDataResult([]);
+        setIsHidden(true);
     }
 
     const handleOnFocus = () => {
         setSelected(true);
+        setIsHidden(false);
     }
 
     const handleChange = async (e) => {
@@ -117,7 +117,7 @@ const SearchBar = () => {
                 />
             </div>
             {dataResult.length > 0 &&
-                <div className={data}>
+                <div className={data} hidden={isHidden}>
                 {dataResult.map((value, key) => {
                     return (
                         <a
