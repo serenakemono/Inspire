@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import AuthService from '../authentication/AuthService'
 import PostsDisplay from '../posts_display/PostsDisplay';
 import PostCreationCard from '../post_creation/PostCreationCard';
 import axios from 'axios';
-import { useParams } from 'react-router';
 import TagCard from './TagCard';
 
 const TagPage = () => {
 
-    let { tagname } = useParams()
+    let { tagname } = useParams();
 
     const currentUser = AuthService.getCurrUser();
 

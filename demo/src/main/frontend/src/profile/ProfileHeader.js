@@ -12,7 +12,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import Item from "@material-ui/core/ListItem"
 import Grid from '@material-ui/core/Grid'
 
-const ProfileHeader = ({ userImg, user, handleEditProfile, tab, setTab }) => {
+const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) => {
 
   if (user === null) return;
   
@@ -45,22 +45,24 @@ const ProfileHeader = ({ userImg, user, handleEditProfile, tab, setTab }) => {
               <Item className="follower-stats">111 Followers 111 Following</Item>
             </Grid>
           </Grid>
-                  
-          <div>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "#e51b23",
-                color: "#FFFFFF",
-                textTransform: 'none',
-                width: "130px",
-                borderRadius: '35rem',
-              }}
-              startIcon={<EditRoundedIcon />}
-              onClick={() => handleEditProfile()}
-            >Edit profile
-            </Button>
-          </div>
+
+          {self == true &&
+            <div>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#e51b23",
+                  color: "#FFFFFF",
+                  textTransform: 'none',
+                  width: "130px",
+                  borderRadius: '35rem',
+                }}
+                startIcon={<EditRoundedIcon />}
+                onClick={() => handleEditProfile()}
+              >Edit profile
+              </Button>
+            </div>
+          }
         </div>
       </div>
     
@@ -68,26 +70,25 @@ const ProfileHeader = ({ userImg, user, handleEditProfile, tab, setTab }) => {
         <Tabs
           value={tab}
           onChange={handleTabs}
-          centered
-          sx={{ width: "50%" }}>
+          centered>
           <Tab
-            style={{textTransform: 'none'}}
+            style={{ textTransform: 'none' }}
             icon={<AccountCircleRoundedIcon />}
             label="About Me" />
           <Tab
-            style={{textTransform: 'none'}}
+            style={{ textTransform: 'none' }}
             icon={<PhotoLibraryRoundedIcon />}
             label="Posts" />
           <Tab
-            style={{textTransform: 'none'}}
+            style={{ textTransform: 'none' }}
             icon={<ForumRoundedIcon />}
             label="Discussions" />
           <Tab
-            style={{textTransform: 'none'}}
+            style={{ textTransform: 'none' }}
             icon={<StyleRoundedIcon />}
             label="Tags" />
           <Tab
-            style={{textTransform: 'none'}}
+            style={{ textTransform: 'none' }}
             icon={<StarRoundedIcon />}
             label="Collections" />
         </Tabs>

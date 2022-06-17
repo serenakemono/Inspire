@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../common/assets/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileHeader from './ProfileHeader';
@@ -11,7 +11,7 @@ import axios from 'axios'
 import PostCreationCard from '../post_creation/PostCreationCard';
 import PostCreationPopup from '../post_creation/PostCreationPopup';
 
-const ProfilePage = () => {
+const SelfProfilePage = () => {
 
     const currentUser = AuthService.getCurrUser();
     const token = currentUser.token;
@@ -90,6 +90,7 @@ const ProfilePage = () => {
                         <div className="row">
                             <div className="col-12 grid-margin">
                                 <ProfileHeader
+                                    self={true}
                                     userImg={userImg}
                                     user={user}
                                     handleEditProfile={handleEditProfile}
@@ -102,6 +103,7 @@ const ProfilePage = () => {
                         <div className="profile-body row">
                             <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
                                 <ProfileCard
+                                    self={true}
                                     user={user}
                                     editMode={editMode}
                                     setEditMode={setEditMode}
@@ -141,4 +143,4 @@ const ProfilePage = () => {
     )
 }
 
-export default ProfilePage
+export default SelfProfilePage

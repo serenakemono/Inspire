@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
-const ProfileCard = ({ user, editMode, setEditMode, handleEditProfile }) => {
+const ProfileCard = ({ self, user, editMode, setEditMode, handleEditProfile }) => {
 
     if (user === null) return;
 
@@ -139,14 +139,16 @@ const ProfileCard = ({ user, editMode, setEditMode, handleEditProfile }) => {
                         justifyContent: "space-between"
                     }}
                 >
-                    <h6 className="card-title mb-0">Bio</h6>
-                    <div className="dropdown">
-                        <div>
-                            <IconButton>
-                                <EditRoundedIcon onClick={handleEditProfile} />
-                            </IconButton>
-                        </div>
-                    </div>
+                            <h6 className="card-title mb-0">Bio</h6>
+                            {self == true &&
+                                <div className="dropdown">
+                                    <div>
+                                        <IconButton>
+                                            <EditRoundedIcon onClick={handleEditProfile} />
+                                        </IconButton>
+                                    </div>
+                                </div>
+                            }
                 </div>
                 <p>{ bio }</p>
                 <div className="mt-3">
@@ -155,7 +157,6 @@ const ProfileCard = ({ user, editMode, setEditMode, handleEditProfile }) => {
                 </div>
             </div>
             )}
-            
         </div>
     )
 }

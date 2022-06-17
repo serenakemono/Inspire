@@ -6,7 +6,8 @@ import HomePage from './home/HomePage';
 
 import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
-import ProfilePage from './profile/ProfilePage';
+import SelfProfilePage from './profile/SelfProfilePage';
+import OtherProfilePage from './profile/OtherProfilePage';
 import AuthService from './authentication/AuthService';
 import LogoutPage from './sign_in_sign_up/LogoutPage';
 import TagPage from './tag_display/TagPage';
@@ -77,12 +78,10 @@ class App extends Component {
       <div>
         <Header headerItems={headerItems} />
         <Routes>
-          
-        
           <Route exact path="feed" element={<HomePage />} />
           <Route path={"feed/hashtag/:tagname"} element={<TagPage />} />
-          
-          <Route path="me" element={<ProfilePage />} />
+          <Route path={"me"} element={<SelfProfilePage />} />
+          <Route path={"user/:username"} element={<OtherProfilePage />} />
           <Route path="logout" element={<LogoutPage />} />
           {/* <Route path="getinspired" element={<GetInspired />} />
           <Route path="community" element={<Community />} />
