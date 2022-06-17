@@ -63,4 +63,11 @@ public class TagServices {
         }
         return tags;
     }
+
+    public List<Tag> listAll(String keyword) {
+        if (keyword != null) {
+            return tagRepository.search(keyword);
+        }
+        return new ArrayList<>();
+    }
 }

@@ -5,6 +5,7 @@ import com.example.demo.entities.Tag;
 import com.example.demo.services.PostServices;
 import com.example.demo.services.TagServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,5 +50,10 @@ public class TagController {
             @RequestParam Long postId
     ) {
         tagServices.addPostToTags(tags, postId);
+    }
+
+    @RequestMapping(path="/search_tag")
+    public List<Tag> searchTag(@Param("keyword") String keyword) {
+        return tagServices.listAll(keyword);
     }
 }
