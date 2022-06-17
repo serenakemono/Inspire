@@ -52,7 +52,7 @@ public class TagController {
         tagServices.addPostToTags(tags, postId);
     }
 
-    @RequestMapping(path="/search_tag")
+    @GetMapping(path="/search_tag")
     public List<Tag> searchTag(@Param("keyword") String keyword) {
         return tagServices.listAll(keyword);
     }

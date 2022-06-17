@@ -33,7 +33,7 @@ const TagPage = () => {
         <div className="maincontainer">
             <div className="container">
                 <div className="profile-page tx-13">
-                    <div style={{height: "80px"}}></div>
+                    <div style={{ height: "80px" }}></div>
                     <div className="profile-page-body row">
                         <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
                             

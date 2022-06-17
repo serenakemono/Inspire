@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputBase, makeStyles } from '@material-ui/core';
+import axios from 'axios'
 
 const SearchBar = () => {
 
     const [selected, setSelected] = useState(false);
     const [text, setText] = useState("");
+    const [dataResult, setDataResult] = useState([]);
+    
+    const ref = useRef(null);
+
+    const SEARCH_TAG_URL = 'http://localhost:8080/api/v1/search_tag';
 
     const useStyles = makeStyles(() => ({
         container: {
@@ -20,6 +26,10 @@ const SearchBar = () => {
             width: '20rem',
             backgroundColor: '#eeeeee',
             border: selected ? '2px solid #e51b23' : ''
+        }, placeholder: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
         }, icon: {
             height: '100%',
             pointerEvents: 'none',
@@ -29,34 +39,88 @@ const SearchBar = () => {
         }, input: {
             marginLeft: '0.5rem',
             width: '15rem'
-        }
+        }, data: {
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '0.5rem',
+            width: '300px',
+            maxHeight: '15rem',
+            backgroundColor: 'white',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+            overflow: 'hidden',
+            overflowY: 'auto',
+            '&::-webkit-scrollbar': {
+                display: 'none',
+            },
+            width: '100%',
+            alignItems: 'center',
+            color: 'black',
+            zIndex: '9999',
+        }, dataItem: {
+            width: '100%',
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center',
+            color: 'black',
+            '&:hover': {
+                backgroundColor: '#eeeeee',
+                cursor: 'pointer',
+                color: 'black',
+            },
+            '& p': {
+                marginLeft: '1rem',
+                marginTop: '0.3rem',
+            },
+        },
     }))
+    const { container, placeholder, icon, input, data, dataItem } = useStyles();
 
-    const { container, icon, input } = useStyles();
-
-    const handleChange = (e) => {
-        const { value } = e.target;
-        setText(value);
+    const handleLoseFocus = () => {
+        setText('');
+        // setDataResult([]);
+        setSelected(false);
     }
 
-    const handleKeyDown = (e) => {
-        if (e.key !== 'Enter') return;
-        // logic to search for a tag
-        setText('');
+    const handleChange = async (e) => {
+        const { value } = e.target;
+        setText(value);
+        if (value.startsWith('#') & value.length > 1) {
+            const res = await axios.get(SEARCH_TAG_URL, { params: { keyword: value } });
+            setDataResult(res.data);
+        } else {
+            setDataResult([]);
+        }
     }
 
     return (
-        <div className={container}>
-            <SearchIcon className={ icon } sx={{ color: "#545454" }} />
-            <InputBase
-                value={text}
-                placeholder='Search...'
-                className={input}
-                onFocus={() => setSelected(true)}
-                onBlur={() => setSelected(false)}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-            />
+        <div className={ container }>
+            <div className={placeholder}>
+                <SearchIcon className={ icon } sx={{ color: "#545454" }} />
+                <InputBase
+                    value={text}
+                    ref={ref}
+                    placeholder='Search...'
+                    className={input}
+                    onFocus={() => setSelected(true)}
+                    onBlur={handleLoseFocus}
+                    onChange={handleChange}
+                />
+            </div>
+            {dataResult.length > 0 && document.activeElement === ref.current && 
+                <div className={data}>
+                {dataResult.map((value, key) => {
+                    return (
+                        <a
+                            className={dataItem}
+                            href={`http://localhost:3000/feed/hashtag/${value.tagname.substring(1)}`}
+                            target='_self'
+                            
+                        >
+                            <p> {value.tagname} </p>
+                        </a>
+                    )
+                })}
+            </div>}
         </div>
     )
 }
