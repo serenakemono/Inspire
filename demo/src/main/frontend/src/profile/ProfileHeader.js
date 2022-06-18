@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import Button from "@material-ui/core/Button"
-import Tab from "@material-ui/core/Tab"
-import Tabs from "@material-ui/core/Tabs"
-import AuthContext from '../authentication/AuthProvider'
+import React from 'react'
+import { Button, Tab, Tabs, Grid, makeStyles } from "@material-ui/core"
+import Item from "@material-ui/core/ListItem"
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import Item from "@material-ui/core/ListItem"
-import Grid from '@material-ui/core/Grid'
+import AddBoxIcon from '@mui/icons-material/AddBox';
+
 
 const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) => {
 
@@ -18,11 +16,22 @@ const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) 
   
   const username = user.username;
   const bio = user.bio;
-  const email = user.email;
 
   const handleTabs = (e, val) => {
-      setTab(val);
+    setTab(val);
   }
+
+  const useStyles = makeStyles(() => ({
+    buttons: {
+      backgroundColor: "#e51b23",
+      color: "#FFFFFF",
+      textTransform: 'none',
+      width: "130px",
+      borderRadius: '35rem',
+    },
+  }))
+    
+  const { buttons } = useStyles();
 
   return (
     <div className="profile-header">
@@ -50,16 +59,22 @@ const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) 
             <div>
               <Button
                 variant="contained"
-                style={{
-                  backgroundColor: "#e51b23",
-                  color: "#FFFFFF",
-                  textTransform: 'none',
-                  width: "130px",
-                  borderRadius: '35rem',
-                }}
+                className={buttons}
                 startIcon={<EditRoundedIcon />}
                 onClick={() => handleEditProfile()}
               >Edit profile
+              </Button>
+            </div>
+          }
+
+          {self == false &&
+            <div>
+              <Button
+                variant="contained"
+                className={buttons}
+                startIcon={<AddBoxIcon />}
+                // onClick={() => handleEditProfile()}
+              >Follow
               </Button>
             </div>
           }

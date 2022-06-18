@@ -41,7 +41,6 @@ const OtherProfilePage = () => {
         }
         const fetchUser = async () => {
             const res = await axios.get(GET_FRIEND_INFO_URL);
-            console.log(res.data);
             setUser(res.data);
         }
         fetchUser().catch((error) => {
