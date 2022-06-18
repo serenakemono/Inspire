@@ -1,8 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Authority;
-import com.example.demo.services.AppUserServices;
 import com.example.demo.entities.AppUser;
+import com.example.demo.services.AppUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,6 +34,11 @@ public class AppUserController {
     @GetMapping(path="users")
     public List<AppUser> getUsers() {
         return appUserServices.getUsers();
+    }
+
+    @GetMapping(path="user/{username}")
+    public AppUser getUser(@PathVariable("username") String username) {
+        return appUserServices.getUser(username);
     }
 
     @PostMapping(path="register")

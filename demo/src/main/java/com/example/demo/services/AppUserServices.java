@@ -127,4 +127,12 @@ public class AppUserServices implements UserDetailsService {
             user.setBio(bio);
         }
     }
+
+    public AppUser getUser(String username) {
+        Optional<AppUser> userOptional = userRepo.findAppUserByUsername(username);
+        if (userOptional.isEmpty()) {
+            throw new IllegalStateException("User with username " + username + " does not exist.");
+        }
+        return userOptional.get();
+    }
 }
