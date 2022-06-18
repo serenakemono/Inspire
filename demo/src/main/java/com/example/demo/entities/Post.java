@@ -57,7 +57,7 @@ public class Post implements Comparable<Post> {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "tagname")
     )
-    @JsonSerialize(using = CustomTagListSerializer.class)
+    @JsonSerialize(using = CustomAppUserListSerializer.class)
     private List<Tag> tags;
 
     public Post() {}

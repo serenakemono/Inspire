@@ -59,4 +59,11 @@ public class AppUserController {
         System.out.println(user);
         appUserServices.updateUser(username, user);
     }
+
+    @PutMapping(path="{follower}/follow/{following}")
+    public void follow(
+            @PathVariable("follower") String follower,
+            @PathVariable("following") String following) {
+        appUserServices.follow(follower, following);
+    }
 }

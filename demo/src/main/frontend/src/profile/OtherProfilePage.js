@@ -78,6 +78,7 @@ const OtherProfilePage = () => {
                                 <div className="col-12 grid-margin">
                                     <ProfileHeader
                                         self={false}
+                                        currUser={currUser}
                                         userImg={userImg}
                                         user={user}
                                         tab={tab}

@@ -1,5 +1,8 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -35,6 +39,24 @@ public class AppUser implements UserDetails {
             inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
     )
     private List<Authority> authorities;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
+    )
+    @JsonSerialize(using = CustomAppUserListSerializer.class)
+    private Set<AppUser> followers;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_following",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
+    )
+    @JsonSerialize(using = CustomAppUserListSerializer.class)
+    private Set<AppUser> following;
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
@@ -124,6 +146,34 @@ public class AppUser implements UserDetails {
 
     public void setEnabled(boolean b) {
         this.enabled = b;
+    }
+
+    public void setTimestampForRegistration(Long timestampForRegistration) {
+        this.timestampForRegistration = timestampForRegistration;
+    }
+
+    public Set<AppUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<AppUser> followers) {
+        this.followers = followers;
+    }
+
+    public Set<AppUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<AppUser> following) {
+        this.following = following;
+    }
+
+    public void addFollower(AppUser follower) {
+        this.followers.add(follower);
+    }
+
+    public void addFollowing(AppUser following) {
+        this.following.add(following);
     }
 
     @Override

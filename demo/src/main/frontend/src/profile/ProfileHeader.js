@@ -1,25 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Tab, Tabs, Grid, makeStyles } from "@material-ui/core"
 import Item from "@material-ui/core/ListItem"
-import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
-import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import ProfileHeaderTabs from './ProfileHeaderTabs';
+import axios from 'axios';
 
-
-const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) => {
+const ProfileHeader = ({
+  self,
+  currUser,
+  userImg,
+  user,
+  handleEditProfile,
+  tab,
+  setTab
+}) => {
 
   if (user === null) return;
   
   const username = user.username;
   const bio = user.bio;
-
-  const handleTabs = (e, val) => {
-    setTab(val);
-  }
 
   const useStyles = makeStyles(() => ({
     buttons: {
@@ -30,8 +30,25 @@ const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) 
       borderRadius: '35rem',
     },
   }))
-    
   const { buttons } = useStyles();
+
+  const [hasFollowed, setHasFollowed] = useState(false);
+  useEffect(() => {
+    if (self) return;
+    if (user.following.includes(currUser)) {
+      setHasFollowed(true);
+    }
+  }, [])
+
+  const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser}/follow/${username}`;
+  const handleStartFollowing = () => {
+    const follow = async () => {
+      await axios.put(FOLLOW_URL);
+    }
+    follow().catch((error) => {
+      console.log(error);
+    })
+  }
 
   return (
     <div className="profile-header">
@@ -68,46 +85,23 @@ const ProfileHeader = ({ self, userImg, user, handleEditProfile, tab, setTab }) 
           }
 
           {self == false &&
+            
             <div>
-              <Button
-                variant="contained"
-                className={buttons}
-                startIcon={<AddBoxIcon />}
-                // onClick={() => handleEditProfile()}
+            <Button
+              variant="contained"
+              className={buttons}
+              startIcon={<AddBoxIcon />}
+              onClick={() => handleStartFollowing()}
+              disabled={hasFollowed}
               >Follow
-              </Button>
+            </Button>
             </div>
           }
         </div>
       </div>
-    
-      <div className="header-links">
-        <Tabs
-          value={tab}
-          onChange={handleTabs}
-          centered>
-          <Tab
-            style={{ textTransform: 'none' }}
-            icon={<AccountCircleRoundedIcon />}
-            label="About Me" />
-          <Tab
-            style={{ textTransform: 'none' }}
-            icon={<PhotoLibraryRoundedIcon />}
-            label="Posts" />
-          <Tab
-            style={{ textTransform: 'none' }}
-            icon={<ForumRoundedIcon />}
-            label="Discussions" />
-          <Tab
-            style={{ textTransform: 'none' }}
-            icon={<StyleRoundedIcon />}
-            label="Tags" />
-          <Tab
-            style={{ textTransform: 'none' }}
-            icon={<StarRoundedIcon />}
-            label="Collections" />
-        </Tabs>
-      </div>
+          
+      <ProfileHeaderTabs tab={tab} setTab={setTab} />
+      
     </div>
   )
 }
