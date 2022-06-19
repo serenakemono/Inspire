@@ -18,26 +18,22 @@ const OtherProfilePage = () => {
     const [user, setUser] = useState(null);
     const [errorMsg, setErrorMsg] = useState('');
     const [posts, setPosts] = useState([]);
-
     const [currUser, setCurrUser] = useState(null);
-    const currentUser = AuthService.getCurrUser();
-    const token = currentUser.token;
 
-    const GET_USERNAME_URL = 'http://localhost:8080/api/v1/auth/userinfo';
     const GET_USER_INFO_URL = `http://localhost:8080/api/v1/user/`;
-    const GET_FRIEND_INFO_URL = `http://localhost:8080/api/v1/user/${username}`;
     const GET_POSTS_URL = `http://localhost:8080/api/v1/${username}/posts`;
+
     useEffect(() => {
         const fetch = async () => {
-            const res = await axios.get(GET_USERNAME_URL,
-                { headers: { "Authorization": `Bearer ${token}` } });
-            const name = res.data.username;
-            if (name == username) {
+            const info = JSON.parse(localStorage.getItem("info"));
+            if (info.username == username) {
                 window.location.href = 'http://localhost:3000/me';
                 return;
             }
-            const info = await axios.get(GET_USER_INFO_URL + username);
-            setCurrUser(info.data);
+            const res = await axios.get(GET_USER_INFO_URL + username);
+            setUser(res.data);
+            const response = await axios.get(GET_USER_INFO_URL + info.username);
+            setCurrUser(response.data);
         }
         fetch().catch((error) => {
             console.log(error);
@@ -45,14 +41,6 @@ const OtherProfilePage = () => {
     }, []);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const res = await axios.get(GET_FRIEND_INFO_URL);
-            setUser(res.data);
-        }
-        fetchUser().catch((error) => {
-            console.log(error);
-            setErrorMsg(error.response.data.message);
-        });
         const fetchPosts = async () => {
             const res = await axios.get(GET_POSTS_URL);
             setPosts(res.data);

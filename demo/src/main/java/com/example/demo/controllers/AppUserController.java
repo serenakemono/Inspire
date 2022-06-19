@@ -66,4 +66,11 @@ public class AppUserController {
             @PathVariable("following") String following) {
         appUserServices.follow(follower, following);
     }
+
+    @PutMapping(path="{follower}/unfollow/{following}")
+    public void unfollow(
+            @PathVariable("follower") String follower,
+            @PathVariable("following") String following) {
+        appUserServices.unfollow(follower, following);
+    }
 }

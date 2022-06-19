@@ -176,6 +176,14 @@ public class AppUser implements UserDetails {
         this.following.add(following);
     }
 
+    public void removeFollower(AppUser follower) {
+        this.followers.remove(follower);
+    }
+
+    public void removeFollowing(AppUser following) {
+        this.following.remove(following);
+    }
+
     @Override
     public String toString() {
         return "User {" +

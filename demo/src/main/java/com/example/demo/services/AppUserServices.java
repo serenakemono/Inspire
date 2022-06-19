@@ -147,4 +147,16 @@ public class AppUserServices implements UserDetailsService {
         followerOptional.get().addFollowing(followingOptional.get());
         followingOptional.get().addFollower(followerOptional.get());
     }
+
+    @Transactional
+    public void unfollow(String follower, String following) {
+        Optional<AppUser> followerOptional = userRepo.findAppUserByUsername(follower);
+        Optional<AppUser> followingOptional = userRepo.findAppUserByUsername(following);
+        if (followerOptional.isEmpty() || followingOptional.isEmpty()) {
+            throw new IllegalStateException(
+                    "User with username " + follower + " or " + follower + " does not exist.");
+        }
+        followerOptional.get().removeFollowing(followingOptional.get());
+        followingOptional.get().removeFollower(followerOptional.get());
+    }
 }

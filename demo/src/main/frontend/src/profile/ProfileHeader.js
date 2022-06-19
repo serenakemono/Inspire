@@ -3,6 +3,7 @@ import { Button, Tab, Tabs, Grid, makeStyles } from "@material-ui/core"
 import Item from "@material-ui/core/ListItem"
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ProfileHeaderTabs from './ProfileHeaderTabs';
 import axios from 'axios';
 
@@ -18,9 +19,6 @@ const ProfileHeader = ({
 
   if (user === null) return;
   if (currUser === null) return;
-  
-  const username = user.username;
-  const bio = user.bio;
 
   const useStyles = makeStyles(() => ({
     buttons: {
@@ -29,6 +27,9 @@ const ProfileHeader = ({
       textTransform: 'none',
       width: "130px",
       borderRadius: '35rem',
+      '&:hover': {
+        backgroundColor: "#e51b23"
+      }
     },
   }))
   const { buttons } = useStyles();
@@ -36,14 +37,14 @@ const ProfileHeader = ({
   const [hasFollowed, setHasFollowed] = useState(false);
   useEffect(() => {
     if (self) return;
-    console.log(currUser);
-    if (currUser.followers.includes(user.username)) {
-      console.log('following');
+    if (currUser.following.includes(user.username)) {
       setHasFollowed(true);
     }
   }, [])
 
-  const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/follow/${username}`;
+  const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/follow/${user.username}`;
+  const UNFOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/unfollow/${user.username}`;
+  
   const handleStartFollowing = () => {
     const follow = async () => {
       await axios.put(FOLLOW_URL);
@@ -51,6 +52,17 @@ const ProfileHeader = ({
     follow().catch((error) => {
       console.log(error);
     })
+    setHasFollowed(!hasFollowed);
+  }
+
+  const handleUnfollow = () => {
+    const unfollow = async () => {
+      await axios.put(UNFOLLOW_URL);
+    }
+    unfollow().catch((error) => {
+      console.log(error);
+    })
+    setHasFollowed(!hasFollowed);
   }
 
   return (
@@ -69,8 +81,8 @@ const ProfileHeader = ({
               <img className="profile-pic" src={userImg} alt="profile" />
             </Grid>
             <Grid item>
-              <Item className="profile-name">{ username }</Item>
-              <Item className="bio">{ bio }</Item>
+              <Item className="profile-name">{ user.username }</Item>
+              <Item className="bio">{ user.bio }</Item>
               <Item className="follower-stats">111 Followers 111 Following</Item>
             </Grid>
           </Grid>
@@ -92,10 +104,10 @@ const ProfileHeader = ({
             <Button
               variant="contained"
               className={buttons}
-              startIcon={<AddBoxIcon />}
-              onClick={() => handleStartFollowing()}
-              disabled={hasFollowed}
-              >Follow
+              startIcon={hasFollowed ? <CheckCircleIcon /> : <AddBoxIcon />}
+              onClick={hasFollowed ? () => handleUnfollow() : () => handleStartFollowing()}
+            >
+              {hasFollowed ? 'Following' : 'Follow'}
             </Button>
             </div>
           }
