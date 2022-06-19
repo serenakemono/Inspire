@@ -102,10 +102,10 @@ const SignUpForm = ({ setIsSignIn }) => {
                 flexDirection: "row",
                 alignItems: "center",
                 position: "relative",
-                right: "130px"
+                // right: "130px"
             }}>
             
-            <Button
+            {/* <Button
                 style={{
                     height: "40px",
                     width: "100px",
@@ -139,7 +139,7 @@ const SignUpForm = ({ setIsSignIn }) => {
                 }}
             >
                 
-            </Box>
+            </Box> */}
 
             <Box
                 display="flex"

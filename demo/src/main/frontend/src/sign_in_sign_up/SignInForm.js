@@ -65,7 +65,7 @@ const SignInForm = ({ setIsSignIn }) => {
                 flexDirection: "row",
                 alignItems: "center",
                 position: "relative",
-                left: "120px",
+                // left: "120px",
             }}>
             <Box
                 display="flex"
@@ -156,7 +156,7 @@ const SignInForm = ({ setIsSignIn }) => {
                     </Grid>
                 </form>
             </Box>
-            <Box
+            {/* <Box
                 style={{
                     width: "150px",
                     height: "260px",
@@ -174,8 +174,8 @@ const SignInForm = ({ setIsSignIn }) => {
                     width: "25ch",
                 }}
             >
-            </Box>
-            <Button
+            </Box> */}
+            {/* <Button
                 style={{
                     height: "40px",
                     width: "100px",
@@ -188,7 +188,7 @@ const SignInForm = ({ setIsSignIn }) => {
                 onClick={()=>setIsSignIn(false)}
             >
                 Sign up
-            </Button>
+            </Button> */}
         </div>
   )
 }
