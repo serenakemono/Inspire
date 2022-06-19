@@ -6,8 +6,8 @@ import HomePage from './home/HomePage';
 
 import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
-import SelfProfilePage from './profile/SelfProfilePage';
-import OtherProfilePage from './profile/OtherProfilePage';
+import SelfProfilePage from './profile/profile_pages/SelfProfilePage';
+import OtherProfilePage from './profile/profile_pages/OtherProfilePage';
 import AuthService from './authentication/AuthService';
 import LogoutPage from './sign_in_sign_up/LogoutPage';
 import TagPage from './tag_display/TagPage';

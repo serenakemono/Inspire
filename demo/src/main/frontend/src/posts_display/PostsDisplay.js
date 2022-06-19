@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Feed from './Feed'
-import axios from 'axios'
 
 const PostsDisplay = ({ posts }) => {
 

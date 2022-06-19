@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import '../common/assets/App.css';
+import '../../common/assets/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ProfileHeader from './ProfileHeader';
-import ProfileCard from './ProfileCard';
-import PostsDisplay from '../posts_display/PostsDisplay';
-import ProfileLatestPics from './ProfileLatestPics';
-import ProfileSuggestions from './ProfileSuggestions';
-import AuthService from '../authentication/AuthService';
+import ProfileHeader from '../profile_header/ProfileHeader';
+import ProfileCard from '../profile_body_left/ProfileCard';
+import PostsDisplay from '../../posts_display/PostsDisplay';
+import ProfileLatestPics from '../profile_body_right/ProfileLatestPics';
+import ProfileSuggestions from '../profile_body_right/ProfileSuggestions';
+import TabPanel from './TabPanel';
+import AuthService from '../../authentication/AuthService';
 import axios from 'axios'
-import PostCreationCard from '../post_creation/PostCreationCard';
-import PostCreationPopup from '../post_creation/PostCreationPopup';
+import PostCreationCard from '../../post_creation/PostCreationCard';
+import PostCreationPopup from '../../post_creation/PostCreationPopup';
+import ProfileSocialTab from '../profile_body_mid/ProfileSocialTab';
 
 const SelfProfilePage = () => {
 
@@ -94,13 +96,30 @@ const SelfProfilePage = () => {
                             </div>
                         
                             <div className="col-md-8 col-xl-6 middle-wrapper">
-                                <PostCreationCard
-                                    userImg={userImg}
-                                    setPopup={setPopup}
-                                    windowStates={windowStates}
-                                    setWindowState={setWindowState}
-                                />
-                                <PostsDisplay posts={posts} />
+                                <TabPanel tab={tab} index={0}>
+                                    <PostCreationCard
+                                        userImg={userImg}
+                                        setPopup={setPopup}
+                                        windowStates={windowStates}
+                                        setWindowState={setWindowState}
+                                    />
+                                    <PostsDisplay posts={posts} />
+                                </TabPanel>
+                                <TabPanel tab={tab} index={1}>
+                                    <PostCreationCard
+                                        userImg={userImg}
+                                        setPopup={setPopup}
+                                        windowStates={windowStates}
+                                        setWindowState={setWindowState}
+                                    />
+                                    <div>No discussions to display.</div>
+                                </TabPanel>
+                                <TabPanel tab={tab} index={2}>tags detail</TabPanel>
+                                <TabPanel tab={tab} index={3}>Collections detail</TabPanel>
+                                <TabPanel tab={tab} index={4}>Likes detail</TabPanel>
+                                <TabPanel tab={tab} index={5}>
+                                    <ProfileSocialTab user={user} />
+                                </TabPanel>
                             </div>
                         
                             <div className="d-none d-xl-block col-xl-3 right-wrapper">

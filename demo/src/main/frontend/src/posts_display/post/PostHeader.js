@@ -34,14 +34,14 @@ const PostHeader = ({post, userImg}) => {
                     display: "flex",
                     alignItems: "center"
                 }}>
-                  <img
-                      className="img-xs rounded-circle"
-                      src={userImg}
-                      alt=""
-                      onClick={() => {
-                          window.location.href = `http://localhost:3000/user/${post.username}`
-                      }}
-                  />
+                    <img
+                        className="img-xs rounded-circle"
+                        src={userImg}
+                        alt=""
+                        onClick={() => {
+                            window.location.href = `http://localhost:3000/user/${post.username}`
+                        }}
+                    />
                 <div style={{ marginLeft: "10px" }}>
                       <div
                           style={{ fontSize: "17px", cursor: "pointer" }}

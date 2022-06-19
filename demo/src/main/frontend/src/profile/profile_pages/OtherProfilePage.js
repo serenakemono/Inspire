@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router';
-import '../common/assets/App.css';
+import '../../common/assets/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 
-import ProfileHeader from './ProfileHeader';
-import ProfileCard from './ProfileCard';
-import PostsDisplay from '../posts_display/PostsDisplay';
-import ProfileLatestPics from './ProfileLatestPics';
-import ProfileSuggestions from './ProfileSuggestions';
+import ProfileHeader from '../profile_header/ProfileHeader';
+import ProfileCard from '../profile_body_left/ProfileCard';
+import PostsDisplay from '../../posts_display/PostsDisplay';
+import ProfileLatestPics from '../profile_body_right/ProfileLatestPics';
+import ProfileSuggestions from '../profile_body_right/ProfileSuggestions';
 
 const OtherProfilePage = () => {
 
@@ -35,6 +35,7 @@ const OtherProfilePage = () => {
         }
         fetch().catch((error) => {
             console.log(error);
+            setErrorMsg(error.response.message);
         });
     }, []);
 
