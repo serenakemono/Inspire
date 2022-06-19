@@ -34,6 +34,7 @@ const SelfProfilePage = () => {
             const username = info.username;
             const res = await axios.get(GET_USER_INFO_URL + username);
             setUser(res.data);
+            setPosts(res.data.posts);
         }
 
         fetchUser().catch((error) => {
@@ -41,23 +42,6 @@ const SelfProfilePage = () => {
             AuthService.logout();
         });
     }, []);
-
-    function get_posts_url(username) {
-        return `http://localhost:8080/api/v1/${username}/posts`
-    }
-
-    useEffect(() => {
-        if (user !== null) {
-            const GET_POSTS_URL = get_posts_url(user.username);
-            axios.get(GET_POSTS_URL)
-                .then((response) => {
-                    if (response.data) {
-                        setPosts(response.data);
-                    }
-                })
-                .catch((error) => { console.log(error) })
-        }
-    }, [user])
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
 

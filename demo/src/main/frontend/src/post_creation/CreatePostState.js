@@ -24,9 +24,7 @@ const CreatePostState = ({
 }) => {
 
     const POST_URL = "http://localhost:8080/api/v1/post"
-    const TAG_URL = "http://localhost:8080/api/v1/tag"
-    // const ADD_POSTS_TO_TAGS = (tag, postId) => `http://localhost:8080/api/v1/tag/${tag}/${postId}`
-
+    
     const handleInputChange = (e) => {
         setText(e.target.value);
         setPostError(false);

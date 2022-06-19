@@ -10,8 +10,6 @@ import PostsDisplay from '../posts_display/PostsDisplay';
 import ProfileLatestPics from './ProfileLatestPics';
 import ProfileSuggestions from './ProfileSuggestions';
 
-import AuthService from '../authentication/AuthService';
-
 const OtherProfilePage = () => {
 
     let { username } = useParams();
@@ -21,7 +19,6 @@ const OtherProfilePage = () => {
     const [currUser, setCurrUser] = useState(null);
 
     const GET_USER_INFO_URL = `http://localhost:8080/api/v1/user/`;
-    const GET_POSTS_URL = `http://localhost:8080/api/v1/${username}/posts`;
 
     useEffect(() => {
         const fetch = async () => {
@@ -32,6 +29,7 @@ const OtherProfilePage = () => {
             }
             const res = await axios.get(GET_USER_INFO_URL + username);
             setUser(res.data);
+            setPosts(res.data.posts);
             const response = await axios.get(GET_USER_INFO_URL + info.username);
             setCurrUser(response.data);
         }
@@ -39,17 +37,6 @@ const OtherProfilePage = () => {
             console.log(error);
         });
     }, []);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const res = await axios.get(GET_POSTS_URL);
-            setPosts(res.data);
-        }
-        fetchPosts().catch((error) => {
-            console.log(error);
-            setErrorMsg(error.response.data.message);
-        });
-    }, [currUser]);
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
 
