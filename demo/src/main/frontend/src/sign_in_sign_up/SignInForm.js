@@ -42,18 +42,15 @@ const SignInForm = ({ setIsSignIn }) => {
         const login = async () => {
             const res = await axios.post(LOGIN_URL, formValues);
             localStorage.setItem("user", JSON.stringify(res.data));
-            setToken(res.data.token);
+            console.log('The token received: ' + res.data.token);
+            const info = await axios.get(GET_USERNAME_URL,
+                { headers: { "Authorization": `Bearer ${res.data.token}` } });
+            localStorage.setItem("info", JSON.stringify(info.data));
         }
 
-        const storeInfo = async (token) => {
-            console.log(token);
-            const res = await axios.get(GET_USERNAME_URL,
-                { headers: { "Authorization": `Bearer ${token}` } });
-            console.log(res);
-            localStorage.setItem("info", JSON.stringify(res.data));
-        }
-
-        login().catch(error => {
+        login()
+            .then(()=>window.location.href = '/me')
+            .catch(error => {
             console.log(error.reponse);
             setLoginStatus({
                 error: true,
@@ -61,11 +58,6 @@ const SignInForm = ({ setIsSignIn }) => {
             })
             return;
         })
-        storeInfo(token).catch(error => {
-            console.log(error);
-            return;
-        })
-        window.location.href = '/me';
     };
 
     return (
