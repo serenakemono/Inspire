@@ -46,32 +46,32 @@ class App extends Component {
 
     const headerItems = [
       {
-          label: "home",
+          label: "Home",
           href: "/feed"
       },
       {
-          label: "getinspired",
+          label: "Get Inspired",
           href: "/getinspired"
       },
       {
-          label: "community",
+          label: "Community",
           href: "/community"
       },
       {
-          label: "messages",
+          label: "Messages",
           href: "/messages"
       },
       {
-          label: "courses",
+          label: "Courses",
           href: "/courses"
       }
     ];
     
     if (currUser) {
       headerItems.push({ label: "Me", href: "/me" });
-      headerItems.push({ label: "log out", href: "/logout" });
+      headerItems.push({ label: "Log out", href: "/logout" });
     } else {
-      headerItems.push({ label: "login/register", href: "/login" });
+      headerItems.push({ label: "Login/Register", href: "/login" });
     }
 
     return (

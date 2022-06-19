@@ -9,10 +9,8 @@ import {
     IconButton,
     MenuItem,
     SwipeableDrawer,
-    Input
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
-import SearchIcon from '@mui/icons-material/Search';
 import { ReactComponent as InspireLogo } from '../common/assets/logo.svg'
 import SearchBar from './SearchBar';
 
@@ -95,6 +93,7 @@ const Header = ({ headerItems }) => {
                         component: RouterLink,
                         to: href
                     }}
+                    style={{ textTransform: "none" }}
                 >
                     {label}
                 </Button>
@@ -125,7 +124,11 @@ const Header = ({ headerItems }) => {
                         key: label,
                     }}
                 >
-                    <MenuItem>{label}</MenuItem>
+                    <MenuItem
+                        style={{ textTransform: "none" }}
+                    >
+                        {label}
+                    </MenuItem>
                 </Link>
             );
         });
