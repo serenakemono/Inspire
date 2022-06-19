@@ -53,6 +53,7 @@ const ProfileHeader = ({
       console.log(error);
     })
     setHasFollowed(!hasFollowed);
+    window.location.reload();
   }
 
   const handleUnfollow = () => {
@@ -63,6 +64,7 @@ const ProfileHeader = ({
       console.log(error);
     })
     setHasFollowed(!hasFollowed);
+    window.location.reload();
   }
 
   return (
@@ -83,7 +85,9 @@ const ProfileHeader = ({
             <Grid item>
               <Item className="profile-name">{ user.username }</Item>
               <Item className="bio">{ user.bio }</Item>
-              <Item className="follower-stats">111 Followers 111 Following</Item>
+              <Item className="follower-stats">
+                {user.followers.length} Followers | {user.following.length} Following
+              </Item>
             </Grid>
           </Grid>
 
