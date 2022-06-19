@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
-import com.example.demo.serializers.CustomAppUserListSerializer;
-import com.example.demo.serializers.CustomPostListSerializer;
+import com.example.demo.serializers.CustomAppUserSetSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,7 +46,7 @@ public class AppUser implements UserDetails {
             joinColumns = @JoinColumn(referencedColumnName = "username"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
     )
-    @JsonSerialize(using = CustomAppUserListSerializer.class)
+    @JsonSerialize(using = CustomAppUserSetSerializer.class)
     private Set<AppUser> followers;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -56,11 +55,11 @@ public class AppUser implements UserDetails {
             joinColumns = @JoinColumn(referencedColumnName = "username"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "username")
     )
-    @JsonSerialize(using = CustomAppUserListSerializer.class)
+    @JsonSerialize(using = CustomAppUserSetSerializer.class)
     private Set<AppUser> following;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
-    private List<Post> posts;
+    private Set<Post> posts;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -196,11 +195,11 @@ public class AppUser implements UserDetails {
         this.following.remove(following);
     }
 
-    public List<Post> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
@@ -210,6 +209,22 @@ public class AppUser implements UserDetails {
 
     public void removePost(Post post) {
         this.posts.remove(post);
+    }
+
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
+    }
+
+    public void addLikedPost(Post post) {
+        this.likedPosts.add(post);
+    }
+
+    public void removeLikedPost(Post post) {
+        this.likedPosts.remove(post);
     }
 
     @Override

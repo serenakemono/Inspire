@@ -12,15 +12,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CustomAppUserListSerializer extends StdSerializer<Set<AppUser>> {
+public class CustomAppUserSetSerializer extends StdSerializer<Set<AppUser>> {
 
     private static Set<AppUser> users =new HashSet<AppUser>();
 
-    public CustomAppUserListSerializer() {
+    public CustomAppUserSetSerializer() {
         this(null);
     }
 
-    protected CustomAppUserListSerializer(Class<Set<AppUser>> t) {
+    protected CustomAppUserSetSerializer(Class<Set<AppUser>> t) {
         super(t);
     }
 

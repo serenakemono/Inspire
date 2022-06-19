@@ -51,15 +51,19 @@ public class PostServices {
         return postRepository.getById(id);
     }
 
+    @Transactional
     public void likePost(String username, Long id) {
         AppUser appUser = appUserRepository.getById(username);
         Post post = postRepository.getById(id);
         post.addLiker(appUser);
+        appUser.addLikedPost(post);
     }
 
+    @Transactional
     public void unlikePost(String username, Long id) {
         AppUser appUser = appUserRepository.getById(username);
         Post post = postRepository.getById(id);
         post.removeLiker(appUser);
+        appUser.removeLikedPost(post);
     }
 }

@@ -37,7 +37,9 @@ const MainBodyDisplay = ({
         </TabPanel>
         <TabPanel tab={tab} index={2}>tags detail</TabPanel>
         <TabPanel tab={tab} index={3}>Collections detail</TabPanel>
-        <TabPanel tab={tab} index={4}>Likes detail</TabPanel>
+        <TabPanel tab={tab} index={4}>
+            <PostsDisplay posts={user.likedPosts} />
+        </TabPanel>
         <TabPanel tab={tab} index={5}>
             <ProfileSocialTab user={user} />
         </TabPanel>

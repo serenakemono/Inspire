@@ -79,6 +79,7 @@ public class PostController {
     @PutMapping(path="/{username}/like/post/{id}")
     public void likePost(
             @PathVariable("username") String username, @PathVariable("id") Long id) {
+        System.out.println("user " + username + "liked post " + id);
         postServices.likePost(username, id);
     }
 

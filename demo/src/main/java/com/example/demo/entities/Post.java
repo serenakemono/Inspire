@@ -1,6 +1,6 @@
 package com.example.demo.entities;
 
-import com.example.demo.serializers.CustomAppUserListSerializer;
+import com.example.demo.serializers.CustomAppUserSetSerializer;
 import com.example.demo.serializers.CustomAppUserSerializer;
 import com.example.demo.serializers.CustomTagListSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -66,8 +66,8 @@ public class Post implements Comparable<Post> {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "username")
     )
-    @JsonSerialize(using = CustomAppUserListSerializer.class)
-    private List<AppUser> likers;
+    @JsonSerialize(using = CustomAppUserSetSerializer.class)
+    private Set<AppUser> likers;
 
     public Post() {}
 
@@ -166,11 +166,11 @@ public class Post implements Comparable<Post> {
         this.tags = tags;
     }
 
-    public List<AppUser> getLikers() {
+    public Set<AppUser> getLikers() {
         return likers;
     }
 
-    public void setLikers(List<AppUser> likers) {
+    public void setLikers(Set<AppUser> likers) {
         this.likers = likers;
     }
 
