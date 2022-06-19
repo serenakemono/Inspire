@@ -1,5 +1,6 @@
-package com.example.demo.entities;
+package com.example.demo.serializers;
 
+import com.example.demo.entities.Tag;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -9,30 +10,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomPostListSerializer extends StdSerializer<List<Post>> {
+public class CustomTagListSerializer extends StdSerializer<List<Tag>> {
 
-    private static List<Post> posts =new ArrayList<Post>();
+    private static List<Tag> tags =new ArrayList<Tag>();
 
-    public CustomPostListSerializer() {
+    public CustomTagListSerializer() {
         this(null);
     }
 
-    protected CustomPostListSerializer(Class<List<Post>> t) {
+    protected CustomTagListSerializer(Class<List<Tag>> t) {
         super(t);
     }
 
 
     @Override
     public void serialize(
-            List<Post> posts,
+            List<Tag> tags,
             JsonGenerator generator,
             SerializerProvider provider)
             throws IOException, JsonProcessingException {
 
-        List<Long> ids = new ArrayList<>();
-        for (Post post : posts) {
-            ids.add(post.getId());
+        List<String> tagnames = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagnames.add(tag.getTagname());
         }
-        generator.writeObject(ids);
+        generator.writeObject(tagnames);
     }
 }

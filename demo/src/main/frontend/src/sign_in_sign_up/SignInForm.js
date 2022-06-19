@@ -33,8 +33,6 @@ const SignInForm = ({ setIsSignIn }) => {
         });
         setLoginStatus(defaultLoginStatus);
     };
-
-    const [token, setToken] = useState('');
     
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.AppUser;
 import com.example.demo.entities.Post;
 import com.example.demo.entities.Image;
 import com.example.demo.entities.Tag;
+import com.example.demo.services.AppUserServices;
 import com.example.demo.services.PostServices;
 import com.example.demo.services.TagServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,16 @@ public class PostController {
 
     private final PostServices postServices;
     private final TagServices tagServices;
+    private final AppUserServices appUserServices;
 
     @Autowired
-    public PostController(PostServices postServices, TagServices tagServices) {
+    public PostController(
+            PostServices postServices,
+            TagServices tagServices,
+            AppUserServices appUserServices) {
         this.postServices = postServices;
         this.tagServices = tagServices;
+        this.appUserServices = appUserServices;
     }
 
     @GetMapping(path="/posts")
@@ -53,7 +60,9 @@ public class PostController {
             @RequestParam(required = false) MultipartFile file
     ) throws IOException {
         Post post = new Post();
-        post.setUsername(username);
+        AppUser appUser = appUserServices.getUser(username);
+        post.setAppUser(appUser);
+        post.setUsername(appUser.getUsername());
         post.setTimestamp(timestamp);
         post.setText(text);
         if (file!=null) {

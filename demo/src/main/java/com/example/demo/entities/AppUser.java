@@ -1,8 +1,8 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.CustomAppUserListSerializer;
+import com.example.demo.serializers.CustomPostListSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +58,9 @@ public class AppUser implements UserDetails {
     )
     @JsonSerialize(using = CustomAppUserListSerializer.class)
     private Set<AppUser> following;
+
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
@@ -182,6 +186,22 @@ public class AppUser implements UserDetails {
 
     public void removeFollowing(AppUser following) {
         this.following.remove(following);
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+    }
+
+    public void removePost(Post post) {
+        this.posts.remove(post);
     }
 
     @Override

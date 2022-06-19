@@ -1,5 +1,6 @@
-package com.example.demo.entities;
+package com.example.demo.serializers;
 
+import com.example.demo.entities.AppUser;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -7,32 +8,30 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class CustomTagListSerializer extends StdSerializer<List<Tag>> {
+public class CustomAppUserSerializer extends StdSerializer<AppUser> {
 
-    private static List<Tag> tags =new ArrayList<Tag>();
+    private static AppUser appUser = new AppUser();
 
-    public CustomTagListSerializer() {
+    public CustomAppUserSerializer() {
         this(null);
     }
 
-    protected CustomTagListSerializer(Class<List<Tag>> t) {
+    protected CustomAppUserSerializer(Class<AppUser> t) {
         super(t);
     }
 
 
     @Override
     public void serialize(
-            List<Tag> tags,
+            AppUser appUser,
             JsonGenerator generator,
             SerializerProvider provider)
             throws IOException, JsonProcessingException {
 
-        List<String> tagnames = new ArrayList<>();
-        for (Tag tag : tags) {
-            tagnames.add(tag.getTagname());
-        }
-        generator.writeObject(tagnames);
+        generator.writeObject(appUser.getUsername());
     }
 }

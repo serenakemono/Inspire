@@ -1,5 +1,6 @@
-package com.example.demo.entities;
+package com.example.demo.serializers;
 
+import com.example.demo.entities.AppUser;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;

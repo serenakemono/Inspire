@@ -1,25 +1,18 @@
 package com.example.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.demo.serializers.CustomAppUserSerializer;
+import com.example.demo.serializers.CustomTagListSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vladmihalcea.hibernate.type.array.ListArrayType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Arrays;
@@ -40,6 +33,10 @@ public class Post implements Comparable<Post> {
             generator = "post_sequence"
     )
     private Long id;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    @JsonSerialize(using = CustomAppUserSerializer.class)
+    private AppUser appUser;
     @Column
     private String username;
     @Column
@@ -64,36 +61,39 @@ public class Post implements Comparable<Post> {
 
     public Post(
             Long id,
-            String username,
+            AppUser appUser,
             Long timestamp,
             String text,
             byte[] image
     ) {
         this.id = id;
-        this.username = username;
+        this.appUser = appUser;
+        this.username = appUser.getUsername();
         this.timestamp = timestamp;
         this.text = text;
         this.image = image;
     }
 
     public Post(
-            String username,
+            AppUser appUser,
             Long timestamp,
             String text,
             byte[] image
     ) {
-        this.username = username;
+        this.appUser = appUser;
+        this.username = appUser.getUsername();
         this.timestamp = timestamp;
         this.text = text;
         this.image = image;
     }
 
     public Post(
-            String username,
+            AppUser appUser,
             Long timestamp,
             String text
     ) {
-        this.username = username;
+        this.appUser = appUser;
+        this.username = appUser.getUsername();
         this.timestamp = timestamp;
         this.text = text;
     }
@@ -104,6 +104,14 @@ public class Post implements Comparable<Post> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public String getUsername() {
@@ -160,7 +168,7 @@ public class Post implements Comparable<Post> {
         }
         return "Post {" +
                 "id='" + id + '\'' +
-                "username='" + username + '\'' +
+                "username='" + appUser.getUsername() + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", text='" + text + '\'' +
                 ", image='" + "image string" + '\'' +
