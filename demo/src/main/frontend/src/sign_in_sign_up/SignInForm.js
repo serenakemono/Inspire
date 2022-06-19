@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
@@ -8,6 +8,7 @@ import axios from '../api/axios';
 const SignInForm = ({ setIsSignIn }) => {
 
     const LOGIN_URL = '/auth/login'
+    const GET_USERNAME_URL = 'http://localhost:8080/api/v1/auth/userinfo'
     
     const defaultFormValues = {
         username: "",
@@ -32,29 +33,39 @@ const SignInForm = ({ setIsSignIn }) => {
         });
         setLoginStatus(defaultLoginStatus);
     };
+
+    const [token, setToken] = useState('');
     
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post(LOGIN_URL, formValues).
-            then((response) => {
-                if (response.data.token) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
-                }
-                setFormValues(defaultFormValues);
-                window.location.href = '/me';
-            }).
-            catch(function (error) {
-                console.log(error)
-                if (error.response) {
-                    console.log(error.response)
-                }
-                setLoginStatus({
-                    error: true,
-                    helperText: 'Wrong username or password.'
-                })
-            }
-        )
+        const login = async () => {
+            const res = await axios.post(LOGIN_URL, formValues);
+            localStorage.setItem("user", JSON.stringify(res.data));
+            setToken(res.data.token);
+        }
+
+        const storeInfo = async (token) => {
+            console.log(token);
+            const res = await axios.get(GET_USERNAME_URL,
+                { headers: { "Authorization": `Bearer ${token}` } });
+            console.log(res);
+            localStorage.setItem("info", JSON.stringify(res.data));
+        }
+
+        login().catch(error => {
+            console.log(error.reponse);
+            setLoginStatus({
+                error: true,
+                helperText: 'Wrong username or password.'
+            })
+            return;
+        })
+        storeInfo(token).catch(error => {
+            console.log(error);
+            return;
+        })
+        window.location.href = '/me';
     };
 
     return (

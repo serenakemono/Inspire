@@ -93,8 +93,6 @@ const SignUpForm = ({ setIsSignIn }) => {
                 }
             }
         )
-
-        setIsSignIn(true);
     };
 
     return (
@@ -257,8 +255,6 @@ const SignUpForm = ({ setIsSignIn }) => {
                     </Grid>
                 </form>
             </Box>
-            
-            
         </div>
     )
 }

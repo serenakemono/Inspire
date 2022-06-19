@@ -13,11 +13,7 @@ import PostCreationPopup from '../post_creation/PostCreationPopup';
 
 const SelfProfilePage = () => {
 
-    const currentUser = AuthService.getCurrUser();
-    const token = currentUser.token;
-
-    const GET_USER_INFO_URL
-        = 'http://localhost:8080/api/v1/auth/userinfo'
+    const GET_USER_INFO_URL = `http://localhost:8080/api/v1/user/`
 
     const [editMode, setEditMode] = useState(false);
     const [user, setUser] = useState(null);
@@ -26,20 +22,23 @@ const SelfProfilePage = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
+        if (AuthService.getCurrUser() == null) {
+            setSessionExpired(true);
+            AuthService.logout();
+            window.location.href = '/login';
+            return;
+        }
+
         const fetchUser = async () => {
-            const res = await axios.get(GET_USER_INFO_URL,
-                { headers: { "Authorization": `Bearer ${token}` } });
-            const newUser = {
-                username: res.data.username,
-                bio: res.data.bio,
-                email: res.data.email,
-            };
-            setUser(newUser);
+            const info = JSON.parse(localStorage.getItem('info'));
+            const username = info.username;
+            const res = await axios.get(GET_USER_INFO_URL + username);
+            setUser(res.data);
         }
 
         fetchUser().catch((error) => {
             setSessionExpired(true);
-            console.log(error);
+            AuthService.logout();
         });
     }, []);
 
@@ -61,8 +60,6 @@ const SelfProfilePage = () => {
     }, [user])
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
-    
-    if (!currentUser) return window.location.href = '/login';
 
     const handleEditProfile = () => {
         setEditMode(true);
@@ -93,6 +90,7 @@ const SelfProfilePage = () => {
                                     self={true}
                                     userImg={userImg}
                                     user={user}
+                                    currUser={user}
                                     handleEditProfile={handleEditProfile}
                                     editMode={editMode}
                                     tab={tab}

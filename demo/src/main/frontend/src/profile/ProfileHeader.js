@@ -17,6 +17,7 @@ const ProfileHeader = ({
 }) => {
 
   if (user === null) return;
+  if (currUser === null) return;
   
   const username = user.username;
   const bio = user.bio;
@@ -35,12 +36,14 @@ const ProfileHeader = ({
   const [hasFollowed, setHasFollowed] = useState(false);
   useEffect(() => {
     if (self) return;
-    if (user.following.includes(currUser)) {
+    console.log(currUser);
+    if (currUser.followers.includes(user.username)) {
+      console.log('following');
       setHasFollowed(true);
     }
   }, [])
 
-  const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser}/follow/${username}`;
+  const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/follow/${username}`;
   const handleStartFollowing = () => {
     const follow = async () => {
       await axios.put(FOLLOW_URL);
@@ -85,7 +88,6 @@ const ProfileHeader = ({
           }
 
           {self == false &&
-            
             <div>
             <Button
               variant="contained"

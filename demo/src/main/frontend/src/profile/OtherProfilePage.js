@@ -23,22 +23,28 @@ const OtherProfilePage = () => {
     const currentUser = AuthService.getCurrUser();
     const token = currentUser.token;
 
-    const GET_CURR_USER_INFO_URL = 'http://localhost:8080/api/v1/auth/userinfo';
+    const GET_USERNAME_URL = 'http://localhost:8080/api/v1/auth/userinfo';
+    const GET_USER_INFO_URL = `http://localhost:8080/api/v1/user/`;
     const GET_FRIEND_INFO_URL = `http://localhost:8080/api/v1/user/${username}`;
     const GET_POSTS_URL = `http://localhost:8080/api/v1/${username}/posts`;
     useEffect(() => {
         const fetch = async () => {
-            const res = await axios.get(GET_CURR_USER_INFO_URL,
+            const res = await axios.get(GET_USERNAME_URL,
                 { headers: { "Authorization": `Bearer ${token}` } });
-            setCurrUser(res.data.username);
+            const name = res.data.username;
+            if (name == username) {
+                window.location.href = 'http://localhost:3000/me';
+                return;
+            }
+            const info = await axios.get(GET_USER_INFO_URL + username);
+            setCurrUser(info.data);
         }
-        fetch();
+        fetch().catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     useEffect(() => {
-        if (currUser == username) {
-            window.location.href = 'http://localhost:3000/me';
-        }
         const fetchUser = async () => {
             const res = await axios.get(GET_FRIEND_INFO_URL);
             setUser(res.data);
@@ -92,7 +98,6 @@ const OtherProfilePage = () => {
                                         self={false}
                                         user={user}
                                         editMode={false}
-                                        handleEditProfile={()=>{}}
                                     />
                                 </div>
                             
