@@ -118,7 +118,7 @@ const ProfileHeader = ({
         </div>
       </div>
           
-      <ProfileHeaderTabs tab={tab} setTab={setTab} />
+      <ProfileHeaderTabs tab={tab} setTab={setTab} self={self} />
       
     </div>
   )

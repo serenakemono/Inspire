@@ -8,7 +8,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
-const ProfileHeaderTabs = ({ tab, setTab }) => {
+const ProfileHeaderTabs = ({ tab, setTab, self }) => {
 
     const handleTabs = (e, val) => {
         setTab(val);
@@ -46,16 +46,20 @@ const ProfileHeaderTabs = ({ tab, setTab }) => {
                     icon={<StarRoundedIcon />}
                     label="Collections"
                 />
-                <Tab
-                    style={tabStyles}
-                    icon={<FavoriteIcon />}
-                    label="Likes"
-                />
-                <Tab
-                    style={tabStyles}
-                    icon={<PeopleAltIcon />}
-                    label="Social"
-                />
+                {self &&
+                    <Tab
+                        style={tabStyles}
+                        icon={<FavoriteIcon />}
+                        label="Likes"
+                    />
+                }
+                {self &&
+                    <Tab
+                        style={tabStyles}
+                        icon={<PeopleAltIcon />}
+                        label="Social"
+                    />
+                }
             </Tabs>
         </div>
     )

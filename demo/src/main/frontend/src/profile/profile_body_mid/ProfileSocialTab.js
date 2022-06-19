@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tab, Tabs } from "@material-ui/core";
-import TabPanel from '../profile_pages/TabPanel';
+import TabPanel from './TabPanel';
 import UsersDisplay from './UsersDisplay';
 
 const ProfileSocialTab = ({ user }) => {
@@ -30,11 +30,11 @@ const ProfileSocialTab = ({ user }) => {
                     >
                         <Tab
                             style={tabStyles}
-                            label="Followers"
+                            label={user.following.length  + " Followers"}
                         />
                         <Tab
                             style={tabStyles}
-                            label="Following"
+                            label={user.following.length  + " Following"}
                         />
                     </Tabs>
                     <TabPanel tab={tab} index={0}>
