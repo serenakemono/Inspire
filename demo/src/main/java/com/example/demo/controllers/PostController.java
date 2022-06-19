@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,5 +74,17 @@ public class PostController {
             List<Tag> tags = tagServices.addPostToTags(tagnames, postId);
             postServices.setTags(tags, postId);
         }
+    }
+
+    @PutMapping(path="/{username}/like/post/{id}")
+    public void likePost(
+            @PathVariable("username") String username, @PathVariable("id") Long id) {
+        postServices.likePost(username, id);
+    }
+
+    @PutMapping(path="/{username}/unlike/post/{id}")
+    public void unlikePost(
+            @PathVariable("username") String username, @PathVariable("id") Long id) {
+        postServices.unlikePost(username, id);
     }
 }

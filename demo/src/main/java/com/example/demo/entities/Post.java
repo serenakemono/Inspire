@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.CustomAppUserListSerializer;
 import com.example.demo.serializers.CustomAppUserSerializer;
 import com.example.demo.serializers.CustomTagListSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -17,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -56,6 +58,16 @@ public class Post implements Comparable<Post> {
     )
     @JsonSerialize(using = CustomTagListSerializer.class)
     private List<Tag> tags;
+
+    @Column
+    @ManyToMany
+    @JoinTable(
+            name = "post_likers",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "username")
+    )
+    @JsonSerialize(using = CustomAppUserListSerializer.class)
+    private List<AppUser> likers;
 
     public Post() {}
 
@@ -152,6 +164,22 @@ public class Post implements Comparable<Post> {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public List<AppUser> getLikers() {
+        return likers;
+    }
+
+    public void setLikers(List<AppUser> likers) {
+        this.likers = likers;
+    }
+
+    public void addLiker(AppUser appUser) {
+        this.likers.add(appUser);
+    }
+
+    public void removeLiker(AppUser appUser) {
+        this.likers.remove(appUser);
     }
 
     @Override

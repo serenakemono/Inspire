@@ -62,6 +62,14 @@ public class AppUser implements UserDetails {
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Post> posts;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "liked_posts",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private Set<Post> likedPosts;
+
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }

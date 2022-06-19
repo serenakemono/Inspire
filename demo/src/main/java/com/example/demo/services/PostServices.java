@@ -18,10 +18,12 @@ import java.util.Optional;
 public class PostServices {
     @Autowired
     private final PostRepository postRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public PostServices(PostRepository postRepository) {
+    public PostServices(PostRepository postRepository, AppUserRepository appUserRepository) {
         this.postRepository = postRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public List<Post> getPostsByUsername(String username) {
@@ -47,5 +49,17 @@ public class PostServices {
 
     public Post getPostById(Long id) {
         return postRepository.getById(id);
+    }
+
+    public void likePost(String username, Long id) {
+        AppUser appUser = appUserRepository.getById(username);
+        Post post = postRepository.getById(id);
+        post.addLiker(appUser);
+    }
+
+    public void unlikePost(String username, Long id) {
+        AppUser appUser = appUserRepository.getById(username);
+        Post post = postRepository.getById(id);
+        post.removeLiker(appUser);
     }
 }
