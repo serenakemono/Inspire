@@ -88,4 +88,9 @@ public class PostController {
             @PathVariable("username") String username, @PathVariable("id") Long id) {
         postServices.unlikePost(username, id);
     }
+
+    @GetMapping(path="/posts/following")
+    public List<Post> getPostsFromFollowing(@RequestParam List<String> following) {
+        return postServices.getPostsFromFollowing(following);
+    }
 }

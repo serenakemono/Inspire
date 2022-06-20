@@ -3,47 +3,27 @@ import AuthService from '../authentication/AuthService'
 import PostsDisplay from '../posts_display/PostsDisplay';
 import PostCreationCard from '../post_creation/PostCreationCard';
 import axios from 'axios';
-import { Functions } from '@material-ui/icons';
 
-const HomePage = () => {
+const CommunityPage = () => {
 
-    const GET_FOLLOWING_URL = 'http://localhost:8080/api/v1/user/'
-    const GET_POSTS_URL = 'http://localhost:8080/api/v1/posts/following';
+    const GET_POSTS_URL = 'http://localhost:8080/api/v1/posts';
     const [posts, setPosts] = useState([]);
-    const [following, setFollowing] = useState([]);
 
     useEffect(() => {
 
         const currentUser = AuthService.getCurrUser();
         if (!currentUser) return window.location.href = '/login';
 
-        const fetchUser = async () => {
-            const username = JSON.parse(localStorage.getItem('info')).username;
-            const res = await axios.get(GET_FOLLOWING_URL + username);
-            console.log(res.data.following);
-            setFollowing(res.data.following);
-        }
+        console.log(currentUser);
 
-        fetchUser().catch((error) => console.log(error));
-    }, [])
-
-    var qs = require('qs');
-    useEffect(() => {
-        if (following == []) return;
-
-        const fetchPosts = async () => {
-            const res = await axios.get(GET_POSTS_URL, {
-                'params': { 'following': following },
-                'paramsSerializer': function (params) {
-                    return qs.stringify(params, {arrayFormat: 'repeat'})
+        axios.get(GET_POSTS_URL)
+            .then((response) => {
+                if (response.data) {
+                    setPosts(response.data);
                 }
-
-            });
-            setPosts(res.data);
-        }
-        
-        fetchPosts().catch((error) => { console.log(error) })
-    }, [following])
+            })
+            .catch((error) => { console.log(error) })
+    }, [])
 
     return (
         <div className="maincontainer">
@@ -70,4 +50,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default CommunityPage

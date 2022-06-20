@@ -3,6 +3,7 @@ import './common/assets/App.css';
 import Header from './header/Header';
 import Missing from './common/Missing';
 import HomePage from './home/HomePage';
+import CommunityPage from './community/CommunityPage';
 
 import React, { useState, useEffect, Component } from 'react';
 import { Route, Routes, useHistory } from 'react-router-dom';
@@ -80,7 +81,8 @@ class App extends Component {
         <Routes>
           <Route exact path="feed" element={<HomePage />} />
           <Route path={"feed/hashtag/:tagname"} element={<TagPage />} />
-          <Route path={"me"} element={<SelfProfilePage />} />
+          <Route path="community" element={<CommunityPage />} />
+          <Route path="me" element={<SelfProfilePage />} />
           <Route path={"user/:username"} element={<OtherProfilePage />} />
           <Route path="logout" element={<LogoutPage />} />
           {/* <Route path="getinspired" element={<GetInspired />} />

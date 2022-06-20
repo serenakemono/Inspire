@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +29,16 @@ public class PostServices {
 
     public List<Post> getPostsByUsername(String username) {
         List<Post> posts = postRepository.findAllByUsername(username);
+        Collections.reverse(posts);
+        return posts;
+    }
+
+    public List<Post> getPostsFromFollowing(List<String> following) {
+        List<Post> posts = new ArrayList<>();
+        for (String username : following) {
+            posts.addAll(postRepository.findAllByUsername(username));
+        }
+        Collections.sort(posts);
         Collections.reverse(posts);
         return posts;
     }
