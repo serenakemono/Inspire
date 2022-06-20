@@ -14,8 +14,6 @@ const CommunityPage = () => {
         const currentUser = AuthService.getCurrUser();
         if (!currentUser) return window.location.href = '/login';
 
-        console.log(currentUser);
-
         axios.get(GET_POSTS_URL)
             .then((response) => {
                 if (response.data) {

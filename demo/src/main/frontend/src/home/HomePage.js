@@ -22,6 +22,7 @@ const HomePage = () => {
             const res = await axios.get(GET_FOLLOWING_URL + username);
             console.log(res.data.following);
             setFollowing(res.data.following);
+            setFollowing(oldArray => [...oldArray, username]);
         }
 
         fetchUser().catch((error) => console.log(error));

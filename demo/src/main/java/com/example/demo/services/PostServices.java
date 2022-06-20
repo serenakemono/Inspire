@@ -55,7 +55,9 @@ public class PostServices {
     }
 
     public List<Post> getPosts() {
-        return postRepository.findAll();
+        List<Post> posts = postRepository.findAll();
+        Collections.reverse(posts);
+        return posts;
     }
 
     public Post getPostById(Long id) {

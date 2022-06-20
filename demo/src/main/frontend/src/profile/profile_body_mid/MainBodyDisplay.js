@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import PostsDisplay from '../../posts_display/PostsDisplay';
 import TabPanel from './TabPanel';
@@ -24,7 +24,7 @@ const MainBodyDisplay = ({
                 windowStates={windowStates}
                 setWindowState={setWindowState}
             />
-            <PostsDisplay posts={user.posts} />
+            <PostsDisplay posts={user.posts.reverse()} />
         </TabPanel>
         <TabPanel tab={tab} index={1}>
             <PostCreationCard
