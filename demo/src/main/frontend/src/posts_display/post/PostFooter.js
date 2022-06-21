@@ -12,15 +12,20 @@ const PostFooter = ({ post }) => {
 
     const [username, setUsername] = useState(null);
     const [liked, setLiked] = useState(false);
+    const [collected, setCollected] = useState(false);
     
     useEffect(() => {
-        console.log('liked: ' + liked);
         const name = JSON.parse(localStorage.getItem("info")).username;
         setUsername(name);
         if (post.likers.includes(name)) {
             setLiked(true);
         } else {
             setLiked(false);
+        }
+        if (post.collectors.includes(name)) {
+            setCollected(true);
+        } else {
+            setCollected(false);
         }
     }, [])
 
@@ -48,6 +53,30 @@ const PostFooter = ({ post }) => {
         })
     }
 
+    const handleCollect = () => {
+        const collect = async () => {
+            const res = await axios.put(`http://localhost:8080/api/v1/${username}/collect/post/${post.id}`);
+            console.log(res);
+            setCollected(true);
+        }
+
+        collect().catch((error) => {
+            console.log(error);
+        })
+    }
+
+    const handleUncollect = () => {
+        const uncollect = async () => {
+            const res = await axios.put(`http://localhost:8080/api/v1/${username}/uncollect/post/${post.id}`);
+            console.log(res);
+            setCollected(false);
+        }
+
+        uncollect().catch((error) => {
+            console.log(error);
+        })
+    }
+
     return (
         <div className="card-footer">
             <Stack direction="row" spacing={2}>
@@ -68,7 +97,8 @@ const PostFooter = ({ post }) => {
                 </Button>
                 <Button
                     style={{ textTransform: 'none' }}
-                    startIcon={<StarRoundedIcon />}
+                    startIcon={collected ? <StarRoundedIcon style={{ color: "#F6BD60" }} /> : <StarRoundedIcon />}
+                    onClick={collected ? ()=>handleUncollect() : ()=>handleCollect()}
                     className="text-muted"
                 >
                     Favorite

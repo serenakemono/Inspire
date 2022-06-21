@@ -69,6 +69,14 @@ public class AppUser implements UserDetails {
     )
     private Set<Post> likedPosts;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "collected_posts",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private Set<Post> collectedPosts;
+
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
@@ -225,6 +233,22 @@ public class AppUser implements UserDetails {
 
     public void removeLikedPost(Post post) {
         this.likedPosts.remove(post);
+    }
+
+    public Set<Post> getCollectedPosts() {
+        return collectedPosts;
+    }
+
+    public void setCollectedPosts(Set<Post> collectedPosts) {
+        this.collectedPosts = collectedPosts;
+    }
+
+    public void addCollectedPost(Post post) {
+        this.collectedPosts.add(post);
+    }
+
+    public void removeCollectedPost(Post post) {
+        this.collectedPosts.remove(post);
     }
 
     @Override

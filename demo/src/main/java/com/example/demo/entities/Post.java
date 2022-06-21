@@ -69,6 +69,16 @@ public class Post implements Comparable<Post> {
     @JsonSerialize(using = CustomAppUserSetSerializer.class)
     private Set<AppUser> likers;
 
+    @Column
+    @ManyToMany
+    @JoinTable(
+            name = "post_collectors",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "username")
+    )
+    @JsonSerialize(using = CustomAppUserSetSerializer.class)
+    private Set<AppUser> collectors;
+
     public Post() {}
 
     public Post(
@@ -180,6 +190,22 @@ public class Post implements Comparable<Post> {
 
     public void removeLiker(AppUser appUser) {
         this.likers.remove(appUser);
+    }
+
+    public Set<AppUser> getCollectors() {
+        return collectors;
+    }
+
+    public void setCollectors(Set<AppUser> collectors) {
+        this.collectors = collectors;
+    }
+
+    public void addCollector(AppUser appUser) {
+        this.collectors.add(appUser);
+    }
+
+    public void removeCollector(AppUser appUser) {
+        this.collectors.remove(appUser);
     }
 
     @Override

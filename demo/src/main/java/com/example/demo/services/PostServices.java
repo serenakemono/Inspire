@@ -79,4 +79,20 @@ public class PostServices {
         post.removeLiker(appUser);
         appUser.removeLikedPost(post);
     }
+
+    @Transactional
+    public void collectPost(String username, Long id) {
+        AppUser appUser = appUserRepository.getById(username);
+        Post post = postRepository.getById(id);
+        post.addCollector(appUser);
+        appUser.addCollectedPost(post);
+    }
+
+    @Transactional
+    public void uncollectPost(String username, Long id) {
+        AppUser appUser = appUserRepository.getById(username);
+        Post post = postRepository.getById(id);
+        post.removeCollector(appUser);
+        appUser.removeCollectedPost(post);
+    }
 }

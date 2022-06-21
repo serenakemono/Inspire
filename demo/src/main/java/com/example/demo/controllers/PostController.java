@@ -79,7 +79,6 @@ public class PostController {
     @PutMapping(path="/{username}/like/post/{id}")
     public void likePost(
             @PathVariable("username") String username, @PathVariable("id") Long id) {
-        System.out.println("user " + username + "liked post " + id);
         postServices.likePost(username, id);
     }
 
@@ -87,6 +86,18 @@ public class PostController {
     public void unlikePost(
             @PathVariable("username") String username, @PathVariable("id") Long id) {
         postServices.unlikePost(username, id);
+    }
+
+    @PutMapping(path="/{username}/collect/post/{id}")
+    public void collectPost(
+            @PathVariable("username") String username, @PathVariable("id") Long id) {
+        postServices.collectPost(username, id);
+    }
+
+    @PutMapping(path="/{username}/uncollect/post/{id}")
+    public void uncollectPost(
+            @PathVariable("username") String username, @PathVariable("id") Long id) {
+        postServices.uncollectPost(username, id);
     }
 
     @GetMapping(path="/posts/following")
