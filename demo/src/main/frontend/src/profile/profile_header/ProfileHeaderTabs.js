@@ -31,11 +31,11 @@ const ProfileHeaderTabs = ({ tab, setTab, self }) => {
                     icon={<PhotoLibraryRoundedIcon />}
                     label="Posts"
                 />
-                <Tab
+                {/* <Tab
                     style={tabStyles}
                     icon={<ForumRoundedIcon />}
                     label="Discussions"
-                />
+                /> */}
                 <Tab
                     style={tabStyles}
                     icon={<StyleRoundedIcon />}

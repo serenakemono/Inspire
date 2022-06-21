@@ -26,7 +26,7 @@ const MainBodyDisplay = ({
             />
             <PostsDisplay posts={user.posts.reverse()} />
         </TabPanel>
-        <TabPanel tab={tab} index={1}>
+        {/* <TabPanel tab={tab} index={1}>
             <PostCreationCard
                 userImg={userImg}
                 setPopup={setPopup}
@@ -34,15 +34,15 @@ const MainBodyDisplay = ({
                 setWindowState={setWindowState}
             />
             <div>No discussions to display.</div>
-        </TabPanel>
-        <TabPanel tab={tab} index={2}>tags detail</TabPanel>
-        <TabPanel tab={tab} index={3}>
+        </TabPanel> */}
+        <TabPanel tab={tab} index={1}>tags detail</TabPanel>
+        <TabPanel tab={tab} index={2}>
             <PostsDisplay posts={user.collectedPosts.reverse()} />
         </TabPanel>
-        <TabPanel tab={tab} index={4}>
+        <TabPanel tab={tab} index={3}>
             <PostsDisplay posts={user.likedPosts.reverse()} />
         </TabPanel>
-        <TabPanel tab={tab} index={5}>
+        <TabPanel tab={tab} index={4}>
             <ProfileSocialTab user={user} />
         </TabPanel>
     </>)

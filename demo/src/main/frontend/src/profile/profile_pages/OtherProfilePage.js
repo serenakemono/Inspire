@@ -9,6 +9,7 @@ import ProfileCard from '../profile_body_left/ProfileCard';
 import PostsDisplay from '../../posts_display/PostsDisplay';
 import ProfileLatestPics from '../profile_body_right/ProfileLatestPics';
 import ProfileSuggestions from '../profile_body_right/ProfileSuggestions';
+import MainBodyDisplay from '../profile_body_mid/MainBodyDisplay';
 
 const OtherProfilePage = () => {
 
@@ -78,7 +79,11 @@ const OtherProfilePage = () => {
                                 </div>
                             
                                 <div className="col-md-8 col-xl-6 middle-wrapper">
-                                    <PostsDisplay posts={posts} />
+                                    <MainBodyDisplay
+                                        tab={tab}
+                                        user={user}
+                                        self={false}
+                                    />
                                 </div>
                             
                                 <div className="d-none d-xl-block col-xl-3 right-wrapper">
