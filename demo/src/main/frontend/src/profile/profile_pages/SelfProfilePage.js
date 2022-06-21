@@ -9,6 +9,7 @@ import AuthService from '../../authentication/AuthService';
 import axios from 'axios'
 import PostCreationPopup from '../../post_creation/PostCreationPopup';
 import MainBodyDisplay from '../profile_body_mid/MainBodyDisplay';
+import UpdateDpPopup from '../profile_header/UpdateDpPopup';
 
 const SelfProfilePage = () => {
 
@@ -48,7 +49,8 @@ const SelfProfilePage = () => {
     }
 
     const [popup, setPopup] = useState(false);
-    const duringPopup = popup ? "during-popup" : ""
+    const [dpPopup, setDpPopup] = useState(false);
+    const duringPopup = popup ? "during-popup" : (dpPopup ? "during-popup" : "")
 
     const windowStates = {
         create_post: "create a post",
@@ -76,6 +78,7 @@ const SelfProfilePage = () => {
                                     editMode={editMode}
                                     tab={tab}
                                     setTab={setTab}
+                                    setDpPopup={setDpPopup}
                                 />
                             </div>
                         </div>
@@ -116,8 +119,11 @@ const SelfProfilePage = () => {
                 windowState={windowState}
                 windowStates={windowStates}
                 setWindowState={setWindowState}
-                userImg={userImg}
                 user={user}
+            />}
+            {dpPopup && <UpdateDpPopup
+                setDpPopup={setDpPopup}
+                username={user.username}
             />}
         </div>
     )

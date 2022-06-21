@@ -16,15 +16,26 @@ const MainBodyDisplay = ({
 
     const userImg = "https://i.pinimg.com/736x/1a/55/23/1a5523ed77eae11f78d73dd3864c4379.jpg"
 
+    const [posts, setPosts] = useState([]);
+    const [collectedPosts, setCollectedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
+
+    useEffect(() => {
+        if (user == null) return;
+        setPosts([...user.posts].sort((a, b) => b.id - a.id));
+        setCollectedPosts([...user.collectedPosts].sort((a, b) => b.id - a.id));
+        setLikedPosts([...user.likedPosts].sort((a, b) => b.id - a.id));
+    }, [user])
+
     return (user != null && <>
         <TabPanel tab={tab} index={0}>
             <PostCreationCard
-                userImg={userImg}
+                userImg={user.dp}
                 setPopup={setPopup}
                 windowStates={windowStates}
                 setWindowState={setWindowState}
             />
-            <PostsDisplay posts={user.posts.reverse()} />
+            <PostsDisplay posts={posts} />
         </TabPanel>
         {/* <TabPanel tab={tab} index={1}>
             <PostCreationCard
@@ -37,10 +48,10 @@ const MainBodyDisplay = ({
         </TabPanel> */}
         <TabPanel tab={tab} index={1}>tags detail</TabPanel>
         <TabPanel tab={tab} index={2}>
-            <PostsDisplay posts={user.collectedPosts.reverse()} />
+            <PostsDisplay posts={collectedPosts} />
         </TabPanel>
         <TabPanel tab={tab} index={3}>
-            <PostsDisplay posts={user.likedPosts.reverse()} />
+            <PostsDisplay posts={likedPosts} />
         </TabPanel>
         <TabPanel tab={tab} index={4}>
             <ProfileSocialTab user={user} />

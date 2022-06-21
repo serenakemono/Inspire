@@ -10,7 +10,6 @@ const PostCreationPopup = ({
     windowState,
     windowStates,
     setWindowState,
-    userImg,
     user
 }) => {
 
@@ -55,7 +54,6 @@ const PostCreationPopup = ({
         <div className={PopUp}>
             {(windowState === windowStates.create_post) && (<CreatePostState
                 user={user}
-                userImg={userImg}
                 setPopup={setPopup}
                 handleClose={handleClose}
                 windowStates={windowStates}

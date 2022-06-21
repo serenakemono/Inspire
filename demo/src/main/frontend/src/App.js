@@ -50,22 +50,22 @@ class App extends Component {
           label: "Home",
           href: "/feed"
       },
-      {
-          label: "Get Inspired",
-          href: "/getinspired"
-      },
+      // {
+      //     label: "Get Inspired",
+      //     href: "/getinspired"
+      // },
       {
           label: "Community",
           href: "/community"
       },
-      {
-          label: "Messages",
-          href: "/messages"
-      },
-      {
-          label: "Courses",
-          href: "/courses"
-      }
+      // {
+      //     label: "Messages",
+      //     href: "/messages"
+      // },
+      // {
+      //     label: "Courses",
+      //     href: "/courses"
+      // }
     ];
     
     if (currUser) {

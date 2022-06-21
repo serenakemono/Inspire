@@ -33,7 +33,7 @@ const CommunityPage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <PostCreationCard />
+                            {/* <PostCreationCard /> */}
                             <PostsDisplay posts={posts} />
                         </div>
                     

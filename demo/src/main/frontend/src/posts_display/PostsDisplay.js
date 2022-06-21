@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Feed from './Feed'
 
 const PostsDisplay = ({ posts }) => {
@@ -10,7 +10,7 @@ const PostsDisplay = ({ posts }) => {
     return (
         <div className="row">
             {posts.length ? (
-                <Feed posts={ posts } userImg={ userImg } />
+                <Feed posts={ posts } />
             ) : (
                 <p>No posts to display.</p>
             )}

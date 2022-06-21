@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.entities.AppUser;
 import com.example.demo.services.AppUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -58,6 +62,14 @@ public class AppUserController {
             @RequestBody AppUser user) {
         System.out.println(user);
         appUserServices.updateUser(username, user);
+    }
+
+    @PutMapping(path="{username}/dp")
+    public void updateDp(
+            @PathVariable("username") String username,
+            @RequestParam(required = true) MultipartFile file
+    ) throws IOException {
+        appUserServices.updateDp(username, file);
     }
 
     @PutMapping(path="{follower}/follow/{following}")

@@ -1,8 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Menu, MenuItem, IconButton } from '@material-ui/core'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
+import axios from 'axios';
 
-const PostHeader = ({post, userImg}) => {
+const PostHeader = ({ post }) => {
+    
+    const GET_USER_URL = "http://localhost:8080/api/v1/user/"
+    const [dp, setDp] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(GET_USER_URL + post.username);
+            setDp(res.data.dp);
+        }
+        fetchUser().catch(error => {
+            console.log(error);
+        })
+    }, [])
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -36,7 +50,7 @@ const PostHeader = ({post, userImg}) => {
                 }}>
                     <img
                         className="img-xs rounded-circle"
-                        src={userImg}
+                        src={`data:image/jpeg;base64,${dp}`}
                         alt=""
                         onClick={() => {
                             window.location.href = `http://localhost:3000/user/${post.username}`

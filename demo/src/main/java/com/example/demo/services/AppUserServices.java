@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -158,5 +160,16 @@ public class AppUserServices implements UserDetailsService {
         }
         followerOptional.get().removeFollowing(followingOptional.get());
         followingOptional.get().removeFollower(followerOptional.get());
+    }
+
+    @Transactional
+    public void updateDp(String username, MultipartFile file) throws IOException {
+        Optional<AppUser> userOptional = userRepo.findAppUserByUsername(username);
+        if (userOptional.isEmpty()) {
+            throw new IllegalStateException(
+                    "User with username " + username + " does not exist.");
+        }
+        AppUser appUser = userOptional.get();
+        appUser.setDp(file.getBytes());
     }
 }

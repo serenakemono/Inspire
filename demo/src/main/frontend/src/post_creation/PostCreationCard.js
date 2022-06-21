@@ -33,7 +33,7 @@ const PostCreationCard = ({
                     alignItems: "center",
                     paddingBottom: "15px"
                 }}>
-                    <img className="img-xs rounded-circle" src={userImg} alt="" />
+                    <img className="img-xs rounded-circle" src={`data:image/jpeg;base64,${userImg}`} alt="" />
                     <button className="btn-create-post" onClick={handleCreate}>
                         Feeling inspired today?
                     </button>

@@ -6,7 +6,6 @@ import axios from 'axios'
 
 import ProfileHeader from '../profile_header/ProfileHeader';
 import ProfileCard from '../profile_body_left/ProfileCard';
-import PostsDisplay from '../../posts_display/PostsDisplay';
 import ProfileLatestPics from '../profile_body_right/ProfileLatestPics';
 import ProfileSuggestions from '../profile_body_right/ProfileSuggestions';
 import MainBodyDisplay from '../profile_body_mid/MainBodyDisplay';

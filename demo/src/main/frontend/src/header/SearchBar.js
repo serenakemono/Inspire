@@ -22,7 +22,7 @@ const SearchBar = () => {
             paddingTop: '0.1rem',
             paddingBottom: '0.1rem',
             marginRight: 0,
-            marginLeft: 0,
+            marginLeft: "-25rem",
             height: '2.35rem',
             width: '20rem',
             backgroundColor: '#eeeeee',

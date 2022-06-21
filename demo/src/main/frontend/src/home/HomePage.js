@@ -11,21 +11,23 @@ const HomePage = () => {
     const GET_POSTS_URL = 'http://localhost:8080/api/v1/posts/following';
     const [posts, setPosts] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [userImg, setUserImg] = useState([]);
 
     useEffect(() => {
 
         const currentUser = AuthService.getCurrUser();
         if (!currentUser) return window.location.href = '/login';
 
-        const fetchUser = async () => {
+        const fetchFollowings = async () => {
             const username = JSON.parse(localStorage.getItem('info')).username;
             const res = await axios.get(GET_FOLLOWING_URL + username);
             console.log(res.data.following);
             setFollowing(res.data.following);
             setFollowing(oldArray => [...oldArray, username]);
+            setUserImg(res.data.dp);
         }
 
-        fetchUser().catch((error) => console.log(error));
+        fetchFollowings().catch((error) => console.log(error));
     }, [])
 
     var qs = require('qs');
@@ -56,7 +58,7 @@ const HomePage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <PostCreationCard />
+                            <PostCreationCard userImg={userImg} />
                             <PostsDisplay posts={posts} />
                         </div>
                     

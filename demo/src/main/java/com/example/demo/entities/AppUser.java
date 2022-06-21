@@ -31,6 +31,7 @@ public class AppUser implements UserDetails {
     private String bio;
     private Long timestampForRegistration;
     private boolean enabled = true;
+    private byte[] dp;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -162,6 +163,13 @@ public class AppUser implements UserDetails {
         this.timestampForRegistration = timestampForRegistration;
     }
 
+    public byte[] getDp() {
+        return dp;
+    }
+
+    public void setDp(byte[] dp) {
+        this.dp = dp;
+    }
 
     public void setEnabled(boolean b) {
         this.enabled = b;

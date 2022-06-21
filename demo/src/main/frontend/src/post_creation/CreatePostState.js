@@ -85,7 +85,11 @@ const CreatePostState = ({
                 alignItems: "center",
                 marginBottom: "10px"
             }}>
-                <img className="img-xs rounded-circle" src={userImg} alt="" />
+                <img
+                    className="img-xs rounded-circle"
+                    src={`data:image/jpeg;base64,${user.dp}`}
+                    alt=""
+                />
                 <div style={{marginLeft:"10px"}}>{ user.username }</div>
             </div>
             <form>

@@ -3,12 +3,12 @@ import PostBody from './PostBody'
 import PostFooter from './PostFooter'
 import PostHeader from './PostHeader'
 
-const Post = ({post, userImg}) => {
+const Post = ({post}) => {
 
   return (
     <div className="col-md-12 grid-margin">
       <div className="card rounded">
-        <PostHeader post={post} userImg={userImg} />
+        <PostHeader post={post} />
         <PostBody post={post} />
         <PostFooter post={post} />
       </div>

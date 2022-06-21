@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Tab, Tabs, Grid, makeStyles } from "@material-ui/core"
+import { Button, Grid, makeStyles } from "@material-ui/core"
 import Item from "@material-ui/core/ListItem"
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -14,7 +14,8 @@ const ProfileHeader = ({
   user,
   handleEditProfile,
   tab,
-  setTab
+  setTab,
+  setDpPopup
 }) => {
 
   if (user === null) return;
@@ -31,8 +32,13 @@ const ProfileHeader = ({
         backgroundColor: "#e51b23"
       }
     },
+    profile_pic: {
+      borderRadius: "50%",
+      width: "6rem",
+      height: "6rem"
+    }
   }))
-  const { buttons } = useStyles();
+  const { buttons, profile_pic } = useStyles();
 
   const [hasFollowed, setHasFollowed] = useState(false);
   useEffect(() => {
@@ -44,6 +50,10 @@ const ProfileHeader = ({
 
   const FOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/follow/${user.username}`;
   const UNFOLLOW_URL = `http://localhost:8080/api/v1/${currUser.username}/unfollow/${user.username}`;
+  
+  const handleUpdateDpPopup = () => {
+    setDpPopup(true);
+  }
   
   const handleStartFollowing = () => {
     const follow = async () => {
@@ -80,7 +90,19 @@ const ProfileHeader = ({
           }}>
           <Grid container spacing={2}>
             <Grid item>
-              <img className="profile-pic" src={userImg} alt="profile" />
+              <img
+                className="img-xs rounded-circle"
+                style={{width: "100px", height: "100px"}}
+                src={`data:image/jpeg;base64,${user.dp}`}
+                alt="profile"
+                onClick={self ? handleUpdateDpPopup : null}
+              />
+              {/* <img
+                className="profile-pic"
+                src={userImg}
+                alt="profile"
+                
+              /> */}
             </Grid>
             <Grid item>
               <Item className="profile-name">{ user.username }</Item>
