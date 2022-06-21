@@ -78,6 +78,14 @@ public class AppUser implements UserDetails {
     )
     private Set<Post> collectedPosts;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "followed_tags",
+            joinColumns = @JoinColumn(referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "tagname")
+    )
+    private Set<Tag> followedTags;
+
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
@@ -257,6 +265,22 @@ public class AppUser implements UserDetails {
 
     public void removeCollectedPost(Post post) {
         this.collectedPosts.remove(post);
+    }
+
+    public Set<Tag> getFollowedTags() {
+        return followedTags;
+    }
+
+    public void setFollowedTags(Set<Tag> followedTags) {
+        this.followedTags = followedTags;
+    }
+
+    public void addFollowedTag(Tag tag) {
+        this.followedTags.add(tag);
+    }
+
+    public void removeFollowedTag(Tag tag) {
+        this.followedTags.remove(tag);
     }
 
     @Override

@@ -11,22 +11,24 @@ const TagPage = () => {
     let { tagname } = useParams();
 
     const currentUser = AuthService.getCurrUser();
-
     if (!currentUser) return window.location.href = '/login';
 
-    const GET_POSTS_URL = `http://localhost:8080/api/v1/tag/${tagname}`;
-
     const [posts, setPosts] = useState([]);
+    const [tag, setTag] = useState(null);
+    const [hasFollowed, setHasFollowed] = useState(false);
+
+    const GET_POSTS_URL = `http://localhost:8080/api/v1/tag/${tagname}`;
+    
     useEffect(() => {
-        console.log(GET_POSTS_URL);
-        axios.get(GET_POSTS_URL)
-            .then((response) => {
-                console.log(response);
-                if (response.data) {
-                    setPosts(response.data.posts);
-                }
-            })
-            .catch((error) => { console.log(error) })
+
+        const username = JSON.parse(localStorage.getItem('info')).username;
+        const fetchPosts = async () => {
+            const res = await axios.get(GET_POSTS_URL);
+            setTag(res.data);
+            setPosts(res.data.posts);
+            setHasFollowed(res.data.tagFollowers.includes(username));
+        }
+        fetchPosts().catch((error) => { console.log(error) })
     }, [])
 
     return (
@@ -40,8 +42,12 @@ const TagPage = () => {
                         </div>
                     
                         <div className="col-md-8 col-xl-6 middle-wrapper">
-                            <TagCard tagname={tagname} />
-                            <PostCreationCard />
+                            <TagCard
+                                tag={tag}
+                                hasFollowed={hasFollowed}
+                                setHasFollowed={setHasFollowed}
+                            />
+                            {/* <PostCreationCard /> */}
                             <PostsDisplay posts={posts.reverse()} />
                         </div>
                     

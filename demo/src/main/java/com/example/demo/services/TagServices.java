@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.AppUser;
 import com.example.demo.entities.Post;
 import com.example.demo.entities.Tag;
+import com.example.demo.repositories.AppUserRepository;
 import com.example.demo.repositories.PostRepository;
 import com.example.demo.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,17 @@ public class TagServices {
     @Autowired
     private final TagRepository tagRepository;
     private final PostRepository postRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public TagServices(TagRepository tagRepository, PostRepository postRepository) {
+    public TagServices(
+            TagRepository tagRepository,
+            PostRepository postRepository,
+            AppUserRepository appUserRepository
+    ) {
         this.tagRepository = tagRepository;
         this.postRepository = postRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public Optional<Tag> getTagByTagname(String tagname) {
@@ -72,5 +80,39 @@ public class TagServices {
             return tags;
         }
         return new ArrayList<>();
+    }
+
+    @Transactional
+    public void followTag(String username, String tagname) {
+        tagname = '#' + tagname;
+        Optional<AppUser> userOptional = appUserRepository.findAppUserByUsername(username);
+        Optional<Tag> tagOptional = tagRepository.findById(tagname);
+        if (userOptional.isEmpty()) {
+            throw new IllegalStateException("User with name " + username + " does not exist");
+        }
+        if (tagOptional.isEmpty()) {
+            throw new IllegalStateException("Tag with name " + tagname + " does not exist");
+        }
+        AppUser appUser = userOptional.get();
+        Tag tag = tagOptional.get();
+        appUser.addFollowedTag(tag);
+        tag.addTagFollower(appUser);
+    }
+
+    @Transactional
+    public void unfollowTag(String username, String tagname) {
+        tagname = '#' + tagname;
+        Optional<AppUser> userOptional = appUserRepository.findAppUserByUsername(username);
+        Optional<Tag> tagOptional = tagRepository.findById(tagname);
+        if (userOptional.isEmpty()) {
+            throw new IllegalStateException("User with name " + username + " does not exist");
+        }
+        if (tagOptional.isEmpty()) {
+            throw new IllegalStateException("Tag with name " + tagname + " does not exist");
+        }
+        AppUser appUser = userOptional.get();
+        Tag tag = tagOptional.get();
+        appUser.removeFollowedTag(tag);
+        tag.removeTagFollower(appUser);
     }
 }

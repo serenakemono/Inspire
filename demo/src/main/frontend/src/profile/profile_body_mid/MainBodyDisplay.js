@@ -4,6 +4,7 @@ import PostsDisplay from '../../posts_display/PostsDisplay';
 import TabPanel from './TabPanel';
 import PostCreationCard from '../../post_creation/PostCreationCard';
 import ProfileSocialTab from '../profile_body_mid/ProfileSocialTab';
+import TagsDisplay from '../../tags_display/TagsDisplay';
 
 const MainBodyDisplay = ({
     self,
@@ -19,12 +20,14 @@ const MainBodyDisplay = ({
     const [posts, setPosts] = useState([]);
     const [collectedPosts, setCollectedPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         if (user == null) return;
         setPosts([...user.posts].sort((a, b) => b.id - a.id));
         setCollectedPosts([...user.collectedPosts].sort((a, b) => b.id - a.id));
         setLikedPosts([...user.likedPosts].sort((a, b) => b.id - a.id));
+        setTags(user.followedTags);
     }, [user])
 
     return (user != null && <>
@@ -46,7 +49,9 @@ const MainBodyDisplay = ({
             />
             <div>No discussions to display.</div>
         </TabPanel> */}
-        <TabPanel tab={tab} index={1}>tags detail</TabPanel>
+        <TabPanel tab={tab} index={1}>
+            <TagsDisplay tags={tags} />
+        </TabPanel>
         <TabPanel tab={tab} index={2}>
             <PostsDisplay posts={collectedPosts} />
         </TabPanel>

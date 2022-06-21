@@ -6,6 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import IosShareRoundedIcon from '@mui/icons-material/IosShareRounded';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import axios from 'axios';
 
 const PostFooter = ({ post }) => {
@@ -75,6 +76,7 @@ const PostFooter = ({ post }) => {
         uncollect().catch((error) => {
             console.log(error);
         })
+        setHasFollowed
     }
 
     return (
@@ -88,28 +90,28 @@ const PostFooter = ({ post }) => {
                 >
                     Like
                 </Button>
-                <Button
+                {/* <Button
                     style={{ textTransform: 'none' }}
                     startIcon={<ChatOutlinedIcon />}
                     className="text-muted"
                 >
                     Comment
-                </Button>
+                </Button> */}
                 <Button
                     style={{ textTransform: 'none' }}
-                    startIcon={collected ? <StarRoundedIcon style={{ color: "#F6BD60" }} /> : <StarRoundedIcon />}
+                    startIcon={collected ? <StarRoundedIcon style={{ color: "#F6BD60" }} /> : <StarOutlineIcon />}
                     onClick={collected ? ()=>handleUncollect() : ()=>handleCollect()}
                     className="text-muted"
                 >
                     Favorite
                 </Button>
-                <Button
+                {/* <Button
                     style={{ textTransform: 'none' }}
                     startIcon={<IosShareRoundedIcon />}
                     className="text-muted"
                 >
                     Share
-                </Button>
+                </Button> */}
             </Stack>
         </div>
     )

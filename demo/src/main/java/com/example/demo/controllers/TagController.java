@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,5 +56,19 @@ public class TagController {
     @GetMapping(path="/search_tag")
     public List<Tag> searchTag(@Param("keyword") String keyword) {
         return tagServices.listAll(keyword);
+    }
+
+    @PutMapping(path="/{username}/follow/tag/{tagname}")
+    public void followTag(
+            @PathVariable("username") String username,
+            @PathVariable("tagname") String tagname) {
+        tagServices.followTag(username, tagname);
+    }
+
+    @PutMapping(path="/{username}/unfollow/tag/{tagname}")
+    public void unfollowTag(
+            @PathVariable("username") String username,
+            @PathVariable("tagname") String tagname) {
+        tagServices.unfollowTag(username, tagname);
     }
 }
