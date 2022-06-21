@@ -36,9 +36,11 @@ const MainBodyDisplay = ({
             <div>No discussions to display.</div>
         </TabPanel>
         <TabPanel tab={tab} index={2}>tags detail</TabPanel>
-        <TabPanel tab={tab} index={3}>Collections detail</TabPanel>
+        <TabPanel tab={tab} index={3}>
+            <PostsDisplay posts={user.collectedPosts.reverse()} />
+        </TabPanel>
         <TabPanel tab={tab} index={4}>
-            <PostsDisplay posts={user.likedPosts} />
+            <PostsDisplay posts={user.likedPosts.reverse()} />
         </TabPanel>
         <TabPanel tab={tab} index={5}>
             <ProfileSocialTab user={user} />
