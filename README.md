@@ -1,9 +1,9 @@
 # Inspire
 
 ## Table of Contents
-* [General Info] (#general-info)
-* [Technologies] (#technologies)
-* [Setup] (#setup)
+* [General Info] (##general-info)
+* [Technologies] (##technologies)
+* [Setup] (##setup)
 
 ## General Info
 Inspire is a social networking platform with key features including but not limited to:
