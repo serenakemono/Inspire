@@ -109,7 +109,7 @@ const SearchBar = () => {
                 <InputBase
                     value={text}
                     ref={ref}
-                    placeholder='Search...'
+                    placeholder='Search for a tag...'
                     className={input}
                     onFocus={handleOnFocus}
                     onBlur={handleLoseFocus}
