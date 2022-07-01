@@ -30,7 +30,7 @@ const ProfileSocialTab = ({ user }) => {
                     >
                         <Tab
                             style={tabStyles}
-                            label={user.following.length  + " Followers"}
+                            label={user.followers.length  + " Followers"}
                         />
                         <Tab
                             style={tabStyles}

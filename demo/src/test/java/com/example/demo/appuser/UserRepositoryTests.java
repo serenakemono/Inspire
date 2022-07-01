@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import java.io.IOException;
 import java.util.Objects;
 
 @DataJpaTest
@@ -28,7 +29,7 @@ public class UserRepositoryTests {
     private AppUserRepository repo;
 
     @Test
-    public void testCreateAppUser() {
+    public void testCreateAppUser() throws IOException {
         AppUser user = new AppUser();
         user.setEmail("serena.wuluoyu@gmail.com");
         user.setUsername("serenakemono");

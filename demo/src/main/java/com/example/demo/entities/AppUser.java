@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -90,7 +95,7 @@ public class AppUser implements UserDetails {
         this.authorities = authorities;
     }
 
-    public AppUser() {
+    public AppUser() throws IOException {
     }
 
     // Constructor with all parameters
@@ -98,12 +103,15 @@ public class AppUser implements UserDetails {
                    String email,
                    String password,
                    String bio,
-                   Long timestampForRegistration) {
+                   Long timestampForRegistration,
+                   byte[] dp
+    ) throws IOException {
         this.username = username;
         this.email = email;
         this.password = password;
         this.bio = bio;
         this.timestampForRegistration = timestampForRegistration;
+        this.dp = dp;
     }
 
     public String getUsername() {
@@ -281,6 +289,13 @@ public class AppUser implements UserDetails {
 
     public void removeFollowedTag(Tag tag) {
         this.followedTags.remove(tag);
+    }
+
+    private byte[] convertImageToByteArray(String filepath) throws IOException {
+        BufferedImage bImage = ImageIO.read(new File(filepath));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos);
+        return bos.toByteArray();
     }
 
     @Override

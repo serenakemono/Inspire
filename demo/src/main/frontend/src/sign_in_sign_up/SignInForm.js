@@ -47,7 +47,7 @@ const SignInForm = ({ setIsSignIn }) => {
         }
 
         login()
-            .then(()=>window.location.href = '/me')
+            .then(()=>window.location.href = '/community')
             .catch(error => {
             console.log(error.reponse);
             setLoginStatus({

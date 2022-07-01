@@ -10,9 +10,9 @@ const ProfileSuggestions = () => {
                 <h6 className="card-title">suggestions for you</h6>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://secureservercdn.net/198.71.233.179/yke.2c1.myftpupload.com/wp-content/uploads/2018/03/Min-An4-600x357.jpeg" alt="" />
                         <div className="ml-2">
-                            <p>Johnny</p>
+                            <p>Amy</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                       </div>
@@ -20,7 +20,7 @@ const ProfileSuggestions = () => {
                           <PersonAddRoundedIcon />
                       </IconButton>
                 </div>
-                <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                {/* <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
                         <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
@@ -31,8 +31,8 @@ const ProfileSuggestions = () => {
                     <IconButton>
                         <PersonAddRoundedIcon />
                     </IconButton>
-                </div>
-                <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                </div> */}
+                {/* <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
                         <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
                         <div className="ml-2">
@@ -43,12 +43,12 @@ const ProfileSuggestions = () => {
                     <IconButton>
                         <PersonAddRoundedIcon />
                     </IconButton>
-                </div>
+                </div> */}
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://imageio.forbes.com/specials-images/imageserve/60499af394ecc49d30c586e5/Happy-smiling-African-American-woman/960x0.jpg?format=jpg&width=960" alt="" />
                         <div className="ml-2">
-                            <p>Johnny</p>
+                            <p>Sansa</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -58,9 +58,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://thumbs.dreamstime.com/b/smiling-black-man-4725389.jpg" alt="" />
                         <div className="ml-2">
-                            <p>Johnny</p>
+                            <p>Eric</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>
@@ -70,9 +70,9 @@ const ProfileSuggestions = () => {
                 </div>
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center hover-pointer">
-                        <img className="img-xs rounded-circle" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="" />
+                        <img className="img-xs rounded-circle" src="https://rudranibanikmd.com/wp-content/uploads/2017/02/Carole.jpg" alt="" />
                         <div className="ml-2">
-                            <p>Johnny</p>
+                            <p>Margret</p>
                             <p className="tx-11 text-muted">12 Mutual Friends</p>
                         </div>
                     </div>

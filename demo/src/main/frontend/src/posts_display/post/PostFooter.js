@@ -90,13 +90,13 @@ const PostFooter = ({ post }) => {
                 >
                     Like
                 </Button>
-                {/* <Button
+                <Button
                     style={{ textTransform: 'none' }}
                     startIcon={<ChatOutlinedIcon />}
                     className="text-muted"
                 >
                     Comment
-                </Button> */}
+                </Button>
                 <Button
                     style={{ textTransform: 'none' }}
                     startIcon={collected ? <StarRoundedIcon style={{ color: "#F6BD60" }} /> : <StarOutlineIcon />}
@@ -105,13 +105,13 @@ const PostFooter = ({ post }) => {
                 >
                     Favorite
                 </Button>
-                {/* <Button
+                <Button
                     style={{ textTransform: 'none' }}
                     startIcon={<IosShareRoundedIcon />}
                     className="text-muted"
                 >
                     Share
-                </Button> */}
+                </Button>
             </Stack>
         </div>
     )

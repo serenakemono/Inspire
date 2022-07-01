@@ -48,7 +48,7 @@ const TagPage = () => {
                                 setHasFollowed={setHasFollowed}
                             />
                             {/* <PostCreationCard /> */}
-                            <PostsDisplay posts={posts.reverse()} />
+                            <PostsDisplay posts={posts} />
                         </div>
                     
                         <div className="d-none d-xl-block col-xl-3 right-wrapper">

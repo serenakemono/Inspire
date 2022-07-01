@@ -14,7 +14,15 @@ import java.util.Set;
 
 public class CustomAppUserSerializer extends StdSerializer<AppUser> {
 
-    private static AppUser appUser = new AppUser();
+    private static AppUser appUser;
+
+    static {
+        try {
+            appUser = new AppUser();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public CustomAppUserSerializer() {
         this(null);

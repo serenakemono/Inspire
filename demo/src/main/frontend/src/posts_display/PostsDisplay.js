@@ -12,7 +12,7 @@ const PostsDisplay = ({ posts }) => {
             {posts.length ? (
                 <Feed posts={ posts } />
             ) : (
-                <p>No posts to display.</p>
+                <p>No posts to display. Start exploring in the community today!</p>
             )}
         </div>
     )

@@ -150,7 +150,7 @@ const ProfileCard = ({ self, user, editMode, setEditMode, handleEditProfile }) =
                                 </div>
                             }
                 </div>
-                <p>{ bio }</p>
+                <p className="text-muted">{ bio }</p>
                 <div className="mt-3">
                     <label className="tx-11 font-weight-bold mb-0">Email:</label>
                     <p className="text-muted">{ email }</p>

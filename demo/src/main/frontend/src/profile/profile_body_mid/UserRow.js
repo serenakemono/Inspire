@@ -82,7 +82,7 @@ const UserRow = ({ username }) => {
         <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
             <img
                 className="img-xs rounded-circle"
-                src={userImg}
+                src={`data:image/jpeg;base64,${user.dp}`}
                 alt=""
                 style={{ cursor: "pointer" }}
                 onClick={() => {

@@ -106,7 +106,7 @@ const SelfProfilePage = () => {
                         
                             <div className="d-none d-xl-block col-xl-3 right-wrapper">
                                 <div className="row">
-                                    <ProfileLatestPics />
+                                    {/* <ProfileLatestPics /> */}
                                     <ProfileSuggestions />
                                 </div>
                             </div>
